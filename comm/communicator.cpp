@@ -14,6 +14,7 @@ void CommunicatorThread::run(void)
 	serialPort = new SerialPort();
 	serialPort->init();
   #ifdef BART
+    vector3d_t sensorVal;
 	sensor = new MPU9150Wrapper();
     sensor->init();
   #endif
@@ -45,7 +46,6 @@ void CommunicatorThread::run(void)
 		}
 #else
   #ifdef BART
-		vector3d_t sensorVal;
 		if (!sensor->getEuler(sensorVal)) {
 			// construct message
 			msg.header = AcceleroValues & 0xff;
@@ -82,6 +82,7 @@ void CommunicatorThread::run(void)
 #ifndef SIMULATION
 	// close port
 	serialPort->deinit();
+    sensor->stop();
 #endif
 }
 
