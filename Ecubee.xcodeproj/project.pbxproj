@@ -23,7 +23,7 @@
 		1F5B4BA31716FFBA00E93904 /* i2cManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = i2cManager.h; sourceTree = "<group>"; };
 		1F609E3E171C129C00726D7E /* fusion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fusion.cpp; sourceTree = "<group>"; };
 		1FBD1191171C26BC00533562 /* local_defaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = local_defaults.h; sourceTree = "<group>"; };
-		1FBD1192171C95F100533562 /* imucal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = imucal.c; sourceTree = "<group>"; };
+		1FBD1192171C95F100533562 /* imucal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imucal.cpp; sourceTree = "<group>"; };
 		1FBD1193171C9DF200533562 /* quaternion.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = quaternion.c; sourceTree = "<group>"; };
 		1FBD1194171C9DF200533562 /* quaternion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = quaternion.h; sourceTree = "<group>"; };
 		1FBD1195171C9DF200533562 /* vector3d.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vector3d.c; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 		1FF8B895170D8757001F6E0C = {
 			isa = PBXGroup;
 			children = (
-				1FBD1192171C95F100533562 /* imucal.c */,
+				1FBD1192171C95F100533562 /* imucal.cpp */,
 				1FBD1191171C26BC00533562 /* local_defaults.h */,
 				1F609E3E171C129C00726D7E /* fusion.cpp */,
 				1F3F4885171816E200C90016 /* i2c */,

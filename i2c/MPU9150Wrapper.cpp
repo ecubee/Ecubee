@@ -32,7 +32,7 @@ MPU9150Wrapper::~MPU9150Wrapper() {
 int MPU9150Wrapper::init() {
     
     
-	if (mpu9150_init(i2c_bus, MPU9150_SAMPLE_RATE, 0)) {
+	if (mpu9150_init(i2c_bus, MPU9150_SAMPLE_RATE, MPU9150_YAW_MIX_FACTOR)) {
         fprintf( stderr, "Failed set up MPU9150\n" );
         return -1;
     }

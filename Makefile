@@ -24,7 +24,7 @@ MARTIJN_OBJS = $(addprefix martijnobj/, $(OBJS))
 
 CAL_APP := ecubeecal
 CAL_INC := eMPL i2c math
-CAL_SRCS := imucal.c $(foreach dir,$(CAL_INC),$(wildcard $(dir)/*.c*))
+CAL_SRCS := imucal.cpp $(foreach dir,$(CAL_INC),$(wildcard $(dir)/*.c*))
 CAL_OBJS := $(notdir $(CAL_SRCS))
 CAL_OBJS := $(CAL_OBJS:%.c=calobj/%.o)
 CAL_OBJS := $(CAL_OBJS:%.cpp=calobj/%.o)
