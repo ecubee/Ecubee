@@ -1317,6 +1317,10 @@ int dmp_read_fifo(short *gyro, short *accel, long *quat,
         accel[2] = ((short)fifo_data[ii+4] << 8) | fifo_data[ii+5];
         ii += 6;
         sensors[0] |= INV_XYZ_ACCEL;
+        
+#ifdef I2C_DEBUG
+         printf("\rrawAccel:   X: %d Y: %d Z: %d   \n", accel[0], accel[1], accel[2]);
+#endif
     }
 
     if (dmp.feature_mask & DMP_FEATURE_SEND_ANY_GYRO) {

@@ -84,8 +84,8 @@ int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
     }
     
 #ifdef MPU9150_DEBUG
-    printf("\rX: %d Y: %d Z: %d   \n", mpu.rawAccel[VEC3_X], mpu.rawAccel[VEC3_Y], mpu.rawAccel[VEC3_Z]);
-    printf("\rX: %0.2f Y: %0.2f Z: %0.2f   \n", normalized[VEC3_X], normalized[VEC3_Y], normalized[VEC3_Z]);
+    printf("\rrawAccel:   X: %d Y: %d Z: %d   \n", mpu.rawAccel[VEC3_X], mpu.rawAccel[VEC3_Y], mpu.rawAccel[VEC3_Z]);
+    printf("\rnormalized: X: %0.2f Y: %0.2f Z: %0.2f   \n", normalized[VEC3_X], normalized[VEC3_Y], normalized[VEC3_Z]);
     
    // fflush(stdout);
 #endif
