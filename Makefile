@@ -1,7 +1,7 @@
 SHELL = /bin/sh
 
 BBFLAGS = -march=armv7-a -mtune=cortex-a8 -mfpu=vfp -mfloat-abi=softfp
-CFLAGS = -c -Wall -O3 -M $(BBFLAGS) -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY -DMPU9150_DEBUG
+CFLAGS = -c -Wall -O3 $(BBFLAGS) -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY -DMPU9150_DEBUG
 #Optional flags: -DI2C_DEBUG -DMPU9150_DEBUG -DRASPBERRYPI $(BBFLAGS)
 LDFLAGS = -losg -lOpenThreads -losgGA -losgDB -losgUtil -losgViewer
 
@@ -23,13 +23,14 @@ MARTIJN_OBJS = $(addprefix martijnobj/, $(OBJS))
 
 CAL_APP := ecubeecal
 CAL_INC := eMPL i2c math
-CAL_SRCS := fusion.cpp $(foreach dir,$(CAL_INC),$(wildcard $(dir)/*.c*))
+CAL_SRCS := imucal.c $(foreach dir,$(CAL_INC),$(wildcard $(dir)/*.c*))
 CAL_OBJS := $(notdir $(CAL_SRCS))
 CAL_OBJS := $(CAL_OBJS:%.c=calobj/%.o)
 CAL_OBJS := $(CAL_OBJS:%.cpp=calobj/%.o)
 
 VPATH := $(INC) 
 
+INSTALL = cp
 INSTALL_PROGRAM = $(INSTALL)
 INSTALL_DATA = ${INSTALL} -m 644
 exec_prefix = /usr
