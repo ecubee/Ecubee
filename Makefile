@@ -1,7 +1,7 @@
 SHELL = /bin/sh
 
 BBFLAGS = -march=armv7-a -mtune=cortex-a8 -mfpu=vfp -mfloat-abi=softfp
-CFLAGS = -c -Wall -O3 $(BBFLAGS) -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY -DMPU9150_DEBUG -DI2C_DEBUG
+CFLAGS = -c -Wall -O3 $(BBFLAGS) -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY -DMPU9150_DEBUG 
 #Optional flags: -DI2C_DEBUG -DMPU9150_DEBUG -DRASPBERRYPI $(BBFLAGS)
 LDFLAGS = -losg -lOpenThreads -losgSim -losgGA -losgDB -losgUtil -losgViewer -lm -ldl -lGLESv2 -lXext -lX11
 # -lGL
