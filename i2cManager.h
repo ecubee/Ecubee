@@ -7,6 +7,8 @@ public:
 	virtual ~i2cManager();
 	char readByte(short slaveAddress, char reg);
 	bool writeByte(short slaveAddress, char reg, char value);
+    short readWord(short slaveAddress, char reg);
+    bool readBlock(short slaveAddress, char reg, char* data, int length);
 private:
 	int deviceDescriptor;
 	int lastAccessed;

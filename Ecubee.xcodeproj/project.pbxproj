@@ -25,17 +25,21 @@
 		1FF8B8AB170D881F001F6E0C /* LIS3LV02DL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LIS3LV02DL.cpp; sourceTree = "<group>"; };
 		1FF8B8AC170D881F001F6E0C /* LIS3LV02DL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LIS3LV02DL.h; sourceTree = "<group>"; };
 		1FF8B8AD170D881F001F6E0C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		1FF8B8AE170D881F001F6E0C /* Makefile.old */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.old; sourceTree = "<group>"; };
 		1FF8B8AF170D881F001F6E0C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		1FF8B8B0170D881F001F6E0C /* rs232.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rs232.cpp; sourceTree = "<group>"; };
 		1FF8B8B1170D881F001F6E0C /* rs232.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rs232.h; sourceTree = "<group>"; };
+		1FF8B8B2170D8A1C001F6E0C /* MPU9150.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPU9150.h; sourceTree = "<group>"; };
+		1FF8B8B3170D8A37001F6E0C /* MPU9150.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MPU9150.cpp; sourceTree = "<group>"; };
+		1FF8B8B4170DA27E001F6E0C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		1FF8B895170D8757001F6E0C = {
 			isa = PBXGroup;
 			children = (
+				1FF8B8B3170D8A37001F6E0C /* MPU9150.cpp */,
 				1FF8B89C170D881F001F6E0C /* acos.cpp */,
+				1FF8B8B6170E2ED0001F6E0C /* i2c */,
 				1FF8B89D170D881F001F6E0C /* acos.h */,
 				1FF8B89E170D881F001F6E0C /* Box.cpp */,
 				1FF8B89F170D881F001F6E0C /* CMakeLists.txt */,
@@ -45,19 +49,35 @@
 				1FF8B8A3170D881F001F6E0C /* CustomCamera.cpp */,
 				1FF8B8A4170D881F001F6E0C /* CustomCamera.h */,
 				1FF8B8A5170D881F001F6E0C /* dimensions.h */,
+				1FF8B8B5170E1DBB001F6E0C /* i2c obsolete */,
+				1FF8B8AD170D881F001F6E0C /* main.cpp */,
+				1FF8B8AF170D881F001F6E0C /* README.md */,
+				1FF8B8B0170D881F001F6E0C /* rs232.cpp */,
+				1FF8B8B1170D881F001F6E0C /* rs232.h */,
+				1FF8B8B4170DA27E001F6E0C /* Makefile */,
+			);
+			sourceTree = "<group>";
+		};
+		1FF8B8B5170E1DBB001F6E0C /* i2c obsolete */ = {
+			isa = PBXGroup;
+			children = (
 				1FF8B8A6170D881F001F6E0C /* HMC5843.cpp */,
+				1FF8B8B2170D8A1C001F6E0C /* MPU9150.h */,
 				1FF8B8A7170D881F001F6E0C /* HMC5843.h */,
 				1FF8B8A8170D881F001F6E0C /* i2c-dev.h */,
 				1FF8B8A9170D881F001F6E0C /* i2cManager.cpp */,
 				1FF8B8AA170D881F001F6E0C /* i2cManager.h */,
 				1FF8B8AB170D881F001F6E0C /* LIS3LV02DL.cpp */,
 				1FF8B8AC170D881F001F6E0C /* LIS3LV02DL.h */,
-				1FF8B8AD170D881F001F6E0C /* main.cpp */,
-				1FF8B8AE170D881F001F6E0C /* Makefile.old */,
-				1FF8B8AF170D881F001F6E0C /* README.md */,
-				1FF8B8B0170D881F001F6E0C /* rs232.cpp */,
-				1FF8B8B1170D881F001F6E0C /* rs232.h */,
 			);
+			name = "i2c obsolete";
+			sourceTree = "<group>";
+		};
+		1FF8B8B6170E2ED0001F6E0C /* i2c */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = i2c;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

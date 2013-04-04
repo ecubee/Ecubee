@@ -36,7 +36,40 @@ char i2cManager::readByte(short slaveAddress, char reg){
 	// set the slave address, so we can read of that client
 	setSlaveAddress(slaveAddress);	
 	// now actually read the value from the register:
+	return i2c_smbus_read_byte_data(deviceDescriptor,reg);
+}
+
+/**************************************************************
+ * Read a word from the given address and register
+ **************************************************************/
+short i2cManager::readWord(short slaveAddress, char reg){
+	// set the slave address, so we can read of that client
+	setSlaveAddress(slaveAddress);
+	// now actually read the value from the register:
 	return i2c_smbus_read_word_data(deviceDescriptor,reg);
+}
+
+/**************************************************************
+ * Read a byte from the given address and register
+ **************************************************************/
+bool i2cManager::readBlock(short slaveAddress, char reg, char* data, int length) {
+    
+    int result;
+    
+    // set the slave address, so we can read of that client
+    setSlaveAddress(slaveAddress);
+    
+    // set read pointer
+    if i2c_smbus_write_byte(deviceDescriptor, reg) != 0
+        return false
+        
+    // now actually read the value from the register:
+    result = i2c_master_recv(deviceDescriptor,data,length);
+    
+    if result == length
+        return true;
+    else
+        return false;
 }
 
 /**************************************************************
