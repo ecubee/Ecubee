@@ -7,7 +7,7 @@ GERTJAN_CFLAGS = -DGERTJAN
 MARTIJN_CFLAGS = -DMARTIJN
 
 APP = EcubeE
-SRCS = $(wildcard *.cpp)
+SRCS = $(wildcard *.cpp) $(wildcard i2c/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
 
 BART_OBJS = $(addprefix bart/, $(OBJS))

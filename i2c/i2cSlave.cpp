@@ -7,6 +7,14 @@
 //
 
 #include "i2cSlave.h"
+#include <stdio.h>   /* Standard input/output definitions */
+//#include <termios.h> /* POSIX terminal control definitions */
+//#include <fcntl.h>   /* File control definitions */
+#include <errno.h>   /* Error number definitions */
+#include <stdlib.h>
+#include <unistd.h>  /* UNIX standard function definitions */
+#include <sys/ioctl.h>
+#include <linux/i2c-dev.h> /* for the I2C_SLAVE constant and write/read functions*/
 
 
 i2cSlave::i2cSlave(i2cBus * busptr, short add) {
