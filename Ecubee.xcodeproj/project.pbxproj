@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		1F5B4BA21716FFBA00E93904 /* i2cManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = i2cManager.cpp; sourceTree = "<group>"; };
+		1F5B4BA31716FFBA00E93904 /* i2cManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = i2cManager.h; sourceTree = "<group>"; };
+		1F5B4BA41716FFBA00E93904 /* i2cSlave.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = i2cSlave.cpp; sourceTree = "<group>"; };
+		1F5B4BA51716FFBA00E93904 /* i2cSlave.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = i2cSlave.h; sourceTree = "<group>"; };
 		1FD272EB1716F8C10015453D /* dmpKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dmpKey.h; sourceTree = "<group>"; };
 		1FD272EC1716F8C10015453D /* dmpmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dmpmap.h; sourceTree = "<group>"; };
 		1FD272ED1716F8C10015453D /* inv_mpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = inv_mpu.c; sourceTree = "<group>"; };
@@ -38,17 +42,11 @@
 		1FF8B8A6170D881F001F6E0C /* HMC5843.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HMC5843.cpp; sourceTree = "<group>"; };
 		1FF8B8A7170D881F001F6E0C /* HMC5843.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HMC5843.h; sourceTree = "<group>"; };
 		1FF8B8A8170D881F001F6E0C /* i2c-dev.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "i2c-dev.h"; sourceTree = "<group>"; };
-		1FF8B8A9170D881F001F6E0C /* i2cManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = i2cManager.cpp; sourceTree = "<group>"; };
-		1FF8B8AA170D881F001F6E0C /* i2cManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = i2cManager.h; sourceTree = "<group>"; };
 		1FF8B8AB170D881F001F6E0C /* LIS3LV02DL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LIS3LV02DL.cpp; sourceTree = "<group>"; };
 		1FF8B8AC170D881F001F6E0C /* LIS3LV02DL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LIS3LV02DL.h; sourceTree = "<group>"; };
 		1FF8B8AD170D881F001F6E0C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1FF8B8AF170D881F001F6E0C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		1FF8B8B4170DA27E001F6E0C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		1FF8B8BA170E31F3001F6E0C /* i2cSlave.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = i2cSlave.cpp; sourceTree = "<group>"; };
-		1FF8B8BB170E31F3001F6E0C /* i2cSlave.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = i2cSlave.h; sourceTree = "<group>"; };
-		1FF8B8BC170E3209001F6E0C /* i2cBus.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = i2cBus.cpp; sourceTree = "<group>"; };
-		1FF8B8BD170E3209001F6E0C /* i2cBus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = i2cBus.h; sourceTree = "<group>"; };
 		1FF8B8BE170EE20A001F6E0C /* MPU9150.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MPU9150.cpp; sourceTree = "<group>"; };
 		1FF8B8BF170EE20A001F6E0C /* MPU9150.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPU9150.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,7 +125,6 @@
 			children = (
 				1FD273121716FCAE0015453D /* osg */,
 				1FD273091716FBE70015453D /* fusiontest.cpp */,
-				1FF8B8B6170E2ED0001F6E0C /* i2c */,
 				1FF8B89F170D881F001F6E0C /* CMakeLists.txt */,
 				1FF8B8B7170E3040001F6E0C /* i2c obsolete */,
 				1FF8B8AD170D881F001F6E0C /* main.cpp */,
@@ -141,25 +138,16 @@
 			);
 			sourceTree = "<group>";
 		};
-		1FF8B8B6170E2ED0001F6E0C /* i2c */ = {
-			isa = PBXGroup;
-			children = (
-				1FF8B8BA170E31F3001F6E0C /* i2cSlave.cpp */,
-				1FF8B8BB170E31F3001F6E0C /* i2cSlave.h */,
-				1FF8B8BC170E3209001F6E0C /* i2cBus.cpp */,
-				1FF8B8BD170E3209001F6E0C /* i2cBus.h */,
-			);
-			path = i2c;
-			sourceTree = "<group>";
-		};
 		1FF8B8B7170E3040001F6E0C /* i2c obsolete */ = {
 			isa = PBXGroup;
 			children = (
+				1F5B4BA21716FFBA00E93904 /* i2cManager.cpp */,
+				1F5B4BA31716FFBA00E93904 /* i2cManager.h */,
+				1F5B4BA41716FFBA00E93904 /* i2cSlave.cpp */,
+				1F5B4BA51716FFBA00E93904 /* i2cSlave.h */,
 				1FF8B8BE170EE20A001F6E0C /* MPU9150.cpp */,
 				1FF8B8BF170EE20A001F6E0C /* MPU9150.h */,
 				1FF8B8A8170D881F001F6E0C /* i2c-dev.h */,
-				1FF8B8A9170D881F001F6E0C /* i2cManager.cpp */,
-				1FF8B8AA170D881F001F6E0C /* i2cManager.h */,
 				1FF8B8AB170D881F001F6E0C /* LIS3LV02DL.cpp */,
 				1FF8B8AC170D881F001F6E0C /* LIS3LV02DL.h */,
 				1FF8B8A7170D881F001F6E0C /* HMC5843.h */,
