@@ -8,12 +8,12 @@ MARTIJN_CFLAGS = -DMARTIJN
 
 APP = EcubeE
 INC = osg comm math mpu9150 eMPL
-SRCS = main.cpp $(wildcard $(INC)/*.cpp) 
+SRCS = main.cpp $(wildcard $(INC)/*.cpp) $(wildcard $(INC)/*.c) 
 OBJS = $(SRCS:.cpp=.o)
 
 FUSION_APP = fusion
 FUSION_INC = osg comm math mpu9150 eMPL
-FUSION_SRCS = fusion.cpp $(wildcard $(FUSION_INC)/*.cpp)
+FUSION_SRCS = fusion.cpp $(wildcard $(FUSION_INC)/*.cpp) $(wildcard $(FUSION_INC)/*.c)
 FUSION_OBJS = $(addprefix fusion/, $(SRCS:.cpp=.o))
 FUSION_CFLAGS = -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
 
