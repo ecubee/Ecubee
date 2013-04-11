@@ -4,8 +4,8 @@
 #include <osg/PositionAttitudeTransform>
 #include <osg/ShapeDrawable>
 #include <osg/Geode>
-#include "communicator.h"
-#include "dimensions.h"
+#include "osg/communicator.h"
+#include "osg/dimensions.h"
 
 osg::ref_ptr<osgViewer::Viewer> CreateWindows(osg::ref_ptr<osgViewer::Viewer> viewer);
 osg::ref_ptr<osg::Geode> createBox(const osg::Vec3& center,float width,float height,float depth);

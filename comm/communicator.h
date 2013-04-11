@@ -3,13 +3,13 @@
 
 #include <osgGA/EventQueue>
 #include <OpenThreads/Thread>
-#include "CustomCamera.h"
+#include "../osg/CustomCamera.h"
 
 #ifndef SIMULATION
 	#include "rs232.h"
 
   #ifdef BART
-	#include "i2cManager.h"
+	#include "../i2c/i2cBanager.h"
 	#include "LIS3LV02DL.h" /* Accelerometer */
 	#include "HMC5843.h" /* Magnetometer */
   #endif

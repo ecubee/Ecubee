@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include "communicator.h"
-#include "acos.h"
+#include "../math/acos.h"
 
 
 void CommunicatorThread::run(void)

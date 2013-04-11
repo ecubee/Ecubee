@@ -2,53 +2,64 @@
 //  MPU9150.h
 //  Ecubee
 //
-//  Created by Marcel Laurijsse on 4/4/13.
+//  Created by Marcel Laurijsse on 5/4/13.
 //
 //
 
-#ifndef Ecubee_MPU9150_h
-#define Ecubee_MPU9150_h
+#ifndef __Ecubee__MPU9150__
+#define __Ecubee__MPU9150__
 
 #define MPU9150_ADDRESS 0x68
-#define HMC5843_CONTROL_REGISTER_A 0x00
-#define HMC5843_CONTROL_REGISTER_B 0x01
-#define HMC5843_MODE_REGISTER 0x02
-#define HMC5843_STATUS_REGISTER 0x09
-// DO2 to DO0 / CRA4 to CRA2 # set to 50 Hz (1 1 0)
-#define HMC5843_DATA_RATE ((1 << 4) | (1 << 3) | (0 << 2))
-// MD1 and MD0 in MR1 and MR0
-#define HMC5843_SINGLE_CONVERSION_MODE ((0 << 1) | ( 1 ))
-#define HMC5843_CONTINUOUS_CONVERSION_MODE ((0 << 1) | ( 0 ))
 
-#define LIS3LV02DL_ADDRESS 0x1d
-// PD0 and PD1 in the datasheet
-#define LIS3LV02DL_POWERDOWNCONTROL ((1 << 7) | (1 << 6))
-// CR1 and CR2 in the datasheet
-#define LIS3LV02DL_CONTROL_REGISTER_1 0x20
-#define LIS3LV02DL_CONTROL_REGISTER_2 0x21
-// bits 5 and 6 of CR1, 00 = 40Hz; 01 = 160Hz; 10 = 640Hz; 11 = 2560Hz
-#define LIS3LV02DL_DECIMATE_FACTOR (0 << 5 | 1 << 4)
-#define LIS3LV02DL_ENABLE_MEASUREMENT (1 << 2 | 1 << 1 | 1 )
+#define MPU9150_REG_SAMPLE_RATE_DEVIDER 0x19
+#define MPU9150_REG_CONFIG_SYNC_DLPF 0x1A // External sync and DLPF config
+#define MPU9150_REG_GYRO_CONFIG 0x1B
+#define MPU9150_REG_ACCEL_CONFIG 0x1C
+#define MPU9150_REG_FIFO_ENABLE 0x23 // Enable fifo buffer
+#define MPU9150_REG_I2C_MASTER_CONTROL 0x24
+#define MPU9150_REG_USER_CTRL 0x6A
+#define MPU9150_REG_POWER_MANAGEMENT 0x6B
 
+#define MPU9150_VALUE_DLPF_BANDWIDTH_5HZ 0x06
+#define MPU9150_VALUE_DLPF_BANDWIDTH_10HZ 0x05
+#define MPU9150_VALUE_DLPF_BANDWIDTH_20HZ 0x04
+#define MPU9150_VALUE_DLPF_BANDWIDTH_44HZ 0x03
+#define MPU9150_VALUE_DLPF_BANDWIDTH_94HZ 0x02
+#define MPU9150_VALUE_DLPF_BANDWIDTH_184HZ 0x01
+#define MPU9150_VALUE_DLPF_BANDWIDTH_260HZ 0x00 // Additionally sets FS_gyro = 8kHz
+#define MPU9150_VALUE_GYRO_RANGE_250 0x00
+#define MPU9150_VALUE_GYRO_RANGE_500 0x08
+#define MPU9150_VALUE_GYRO_RANGE_1000 0x10
+#define MPU9150_VALUE_GYRO_RANGE_2000 0x18
+#define MPU9150_VALUE_ACCEL_RANGE_2G 0x00
+#define MPU9150_VALUE_ACCEL_RANGE_4G 0x08
+#define MPU9150_VALUE_ACCEL_RANGE_8G 0x10
+#define MPU9150_VALUE_ACCEL_RANGE_16G 0x18
+#define MPU9150_VALUE_FIFO_ENABLE_GYRO 0x70
+#define MPU9150_VALUE_FIFO_ENABLE_ACCEL 0x08
+#define MPU9150_VALUE_FIFO_ENABLE_MAGNETO 0x01 // Verify slave number of Magnetometer
+#define MPU9150_VALUE_WAIT_FOR_ES 0x40
+#define MPU9150_VALUE_I2C_MST_CLK_400KHZ 0x13
+#define MPU9150_VALUE_FIFO_ENABLE_GLOBAL 0x40
+#define MPU9150_VALUE_USER_CTRL_RESET 0x07
+#define MPU9150_VALUE_I2C_MST_EN 0x20
+#define MPU9150_VALUE_RESET_DEVICE 0x80 // Reset all register values to default
+#define MPU9150_VALUE_CLOCK_PLL_X 0x01
 
-class MPU9150Wrapper {
+class MPU9150 : public i2cSlave {
 public:
-	MPU9150Wrapper(i2cManager * man);
-	MPU9150Wrapper(i2cManager * man, char configuration);
-	virtual ~MPU9150Wrapper();
-	bool getData(float* vx, float* vy, float* vz);
+	MPU9150(i2cBus * bus) : MPU9150(bus, MPU9150_ADDRESS);
+	MPU9150(i2cBus * man, char address) : i2cSlave(bus, address);
+	~MPU9150();
+    bool init();
+    bool reset();
+//	bool getData(float* vx, float* vy, float* vz);
+
 private:
-	char modeRegister;
-	char configurationRegisterA;
-	char configurationRegisterB;
-	i2cManager* manager;
-	int readRegister(char reg);
-	bool writeRegister(char reg, char value);
-	bool isDataReady();
-	bool isUnlocked();
+    bool fifoEnabled;
+    unsigned short getFifoCount();
+    void readFifo();
     
 };
 
-
-
-#endif
+#endif /* defined(__Ecubee__MPU9150__) */

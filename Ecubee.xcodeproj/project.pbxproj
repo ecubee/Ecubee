@@ -7,16 +7,34 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		1FF8B89C170D881F001F6E0C /* acos.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = acos.cpp; sourceTree = "<group>"; };
-		1FF8B89D170D881F001F6E0C /* acos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acos.h; sourceTree = "<group>"; };
-		1FF8B89E170D881F001F6E0C /* Box.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
+		1FD272EB1716F8C10015453D /* dmpKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dmpKey.h; sourceTree = "<group>"; };
+		1FD272EC1716F8C10015453D /* dmpmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dmpmap.h; sourceTree = "<group>"; };
+		1FD272ED1716F8C10015453D /* inv_mpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = inv_mpu.c; sourceTree = "<group>"; };
+		1FD272EE1716F8C10015453D /* inv_mpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inv_mpu.h; sourceTree = "<group>"; };
+		1FD272EF1716F8C10015453D /* inv_mpu_dmp_motion_driver.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = inv_mpu_dmp_motion_driver.c; sourceTree = "<group>"; };
+		1FD272F01716F8C10015453D /* inv_mpu_dmp_motion_driver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inv_mpu_dmp_motion_driver.h; sourceTree = "<group>"; };
+		1FD272F11716F8C10015453D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		1FD272F61716F97E0015453D /* linux_glue.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = linux_glue.c; sourceTree = "<group>"; };
+		1FD272F71716F97E0015453D /* linux_glue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = linux_glue.h; sourceTree = "<group>"; };
+		1FD273031716FBA30015453D /* mpu9150.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mpu9150.c; sourceTree = "<group>"; };
+		1FD273041716FBA30015453D /* mpu9150.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mpu9150.h; sourceTree = "<group>"; };
+		1FD273051716FBA30015453D /* quaternion.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = quaternion.c; sourceTree = "<group>"; };
+		1FD273061716FBA30015453D /* quaternion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = quaternion.h; sourceTree = "<group>"; };
+		1FD273071716FBA30015453D /* vector3d.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vector3d.c; sourceTree = "<group>"; };
+		1FD273081716FBA30015453D /* vector3d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector3d.h; sourceTree = "<group>"; };
+		1FD273091716FBE70015453D /* fusiontest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fusiontest.cpp; sourceTree = "<group>"; };
+		1FD2730B1716FC7C0015453D /* acos.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = acos.cpp; sourceTree = "<group>"; };
+		1FD2730C1716FC7C0015453D /* acos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acos.h; sourceTree = "<group>"; };
+		1FD2730E1716FC950015453D /* communicator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = communicator.cpp; sourceTree = "<group>"; };
+		1FD2730F1716FC950015453D /* communicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = communicator.h; sourceTree = "<group>"; };
+		1FD273101716FC950015453D /* rs232.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rs232.cpp; sourceTree = "<group>"; };
+		1FD273111716FC950015453D /* rs232.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rs232.h; sourceTree = "<group>"; };
+		1FD273131716FCAE0015453D /* Box.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
+		1FD273141716FCAE0015453D /* CreateWindows.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CreateWindows.cpp; sourceTree = "<group>"; };
+		1FD273151716FCAE0015453D /* CustomCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CustomCamera.cpp; sourceTree = "<group>"; };
+		1FD273161716FCAE0015453D /* CustomCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCamera.h; sourceTree = "<group>"; };
+		1FD273171716FCAE0015453D /* dimensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dimensions.h; sourceTree = "<group>"; };
 		1FF8B89F170D881F001F6E0C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
-		1FF8B8A0170D881F001F6E0C /* communicator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = communicator.cpp; sourceTree = "<group>"; };
-		1FF8B8A1170D881F001F6E0C /* communicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = communicator.h; sourceTree = "<group>"; };
-		1FF8B8A2170D881F001F6E0C /* CreateWindows.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CreateWindows.cpp; sourceTree = "<group>"; };
-		1FF8B8A3170D881F001F6E0C /* CustomCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CustomCamera.cpp; sourceTree = "<group>"; };
-		1FF8B8A4170D881F001F6E0C /* CustomCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCamera.h; sourceTree = "<group>"; };
-		1FF8B8A5170D881F001F6E0C /* dimensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dimensions.h; sourceTree = "<group>"; };
 		1FF8B8A6170D881F001F6E0C /* HMC5843.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HMC5843.cpp; sourceTree = "<group>"; };
 		1FF8B8A7170D881F001F6E0C /* HMC5843.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HMC5843.h; sourceTree = "<group>"; };
 		1FF8B8A8170D881F001F6E0C /* i2c-dev.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "i2c-dev.h"; sourceTree = "<group>"; };
@@ -26,10 +44,6 @@
 		1FF8B8AC170D881F001F6E0C /* LIS3LV02DL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LIS3LV02DL.h; sourceTree = "<group>"; };
 		1FF8B8AD170D881F001F6E0C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1FF8B8AF170D881F001F6E0C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		1FF8B8B0170D881F001F6E0C /* rs232.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rs232.cpp; sourceTree = "<group>"; };
-		1FF8B8B1170D881F001F6E0C /* rs232.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rs232.h; sourceTree = "<group>"; };
-		1FF8B8B2170D8A1C001F6E0C /* MPU9150.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPU9150.h; sourceTree = "<group>"; };
-		1FF8B8B3170D8A37001F6E0C /* MPU9150.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MPU9150.cpp; sourceTree = "<group>"; };
 		1FF8B8B4170DA27E001F6E0C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		1FF8B8BA170E31F3001F6E0C /* i2cSlave.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = i2cSlave.cpp; sourceTree = "<group>"; };
 		1FF8B8BB170E31F3001F6E0C /* i2cSlave.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = i2cSlave.h; sourceTree = "<group>"; };
@@ -40,26 +54,90 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		1FD272EA1716F8C10015453D /* eMPL */ = {
+			isa = PBXGroup;
+			children = (
+				1FD272EB1716F8C10015453D /* dmpKey.h */,
+				1FD272EC1716F8C10015453D /* dmpmap.h */,
+				1FD272ED1716F8C10015453D /* inv_mpu.c */,
+				1FD272EE1716F8C10015453D /* inv_mpu.h */,
+				1FD272EF1716F8C10015453D /* inv_mpu_dmp_motion_driver.c */,
+				1FD272F01716F8C10015453D /* inv_mpu_dmp_motion_driver.h */,
+				1FD272F11716F8C10015453D /* README.md */,
+			);
+			path = eMPL;
+			sourceTree = "<group>";
+		};
+		1FD272F51716F97E0015453D /* glue */ = {
+			isa = PBXGroup;
+			children = (
+				1FD272F61716F97E0015453D /* linux_glue.c */,
+				1FD272F71716F97E0015453D /* linux_glue.h */,
+			);
+			path = glue;
+			sourceTree = "<group>";
+		};
+		1FD273021716FBA30015453D /* mpu9150 */ = {
+			isa = PBXGroup;
+			children = (
+				1FD273031716FBA30015453D /* mpu9150.c */,
+				1FD273041716FBA30015453D /* mpu9150.h */,
+				1FD273051716FBA30015453D /* quaternion.c */,
+				1FD273061716FBA30015453D /* quaternion.h */,
+				1FD273071716FBA30015453D /* vector3d.c */,
+				1FD273081716FBA30015453D /* vector3d.h */,
+			);
+			path = mpu9150;
+			sourceTree = "<group>";
+		};
+		1FD2730A1716FC7C0015453D /* math */ = {
+			isa = PBXGroup;
+			children = (
+				1FD2730B1716FC7C0015453D /* acos.cpp */,
+				1FD2730C1716FC7C0015453D /* acos.h */,
+			);
+			path = math;
+			sourceTree = "<group>";
+		};
+		1FD2730D1716FC950015453D /* comm */ = {
+			isa = PBXGroup;
+			children = (
+				1FD2730E1716FC950015453D /* communicator.cpp */,
+				1FD2730F1716FC950015453D /* communicator.h */,
+				1FD273101716FC950015453D /* rs232.cpp */,
+				1FD273111716FC950015453D /* rs232.h */,
+			);
+			path = comm;
+			sourceTree = "<group>";
+		};
+		1FD273121716FCAE0015453D /* osg */ = {
+			isa = PBXGroup;
+			children = (
+				1FD273131716FCAE0015453D /* Box.cpp */,
+				1FD273141716FCAE0015453D /* CreateWindows.cpp */,
+				1FD273151716FCAE0015453D /* CustomCamera.cpp */,
+				1FD273161716FCAE0015453D /* CustomCamera.h */,
+				1FD273171716FCAE0015453D /* dimensions.h */,
+			);
+			path = osg;
+			sourceTree = "<group>";
+		};
 		1FF8B895170D8757001F6E0C = {
 			isa = PBXGroup;
 			children = (
-				1FF8B89C170D881F001F6E0C /* acos.cpp */,
+				1FD273121716FCAE0015453D /* osg */,
+				1FD273091716FBE70015453D /* fusiontest.cpp */,
 				1FF8B8B6170E2ED0001F6E0C /* i2c */,
-				1FF8B89D170D881F001F6E0C /* acos.h */,
-				1FF8B89E170D881F001F6E0C /* Box.cpp */,
 				1FF8B89F170D881F001F6E0C /* CMakeLists.txt */,
-				1FF8B8A0170D881F001F6E0C /* communicator.cpp */,
-				1FF8B8A1170D881F001F6E0C /* communicator.h */,
-				1FF8B8A2170D881F001F6E0C /* CreateWindows.cpp */,
-				1FF8B8A3170D881F001F6E0C /* CustomCamera.cpp */,
-				1FF8B8A4170D881F001F6E0C /* CustomCamera.h */,
-				1FF8B8A5170D881F001F6E0C /* dimensions.h */,
 				1FF8B8B7170E3040001F6E0C /* i2c obsolete */,
 				1FF8B8AD170D881F001F6E0C /* main.cpp */,
 				1FF8B8AF170D881F001F6E0C /* README.md */,
-				1FF8B8B0170D881F001F6E0C /* rs232.cpp */,
-				1FF8B8B1170D881F001F6E0C /* rs232.h */,
+				1FD272F51716F97E0015453D /* glue */,
 				1FF8B8B4170DA27E001F6E0C /* Makefile */,
+				1FD2730D1716FC950015453D /* comm */,
+				1FD2730A1716FC7C0015453D /* math */,
+				1FD273021716FBA30015453D /* mpu9150 */,
+				1FD272EA1716F8C10015453D /* eMPL */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,8 +148,6 @@
 				1FF8B8BB170E31F3001F6E0C /* i2cSlave.h */,
 				1FF8B8BC170E3209001F6E0C /* i2cBus.cpp */,
 				1FF8B8BD170E3209001F6E0C /* i2cBus.h */,
-				1FF8B8BE170EE20A001F6E0C /* MPU9150.cpp */,
-				1FF8B8BF170EE20A001F6E0C /* MPU9150.h */,
 			);
 			path = i2c;
 			sourceTree = "<group>";
@@ -79,8 +155,8 @@
 		1FF8B8B7170E3040001F6E0C /* i2c obsolete */ = {
 			isa = PBXGroup;
 			children = (
-				1FF8B8B3170D8A37001F6E0C /* MPU9150.cpp */,
-				1FF8B8B2170D8A1C001F6E0C /* MPU9150.h */,
+				1FF8B8BE170EE20A001F6E0C /* MPU9150.cpp */,
+				1FF8B8BF170EE20A001F6E0C /* MPU9150.h */,
 				1FF8B8A8170D881F001F6E0C /* i2c-dev.h */,
 				1FF8B8A9170D881F001F6E0C /* i2cManager.cpp */,
 				1FF8B8AA170D881F001F6E0C /* i2cManager.h */,
