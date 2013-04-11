@@ -7,8 +7,15 @@ GERTJAN_CFLAGS = -DGERTJAN
 MARTIJN_CFLAGS = -DMARTIJN
 
 APP = EcubeE
-SRCS = $(wildcard *.cpp) $(wildcard i2c/*.cpp)
+INC = osg comm math mpu9150 eMPL
+SRCS = main.cpp $(wildcard $(INC)/*.cpp) 
 OBJS = $(SRCS:.cpp=.o)
+
+FUSION_APP = fusion
+FUSION_INC = osg comm math mpu9150 eMPL
+FUSION_SRCS = fusion.cpp $(wildcard $(FUSION_INC)/*.cpp)
+FUSION_OBJS = $(addprefix fusion/, $(SRCS:.cpp=.o))
+FUSION_CFLAGS = -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
 
 BART_OBJS = $(addprefix bart/, $(OBJS))
 GERTJAN_OBJS = $(addprefix gertjan/, $(OBJS))
@@ -37,6 +44,13 @@ martijn: $(MARTIJN_OBJS)
 	
 martijn/%.o: %.cpp
 	$(CXX) $(MARTIJN_CFLAGS) $(CFLAGS) $< -o $@
+    
+fusion: $(FUSION_OBJS)
+	$(CXX) $^ -o $(FUSION_APP)
+
+fusion/%.o: %.cpp
+	$(CXX) $(FUSION_CFLAGS) $(CFLAGS) $< -o $@
+
 
 clean:
 	rm -f $(APP) \
