@@ -29,8 +29,8 @@ public:
 	bool getEulder(float* vector);
 
 private:
-    const int i2c_bus;
-    const char address;
+    int i2c_bus;
+    char address;
     mpudata_t mpu;
     
     int setCalibration(bool mag);
