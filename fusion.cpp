@@ -148,7 +148,7 @@ int main(int argc, char **argv)
     
 	register_sig_handler();
     
-	mpu9150_set_debug(verbose);
+	//mpu9150_set_debug(verbose);
     
 	if (mpu9150_init(i2c_bus, sample_rate, yaw_mix_factor))
 		exit(1);

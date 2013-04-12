@@ -7,14 +7,16 @@
 //  TODO: Integrated interupt support using GPIO pin
 //
 
+#include <stdio.h>
+#include <string.h>
 #include "MPU9150Wrapper.h"
 #include "mpu9150.h"
 
 
 
-MPU9150Wrapper::MPU9150Wrapper(int i2c_bus, char address) {
-    this->i2c_bus = i2c_bus;
-    this->address = address;
+MPU9150Wrapper::MPU9150Wrapper(int bus = MPU9150_BUS, char add = MPU9150_ADDRESS) {
+    i2c_bus = bus;
+    add = add;
 }
 
 MPU9150Wrapper::~MPU9150Wrapper() {
@@ -61,11 +63,11 @@ int MPU9150Wrapper::read() {
 int MPU9150Wrapper::setCalibration(bool mag) {
     int i;
 	FILE *f;
-    char filename[32]
+    char filename[32];
 	char buff[32];
 	long readout[6];
-    const long magdefaults[6] = {-163, 77, -100, 153, -231, 34}
-    const long acceldefaults[6] = {-16566, 16888, -16968, 16996, -18186, 16164 }
+    const long magdefaults[6] = {-163, 77, -100, 153, -231, 34};
+    const long acceldefaults[6] = {-16566, 16888, -16968, 16996, -18186, 16164 };
     int * val;
     bool error = false;
 	caldata_t cal;
@@ -73,9 +75,8 @@ int MPU9150Wrapper::setCalibration(bool mag) {
     if (mag) {
         strcopy(filename, "/etc/ecubee/magcal.txt");
         val = magdefault;
-    }
-    else {
-        strcopy(filename, "/etc/ecubee/accelcal.txt");
+    } else {
+        strcpy(filename, "/etc/ecubee/accelcal.txt");
         val = acceldefauls;
     }
     

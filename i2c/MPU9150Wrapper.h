@@ -21,8 +21,7 @@
 
 class MPU9150Wrapper {
 public:
-    MPU9150Wrapper(int i2c_bus, char address);
-	MPU9150Wrapper(void):MPU9150Wrapper(MPU9150_BUS, MPU9150_ADDRESS);
+    MPU9150Wrapper(int bus = MPU9150_BUS, char add = MPU9150_ADDRESS);
 	~MPU9150();
     int init();
     int reset();
