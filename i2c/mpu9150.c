@@ -151,12 +151,13 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	return 0;
 }
 
-void mpu9150_exit()
+int mpu9150_exit()
 {
+    int result;
 	// turn off the DMP on exit 
-	if (mpu_set_dmp_state(0))
+	if (result = mpu_set_dmp_state(0))
 		printf("mpu_set_dmp_state(0) failed\n");
-
+    return result;
 	// TODO: Should turn off the sensors too
 }
 
