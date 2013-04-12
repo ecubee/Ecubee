@@ -12,10 +12,11 @@ SRCS = main.cpp $(wildcard $(INC)/*.cpp) $(wildcard $(INC)/*.c)
 OBJS = $(SRCS:.cpp=.o)
 
 FUSION_APP = fusion
-FUSION_INC = osg comm math mpu9150 eMPL
+FUSION_INC = glue mpu9150 eMPL
 FUSION_SRCS = fusion.cpp $(wildcard $(FUSION_INC)/*.cpp) $(wildcard $(FUSION_INC)/*.c)
-FUSION_OBJS = $(addprefix fusion/, $(SRCS:.cpp=.o))
+FUSION_OBJS = $(addprefix fusion/, $(FUSION_SRCS:.cpp=.o))
 FUSION_CFLAGS = -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
+FUSION_PATHS = $(addprefix -I , $(FUSION_INC))
 
 BART_OBJS = $(addprefix bart/, $(OBJS))
 GERTJAN_OBJS = $(addprefix gertjan/, $(OBJS))
@@ -49,11 +50,16 @@ fusion: $(FUSION_OBJS)
 	$(CXX) $^ -o $(FUSION_APP)
 
 fusion/%.o: %.cpp
-	$(CXX) $(FUSION_CFLAGS) $(CFLAGS) $< -o $@
+	mkdir -p fusion
+	$(CXX) $(FUSION_CFLAGS) $(CFLAGS) $(FUSION_PATHS) $< -o $@
 
+fusion/%.o: %.c
+	mkdir -p fusion
+	$(CXX) $(FUSION_CFLAGS) $(CFLAGS) $(FUSION_PATHS) $< -o $@
 
 clean:
 	rm -f $(APP) \
 		  bart/*.o \
 		  gertjan/*.o \
-		  martijn/*.o
+		  martijn/*.o \
+		  fusion/*.o
