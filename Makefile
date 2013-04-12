@@ -16,7 +16,7 @@ FUSION_INC = eMPL i2c
 FUSION_SRCS = fusion.cpp $(wildcard $(FUSION_INC)/*.cpp) $(wildcard $(FUSION_INC)/*.c)
 FUSION_OBJDIR = fusionobj
 
-FUSION_OBJS := $(patsubst %.cpp, $(FUSION_OBJDIR)/%.o, $(notdir $(FUSION_SRCS)))
+FUSION_OBJS := $(patsubst %.c*, $(FUSION_OBJDIR)/%.o, $(notdir $(FUSION_SRCS)))
 
 FUSION_CFLAGS = -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
 FUSION_PATHS = $(addprefix -I$(CURDIR)/, $(FUSION_INC))
