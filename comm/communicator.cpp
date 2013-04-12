@@ -3,6 +3,7 @@
 #include <iomanip>
 #include "communicator.h"
 #include "../math/acos.h"
+#include "../i2c/MPU9150Wrapper.h"
 
 
 void CommunicatorThread::run(void)

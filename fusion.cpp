@@ -29,8 +29,8 @@
 #include <getopt.h>
 #include <errno.h>
 
-#include "mpu9150.h"
-#include "linux_glue.h"
+#include "i2c/mpu9150.h"
+#include "i2c/linux_glue.h"
 #include "local_defaults.h"
 
 int set_cal(int mag, char *cal_file);

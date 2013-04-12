@@ -15,8 +15,7 @@
 #define MPU9150_ADDRESS 0x68
 #define MPU9150_SAMPLE_RATE 50   // Output rate of DMP
 #define MPU9150_YAW_MIX_FACTOR 10    // The bigger, the less dominant magnetometer
-#define MPU9150_ACCEL_CAL "accelcal.txt"
-#define MPU9150_MAG_CAL "magcal.txt"
+
 
 
 class MPU9150Wrapper {
