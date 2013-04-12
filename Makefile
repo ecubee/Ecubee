@@ -14,7 +14,7 @@ OBJS = $(SRCS:.cpp=.o)
 FUSION_APP = fusion
 FUSION_INC = i2c eMPL
 FUSION_SRCS = fusion.cpp $(wildcard $(FUSION_INC)/*.cpp) $(wildcard $(FUSION_INC)/*.c)
-FUSION_OBJDIR = fusion
+FUSION_OBJDIR = fusionobj
 
 FUSION_OBJS := $(patsubst %.c*, $(OBJDIR)/%.o, $(notdir $(FUSION_SRC)))
 
