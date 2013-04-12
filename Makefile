@@ -12,14 +12,14 @@ SRCS = main.cpp $(wildcard $(INC)/*.cpp) $(wildcard $(INC)/*.c)
 OBJS = $(SRCS:.cpp=.o)
 
 FUSION_APP = fusion
-FUSION_INC = i2c eMPL
+FUSION_INC = eMPL i2c
 FUSION_SRCS = fusion.cpp $(wildcard $(FUSION_INC)/*.cpp) $(wildcard $(FUSION_INC)/*.c)
 FUSION_OBJDIR = fusionobj
 
 FUSION_OBJS := $(patsubst %.cpp, $(FUSION_OBJDIR)/%.o, $(notdir $(FUSION_SRCS)))
 
 FUSION_CFLAGS = -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
-FUSION_PATHS = $(addprefix -I , $(FUSION_INC))
+FUSION_PATHS = $(addprefix -I$(CURDIR)/, $(FUSION_INC))
 
 VPATH := $(sort  $(dir $(FUSION_SRCS)))
 
@@ -27,7 +27,7 @@ BART_OBJS = $(addprefix bart/, $(OBJS))
 GERTJAN_OBJS = $(addprefix gertjan/, $(OBJS))
 MARTIJN_OBJS = $(addprefix martijn/, $(OBJS))
 
-.PHONY: clean all bart gertjan martijn
+.PHONY: clean all bart gertjan martijn $(FUSION_APP)
 
 # Insert name target for which you want to compile
 all: bart
@@ -51,21 +51,21 @@ martijn: $(MARTIJN_OBJS)
 martijn/%.o: %.cpp
 	$(CXX) $(MARTIJN_CFLAGS) $(CFLAGS) $< -o $@
     
-fusion: $(FUSION_OBJS)
+fusion: fusiondir $(FUSION_OBJS)
 	$(CXX) $^ -o $(FUSION_APP)
 
 fusionobj/%.o: %.cpp
-	mkdir -p $(FUSION_OBJDIR)
 	$(CXX) $(FUSION_CFLAGS) $(CXXFLAGS) $(FUSION_PATHS) $< -o $@
 
 fusionobj/%.o: %.c
-	mkdir -p fusion
 	$(CC) $(FUSION_CFLAGS) $(CCFLAGS) $(FUSION_PATHS) $< -o $@
 
+fusiondir:
+	mkdir -p $(FUSION_OBJDIR)
 
 clean:
-	rm -f $(APP) \
+	rm -rf $(APP) \
 		  bart/*.o \
 		  gertjan/*.o \
 		  martijn/*.o \
-		  fusion/*.o
+		  $(FUSION_OBJDIR)
