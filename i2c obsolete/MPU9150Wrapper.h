@@ -1,13 +1,13 @@
 //
-//  MPU9150.h
+//  MPU9150Wrapper.h
 //  Ecubee
 //
 //  Created by Marcel Laurijsse on 5/4/13.
 //
 //
 
-#ifndef __Ecubee__MPU9150__
-#define __Ecubee__MPU9150__
+#ifndef __Ecubee__MPU9150Wrapper__
+#define __Ecubee__MPU9150Wrapper__
 
 #define MPU9150_ADDRESS 0x68
 
@@ -46,10 +46,10 @@
 #define MPU9150_VALUE_RESET_DEVICE 0x80 // Reset all register values to default
 #define MPU9150_VALUE_CLOCK_PLL_X 0x01
 
-class MPU9150 : public i2cSlave {
+class MPU9150Wrapper : public i2cSlave {
 public:
-	MPU9150(i2cBus * bus) : MPU9150(bus, MPU9150_ADDRESS);
-	MPU9150(i2cBus * man, char address) : i2cSlave(bus, address);
+	MPU9150Wrapper(i2cBus * bus) : MPU9150Wrapper(bus, MPU9150_ADDRESS);
+	MPU9150Wrapper(i2cBus * man, char address) : i2cSlave(bus, address);
 	~MPU9150();
     bool init();
     bool reset();
