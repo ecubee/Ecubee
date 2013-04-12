@@ -7,16 +7,21 @@ GERTJAN_CFLAGS = -DGERTJAN
 MARTIJN_CFLAGS = -DMARTIJN
 
 APP = EcubeE
-INC = osg comm math mpu9150 eMPL
+INC = osg comm math i2c eMPL
 SRCS = main.cpp $(wildcard $(INC)/*.cpp) $(wildcard $(INC)/*.c) 
 OBJS = $(SRCS:.cpp=.o)
 
 FUSION_APP = fusion
-FUSION_INC = glue mpu9150 eMPL
+FUSION_INC = i2c eMPL
 FUSION_SRCS = fusion.cpp $(wildcard $(FUSION_INC)/*.cpp) $(wildcard $(FUSION_INC)/*.c)
-FUSION_OBJS = $(addprefix fusion/, $(FUSION_SRCS:.cpp=.o))
+FUSION_OBJDIR = fusion
+
+FUSION_OBJS := $(patsubst %.c*, $(OBJDIR)/%.o, $(notdir $(FUSION_SRC)))
+
 FUSION_CFLAGS = -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
 FUSION_PATHS = $(addprefix -I , $(FUSION_INC))
+
+VPATH := $(sort  $(dir $(FUSION_SRCS)))
 
 BART_OBJS = $(addprefix bart/, $(OBJS))
 GERTJAN_OBJS = $(addprefix gertjan/, $(OBJS))
@@ -51,11 +56,12 @@ fusion: $(FUSION_OBJS)
 
 fusion/%.o: %.cpp
 	mkdir -p fusion
-	$(CXX) $(FUSION_CFLAGS) $(CFLAGS) $(FUSION_PATHS) $< -o $@
+	$(CXX) $(FUSION_CFLAGS) $(CXXFLAGS) $(FUSION_PATHS) $< -o $@
 
 fusion/%.o: %.c
 	mkdir -p fusion
-	$(CXX) $(FUSION_CFLAGS) $(CFLAGS) $(FUSION_PATHS) $< -o $@
+	$(CC) $(FUSION_CFLAGS) $(CCFLAGS) $(FUSION_PATHS) $< -o $@
+
 
 clean:
 	rm -f $(APP) \
