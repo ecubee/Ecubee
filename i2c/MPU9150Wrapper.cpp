@@ -73,11 +73,11 @@ int MPU9150Wrapper::setCalibration(bool mag) {
 	caldata_t cal;
     
     if (mag) {
-        strcopy(filename, "/etc/ecubee/magcal.txt");
-        val = magdefault;
+        strcpy(filename, "/etc/ecubee/magcal.txt");
+        val = magdefaults;
     } else {
         strcpy(filename, "/etc/ecubee/accelcal.txt");
-        val = acceldefauls;
+        val = acceldefaults;
     }
     
     f = fopen(filename, "r");
@@ -108,7 +108,7 @@ int MPU9150Wrapper::setCalibration(bool mag) {
         error = true;
     }
     
-    if !error
+    if (!error)
         val = readout;
 
     

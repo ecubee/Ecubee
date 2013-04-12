@@ -26,7 +26,7 @@ public:
     int init();
     int reset();
     int stop();
-	bool getEulder(float* vector);
+	int getEuler(float* vector);
 
 private:
     int i2c_bus;
