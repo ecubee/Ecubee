@@ -36,7 +36,6 @@ static int data_fusion(mpudata_t *mpu);
 static unsigned short inv_row_2_scale(const signed char *row);
 static unsigned short inv_orientation_matrix_to_scalar(const signed char *mtx);
 
-int debug_on;
 int yaw_mixing_factor;
 
 int use_accel_cal;
@@ -45,10 +44,7 @@ caldata_t accel_cal_data;
 int use_mag_cal;
 caldata_t mag_cal_data;
 
-void mpu9150_set_debug(int on)
-{
-	debug_on = on;
-}
+
 
 int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 {
@@ -185,12 +181,13 @@ void mpu9150_set_accel_cal(caldata_t *cal)
 		bias[i] = -accel_cal_data.offset[i];
 	}
 
-	if (debug_on) {
-		printf("\naccel cal (range : offset)\n");
+#ifdef I2C_DEBUG
+    fprintf(stderr, "\naccel cal (range : offset)\n");
 
-		for (i = 0; i < 3; i++)
-			printf("%d : %d\n", accel_cal_data.range[i], accel_cal_data.offset[i]);
+	for (i = 0; i < 3; i++)
+			fprintf(stderr, "%d : %d\n", accel_cal_data.range[i], accel_cal_data.offset[i]);
 	}
+#endif
 
 	mpu_set_accel_bias(bias);
 
@@ -220,13 +217,13 @@ void mpu9150_set_mag_cal(caldata_t *cal)
 			mag_cal_data.offset[i] = MAG_SENSOR_RANGE;
 	}
 
-	if (debug_on) {
-		printf("\nmag cal (range : offset)\n");
+#ifdef I2C_DEBUG
+    fprintf(stderr, "\nmag cal (range : offset)\n");
 
 		for (i = 0; i < 3; i++)
-			printf("%d : %d\n", mag_cal_data.range[i], mag_cal_data.offset[i]);
+			fprintf(stderr, "%d : %d\n", mag_cal_data.range[i], mag_cal_data.offset[i]);
 	}
-
+#endif
 	use_mag_cal = 1;
 }
 
@@ -234,6 +231,7 @@ int mpu9150_read_dmp(mpudata_t *mpu)
 {
 	short sensors;
 	unsigned char more;
+    int i = 0;
 
 	if (!data_ready())
 		return -1;
@@ -242,15 +240,19 @@ int mpu9150_read_dmp(mpudata_t *mpu)
 		printf("dmp_read_fifo() failed\n");
 		return -1;
 	}
-
+    
 	while (more) {
 		// Fell behind, reading again
 		if (dmp_read_fifo(mpu->rawGyro, mpu->rawAccel, mpu->rawQuat, &mpu->dmpTimestamp, &sensors, &more) < 0) {
 			printf("dmp_read_fifo() failed\n");
 			return -1;
 		}
+        i++;
 	}
-
+#ifdef I2C_DEBUG
+    if i
+        fprintf(stderr, "DBG: skipped %d samples\n", i);
+#endif
 	return 0;
 }
 

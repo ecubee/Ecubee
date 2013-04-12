@@ -1,5 +1,5 @@
 //
-//  MPU9150.cpp
+//  MPU9150Wrapper.cpp
 //  Ecubee
 //
 //  Created by Marcel Laurijsse on 5/4/13.
@@ -7,65 +7,123 @@
 //  TODO: Integrated interupt support using GPIO pin
 //
 
-#include "MPU9150.h"
+#include "MPU9150Wrapper.h"
+#include "mpu9150.h"
 
 
 
-
-MPU9150::MPU9150(i2cBus * man, char address) : i2cSlave(bus, address) {
-    
+MPU9150Wrapper::MPU9150Wrapper(int i2c_bus, char address) {
+    this->i2c_bus = i2c_bus;
+    this->address = address;
 }
 
-MPU9150::~MPU9150() {
-    //do some shutdown?
+MPU9150Wrapper::~MPU9150Wrapper() {
+	// Stop the DMP
+    stop();
 }
 
-MPU9150::init() {
+int MPU9150Wrapper::init() {
     
+    
+	if (mpu9150_init(i2c_bus, MPU9150_SAMPLE_RATE, MPU9150_YAW_MIX_FACTOR)) {
+        fprintf( stderr, "Failed set up MPU9150\n" );
+        return -1;
+    }
+    
+	setCalibration(false); // Accel Calibration;
+    setCalibration(true);  // Magneto Calibration
+    
+    memset(&mpu, 0, sizeof(mpudata_t));
+    
+    
+	return 0;
 }
 
-//MPU9150::init(bool useFifo = false) {
-//    // Configuration and initialization procedures
-//    
-//    // Reset all registers
-//    writeRegByte(MPU9150_REG_POWER_MANAGEMENT, MPU9150_VALUE_RESET_DEVICE);
-//    
-//    // Set LPF
-//    writeRegByte(MPU9150_REG_CONFIG_SYNC_DLPF, MPU9150_VALUE_DLPF_BANDWIDTH_5HZ);
-//    
-//    // Set Sensor Range
-//    writeRegByte(MPU9150_REG_GYRO_CONFIG, MPU9150_VALUE_GYRO_RANGE_250);
-//    writeRegByte(MPU9150_REG_ACCEL_CONFIG, MPU9150_VALUE_ACCEL_RANGE_2G);
-//
-//    // Use the FIFO buffer?
-//    fifoEnabled = useFifo;
-//    if useFifo 
-//        writeRegByte(MPU9150_REG_FIFO_ENABLE, (MPU9150_VALUE_FIFO_ENABLE_GYRO | MPU9150_VALUE_FIFO_ENABLE_ACCEL | MPU9150_VALUE_FIFO_ENABLE_MAGNETO));
-//    else
-//        writeRegByte(MPU9150_REG_FIFO_ENABLE, 0x00);
-//        
-//    
-//    // Configure external sensor (magnetometer)
-//    writeRegByte(MPU9150_REG_I2C_MASTER_CONTROL, (MPU9150_VALUE_WAIT_FOR_ES | MPU9150_VALUE_I2C_MST_CLK_400KHZ));
-//    
-//    // Switch to Gyro clock
-//    writeRegByte(MPU9150_REG_POWER_MANAGEMENT, MPU9150_VALUE_CLOCK_PLL_X);
-//    
-//    // Reset all measurements
-//    reset();
-//    
-//}
-
-MPU9150::reset() {
-    // this clears the sensors of all analog an digital traces left by previous measurements
+int MPU9150Wrapper::getEuler(float * vector) {    
+    if read() {
+        return -1
+    }
     
-    char command
-    
-    if fifoEnabled
-        command = MPU9150_VALUE_FIFO_ENABLE_GLOBAL | MPU9150_VALUE_USER_CTRL_RESET | MPU9150_VALUE_I2C_MST_EN;
-    else
-        command = MPU9150_VALUE_USER_CTRL_RESET | MPU9150_VALUE_I2C_MST_EN;
+    for (int i=0; i < 3; i++) {
+        vector[i] = mpu->fusedEuler[i];
+    }
+    return 0;
+}
 
-    writeRegByte(MPU9150_REG_USER_CTRL, command);
+int MPU9150Wrapper::stop() {
+    return mpu9150_exit();
+}
+
+int MPU9150Wrapper::read() {
+    return mpu9150_read(&mpu);
+}
+
+int MPU9150Wrapper::setCalibration(bool mag) {
+    int i;
+	FILE *f;
+    char filename[32]
+	char buff[32];
+	long readout[6];
+    const long magdefaults[6] = {-163, 77, -100, 153, -231, 34}
+    const long acceldefaults[6] = {-16566, 16888, -16968, 16996, -18186, 16164 }
+    int * val;
+    bool error = false;
+	caldata_t cal;
+    
+    if (mag) {
+        strcopy(filename, "/etc/ecubee/magcal.txt");
+        val = magdefault;
+    }
+    else {
+        strcopy(filename, "/etc/ecubee/accelcal.txt");
+        val = acceldefauls;
+    }
+    
+    f = fopen(filename, "r");
+    
+    if (f) {
+        memset(buff, 0, sizeof(buff));
         
+        for (i = 0; i < 6; i++) {
+            if (!fgets(buff, 20, f)) {
+                fprintf(stderr, "Warning: Not enough lines in calibration file, switching to hardcoded values\n");
+                error = true;
+                break;
+            }
+            
+            readout[i] = atoi(buff);
+            
+            if (readout[i] == 0) {
+                fprintf(stderr, "Warning: Invalid cal value: %s, switching to hardcoded values\n", buff);
+                error = true;
+                break;
+            }
+        }
+        
+        fclose(f);
+
+    } else {
+        fprintf(stderr, "Warning: %s not found, switching to hardcoded values\n");
+        error = true;
+    }
+    
+    if !error
+        val = readout;
+
+    
+	cal.offset[0] = (short)((val[0] + val[1]) / 2);
+	cal.offset[1] = (short)((val[2] + val[3]) / 2);
+	cal.offset[2] = (short)((val[4] + val[5]) / 2);
+    
+	cal.range[0] = (short)(val[1] - cal.offset[0]);
+	cal.range[1] = (short)(val[3] - cal.offset[1]);
+	cal.range[2] = (short)(val[5] - cal.offset[2]);
+	
+	if (mag)
+		mpu9150_set_mag_cal(&cal);
+	else
+		mpu9150_set_accel_cal(&cal);
+    
+	return 0;
 }
+

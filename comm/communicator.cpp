@@ -12,9 +12,7 @@ void CommunicatorThread::run(void)
 	serialPort = new SerialPort();
 	serialPort->init();
   #ifdef BART
-	manager = new i2cManager("/dev/i2c-3");
-	accelerometer = new LIS3LV02DLWrapper(manager);
-	magnetometer = new HMC5843Wrapper(manager);
+	sensor = new MPU9150Wrapper();
   #endif
 #endif
 
@@ -28,7 +26,7 @@ void CommunicatorThread::run(void)
 	while (!_done) {
 		struct sMessage msg;
 #ifdef SIMULATION
-		msg.header = AcceleroValues & 0xff;
+		msg.header = FusedValues & 0xff;
 		msg.size = 3 * sizeof(float);
 		float *ptr = (float *) msg.data;
 		for (int i = 0; i < 3; ++i, ++ptr) {
@@ -45,7 +43,7 @@ void CommunicatorThread::run(void)
 #else
   #ifdef BART
 		float sensorVal[3];
-		if (accelerometer->getData(&sensorVal[0], &sensorVal[1], &sensorVal[2])) {
+		if (!sensor->getEuler(&sensorVal)) {
 			// construct message
 			msg.header = AcceleroValues & 0xff;
 			msg.size = 3 * sizeof(float);
@@ -55,16 +53,20 @@ void CommunicatorThread::run(void)
 			}
 			// send message via serial port
 			serialPort->send((char *) &msg, msg.size + 2);
+            _cameraManip->setXAngle(sensorVal[0]);
+			_cameraManip->setYAngle(sensorVal[1]);
+            _cameraManip->setZAngle(sensorVal[2]);
 		}
   #else
 		// read message from serial port
 		serialPort->receive((char *) &msg.header, 1);
 		serialPort->receive((char *) &msg.size, 1);
 		serialPort->receive((char *) msg.data, msg.size);
+        // handle message
+		handle(&msg);
+
   #endif
 #endif	
-		// handle message
-		handle(&msg);
 		
 		// sleep for a while
 #ifdef SIMULATION
@@ -88,10 +90,9 @@ void CommunicatorThread::stop(void)
 void CommunicatorThread::handle(struct sMessage *msg)
 {
 	switch (msg->header) {
-	case AcceleroValues:
+	case FusedValues:
 		{
 			float sensorVal[3];
-			float xAngle, yAngle;
 			float *ptr = (float *) msg->data;
 			for (int i = 0; i < 3; ++i, ++ptr) {
 				sensorVal[i] = *ptr;
@@ -102,12 +103,13 @@ void CommunicatorThread::handle(struct sMessage *msg)
 			// OSG_NOTICE <<"Accelerometer z: " << sensorVal[2] << std::endl;
 			
 			// calculate angles
-			xAngle = fastAcos(sensorVal[0]) - (0.5 * osg::PI);
-			yAngle = fastAcos(sensorVal[1]) - (0.5 * osg::PI);
+			//xAngle = fastAcos(sensorVal[0]) - (0.5 * osg::PI);
+			//yAngle = fastAcos(sensorVal[1]) - (0.5 * osg::PI);
 			
 			// update camera manipulator angles
-			_cameraManip->setXAngle(xAngle);
-			_cameraManip->setYAngle(yAngle);
+			_cameraManip->setXAngle(sensorVal[0]);
+			_cameraManip->setYAngle(sensorVal[1]);
+            _cameraManip->setZAngle(sensorVal[2]);
 		}
 		break;
 	default:
