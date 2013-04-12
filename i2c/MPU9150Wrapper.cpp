@@ -44,7 +44,7 @@ int MPU9150Wrapper::init() {
 
 int MPU9150Wrapper::getEuler(float * vector) {    
     if (read()) {
-        return -1
+        return -1;
     }
     
     for (int i=0; i < 3; i++) {
@@ -67,8 +67,8 @@ int MPU9150Wrapper::setCalibration(bool mag) {
     char filename[32];
 	char buff[32];
 	long readout[6];
-    const long magdefaults[6] = {-163, 77, -100, 153, -231, 34};
-    const long acceldefaults[6] = {-16566, 16888, -16968, 16996, -18186, 16164 };
+    long magdefaults[6] = {-163, 77, -100, 153, -231, 34};
+    long acceldefaults[6] = {-16566, 16888, -16968, 16996, -18186, 16164 };
     long * val;
     bool error = false;
 	caldata_t cal;
