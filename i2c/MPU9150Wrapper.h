@@ -21,12 +21,12 @@
 
 class MPU9150Wrapper {
 public:
-    MPU9150Wrapper(int bus = MPU9150_BUS, char add = MPU9150_ADDRESS);
-	~MPU9150();
+    MPU9150Wrapper(int bus, char add);
+	virtual ~MPU9150Wrapper();
     int init();
     int reset();
     int stop();
-//	bool getData(float* vx, float* vy, float* vz);
+	bool getEulder(float* vector);
 
 private:
     const int i2c_bus;
