@@ -6,26 +6,27 @@ BART_CFLAGS = -DBART
 GERTJAN_CFLAGS = -DGERTJAN
 MARTIJN_CFLAGS = -DMARTIJN
 
-APP = EcubeE
-INC = osg comm math i2c eMPL
-SRCS = main.cpp $(wildcard $(INC)/*.cpp) $(wildcard $(INC)/*.c) 
-OBJS = $(SRCS:.cpp=.o)
+APP := EcubeE
+INC := osg comm math i2c eMPL
+SRCS := main.cpp $(wildcard $(INC)/*.cpp) $(wildcard $(INC)/*.c) 
+OBJS := $(SRCS:.cpp=.o)
 
-FUSION_APP = fusion
-FUSION_INC = eMPL i2c
-FUSION_SRCS = fusion.cpp $(wildcard $(FUSION_INC)/*.cpp) $(wildcard $(FUSION_INC)/*.c)
-FUSION_OBJDIR = fusionobj
+FUSION_APP := fusion
+FUSION_INC := eMPL i2c
+FUSION_SRCS := fusion.cpp $(foreach dir,$(FUSION_INC),$(wildcard $(dir)/*.c*))
+FUSION_OBJDIR := fusionobj
 
-FUSION_OBJS := $(patsubst %.c*, $(FUSION_OBJDIR)/%.o, $(notdir $(FUSION_SRCS)))
-
+FUSION_OBJS := $(notdir $(FUSION_SRCS))
+FUSION_OBJS := $(FUSION_OBJS:%.c=$(FUSION_OBJDIR)/%.o)
+FUSION_OBJS := $(FUSION_OBJS:%.cpp=$(FUSION_OBJDIR)/%.o)
 FUSION_CFLAGS = -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
 FUSION_PATHS = $(addprefix -I$(CURDIR)/, $(FUSION_INC))
-
-VPATH := $(sort  $(dir $(FUSION_SRCS)))
 
 BART_OBJS = $(addprefix bart/, $(OBJS))
 GERTJAN_OBJS = $(addprefix gertjan/, $(OBJS))
 MARTIJN_OBJS = $(addprefix martijn/, $(OBJS))
+
+VPATH := $(INC) 
 
 .PHONY: clean all bart gertjan martijn $(FUSION_APP)
 
@@ -52,13 +53,14 @@ martijn/%.o: %.cpp
 	$(CXX) $(MARTIJN_CFLAGS) $(CFLAGS) $< -o $@
     
 fusion: fusiondir $(FUSION_OBJS)
-	$(CXX) $^ -o $(FUSION_APP)
+	echo $(FUSION_OBJS)
+	$(CXX) $(FUSION_OBJS) -o $(FUSION_APP)
 
 fusionobj/%.o: %.cpp
-	$(CXX) $(FUSION_CFLAGS) $(CXXFLAGS) $(FUSION_PATHS) $< -o $@
+	$(CXX) $(FUSION_CFLAGS) $(CFLAGS) $(FUSION_PATHS) $< -o $@
 
 fusionobj/%.o: %.c
-	$(CC) $(FUSION_CFLAGS) $(CCFLAGS) $(FUSION_PATHS) $< -o $@
+	$(CXX) $(FUSION_CFLAGS) $(CFLAGS) $(FUSION_PATHS) $< -o $@
 
 fusiondir:
 	mkdir -p $(FUSION_OBJDIR)
