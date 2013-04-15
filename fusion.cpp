@@ -28,6 +28,8 @@ int main(int argc, char **argv)
 {
     float angles[3];
     int result;
+    MPU9150Wrapper * sensor;
+    
     sensor = new MPU9150Wrapper(I2C_BUS);
     
     printf("Fusion Test Program. Use ^c to terminate\n\n");
