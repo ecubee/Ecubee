@@ -1727,6 +1727,7 @@ int mpu_read_fifo_stream(unsigned short length, unsigned char *data,
     fifo_count = (tmp[0] << 8) | tmp[1];
     if (fifo_count < length) {
         more[0] = 0;
+        fprintf(stderr, "Stream empty\n");
         return -1;
     }
     if (fifo_count > (st.hw->max_fifo >> 1)) {
