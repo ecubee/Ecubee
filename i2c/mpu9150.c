@@ -311,7 +311,7 @@ int data_ready()
 
 	// debug
 	if(debug_on) {
-        linux_i2c_read(0x68, 0x72, 2, data)
+        linux_i2c_read(0x68, 0x72, 2, data);
             fprintf(stderr, "Data:   %02X%02X  \n", data[0], data[1]);
             fprintf(stderr, "Status: %04X  \n", status);
     }
