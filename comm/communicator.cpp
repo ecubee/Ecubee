@@ -2,8 +2,9 @@
 #include <iostream>
 #include <iomanip>
 #include "communicator.h"
-#include "../math/acos.h"
-#include "../i2c/MPU9150Wrapper.h"
+#include "acos.h"
+#include "vector3d.h"
+#include "MPU9150Wrapper.h"
 
 
 void CommunicatorThread::run(void)
@@ -43,11 +44,11 @@ void CommunicatorThread::run(void)
 		}
 #else
   #ifdef BART
-		float sensorVal[3];
-		if (!sensor->getEuler(&sensorVal)) {
+		vector3d_t sensorVal;
+		if (!sensor->getEuler(sensorVal)) {
 			// construct message
 			msg.header = AcceleroValues & 0xff;
-			msg.size = 3 * sizeof(float);
+			msg.size = sizeof(vector3d_t);
 			float *ptr = (float *) msg.data;
 			for (int i = 0; i < 3; ++i, ++ptr) {
 				*ptr = sensorVal[i];
@@ -73,7 +74,7 @@ void CommunicatorThread::run(void)
 #ifdef SIMULATION
 		OpenThreads::Thread::microSleep(16000);
 #else
-		OpenThreads::Thread::microSleep(1000000);
+		OpenThreads::Thread::microSleep(10000);
 #endif
 	}
 

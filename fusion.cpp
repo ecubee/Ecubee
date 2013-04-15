@@ -11,9 +11,9 @@
 #include <string.h>
 #include <signal.h>
 #include <float.h>
-#include "i2c/MPU9150Wrapper.h"
-#include "i2c/vector3d.h"
-#include "i2c/linux_glue.h"
+#include "MPU9150Wrapper.h"
+#include "vector3d.h"
+#include "linux_glue.h"
 
 #ifdef RASPBERRYPI
 #define I2C_BUS 1

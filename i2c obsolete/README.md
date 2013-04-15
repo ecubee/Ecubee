@@ -1,0 +1,1 @@
+These files are no longer used. They are included in the project for further reference. Current solution from invensense is provided in C and hence not so nice, parts from these codes could be used when 9-axis motion fusion code/binaries are released for ARMv7.
