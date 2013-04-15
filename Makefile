@@ -1,5 +1,6 @@
-CXX = g++
-CFLAGS = -c -Wall -O3 -march=armv7-a -mtune=cortex-a8 -mfpu=vfp -mfloat-abi=softfp
+#CXX = g++
+CFLAGS = -c -Wall -O3 
+BBFLAGS = -march=armv7-a -mtune=cortex-a8 -mfpu=vfp -mfloat-abi=softfp
 LDFLAGS = -losg -lOpenThreads -losgGA -losgDB -losgUtil -losgViewer
 
 BART_CFLAGS = -DBART
@@ -8,8 +9,15 @@ MARTIJN_CFLAGS = -DMARTIJN
 
 APP := EcubeE
 INC := osg comm math i2c eMPL
-SRCS := main.cpp $(wildcard $(INC)/*.cpp) $(wildcard $(INC)/*.c) 
-OBJS := $(SRCS:.cpp=.o)
+PATHS = $(addprefix -I$(CURDIR)/, $(INC))
+SRCS := main.cpp $(foreach dir,$(INC),$(wildcard $(dir)/*.c*)) 
+OBJS := $(notdir $(SRCS))
+OBJS := $(OBJS:%.c=%.o)
+OBJS := $(OBJS:%.cpp=%.o)
+
+BART_OBJS = $(addprefix bart/, $(OBJS))
+GERTJAN_OBJS = $(addprefix gertjan/, $(OBJS))
+MARTIJN_OBJS = $(addprefix martijn/, $(OBJS))
 
 FUSION_APP := fusion
 FUSION_INC := eMPL i2c
@@ -22,10 +30,6 @@ FUSION_OBJS := $(FUSION_OBJS:%.cpp=$(FUSION_OBJDIR)/%.o)
 FUSION_CFLAGS = -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
 FUSION_PATHS = $(addprefix -I$(CURDIR)/, $(FUSION_INC))
 
-BART_OBJS = $(addprefix bart/, $(OBJS))
-GERTJAN_OBJS = $(addprefix gertjan/, $(OBJS))
-MARTIJN_OBJS = $(addprefix martijn/, $(OBJS))
-
 VPATH := $(INC) 
 
 .PHONY: clean all bart gertjan martijn $(FUSION_APP)
@@ -33,41 +37,57 @@ VPATH := $(INC)
 # Insert name target for which you want to compile
 all: bart
 
-bart: $(BART_OBJS)
+bart: bartdir $(BART_OBJS)
 	$(CXX) $(LDFLAGS) $^ -o $(APP)
 	
 bart/%.o: %.cpp
-	$(CXX) $(BART_CFLAGS) $(CFLAGS) $< -o $@
+	$(CXX) $(BART_CFLAGS) $(CFLAGS) $(BBFLAGS) $(PATHS) $< -o $@
 	
-gertjan: $(GERTJAN_OBJS)
+bart/%.o: %.c
+	$(CC) $(BART_CFLAGS) $(CFLAGS) $(BBFLAGS) $(PATHS) $< -o $@
+
+gertjan: gertjandir $(GERTJAN_OBJS)
 	$(CXX) $(LDFLAGS) $^ -o $(APP)
 
 gertjan/%.o: %.cpp
-	$(CXX) $(GERTJAN_CFLAGS) $(CFLAGS) $< -o $@
+	$(CXX) $(GERTJAN_CFLAGS) $(CFLAGS) $(BBFLAGS) $(PATHS) $< -o $@
 
-martijn: $(MARTIJN_OBJS)
-	mkdir -p martijn
+gertjan/%.o: %.c
+	$(CC) $(GERTJAN_CFLAGS) $(CFLAGS) $(BBFLAGS) $(PATHS) $< -o $@
+
+martijn: martijndir $(MARTIJN_OBJS)
 	$(CXX) $(LDFLAGS) $^ -o $(APP)
 	
 martijn/%.o: %.cpp
-	$(CXX) $(MARTIJN_CFLAGS) $(CFLAGS) $< -o $@
+	$(CXX) $(MARTIJN_CFLAGS) $(CFLAGS) $(BBFLAGS) $(PATHS) $< -o $@
+
+martijn/%.o: %.c
+	$(CC) $(MARTIJN_CFLAGS) $(CFLAGS) $(BBFLAGS) $(PATHS) $< -o $@
     
 fusion: fusiondir $(FUSION_OBJS)
-	echo $(FUSION_OBJS)
 	$(CXX) $(FUSION_OBJS) -o $(FUSION_APP)
 
 fusionobj/%.o: %.cpp
-	$(CXX) $(FUSION_CFLAGS) $(CFLAGS) $(FUSION_PATHS) $< -o $@
+	$(CXX) $(CFLAGS) $(FUSION_CFLAGS) $(FUSION_PATHS) $< -o $@
 
 fusionobj/%.o: %.c
-	$(CXX) $(FUSION_CFLAGS) $(CFLAGS) $(FUSION_PATHS) $< -o $@
+	$(CC) $(CFLAGS) $(FUSION_CFLAGS) $(FUSION_PATHS) $< -o $@
+
+bartdir:
+	mkdir -p bart
+
+gertjandir:
+	mkdir -p gertjan
+
+martijndir:
+	mkdir -p martijn
 
 fusiondir:
 	mkdir -p $(FUSION_OBJDIR)
 
 clean:
 	rm -rf $(APP) \
-		  bart/*.o \
-		  gertjan/*.o \
-		  martijn/*.o \
+		  bart \
+		  gertjan \
+		  martijn \
 		  $(FUSION_OBJDIR)
