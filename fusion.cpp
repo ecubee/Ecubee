@@ -44,6 +44,8 @@ int main(int argc, char **argv)
     
     sensor->debug();
     
+    printf("\nInitialization successful. Entering read loop\n\n");
+    
     while (!done) {
         if ((result = sensor->getEuler(angles)) < 0) {
             fprintf(stderr, "Sensor read error");
