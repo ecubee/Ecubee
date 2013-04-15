@@ -38,7 +38,9 @@ int main(int argc, char **argv)
     
     printf("Fusion Test Program. Use ^c to terminate\n\n");
 
-    sensor->init();
+    if (!sensor->init()) 
+        exit(1);
+    
     sensor->debug();
     
     while (!done) {
