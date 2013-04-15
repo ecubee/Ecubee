@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include "MPU9150Wrapper.h"
 #include "mpu9150.h"
+#include "vector3d.h"
 
 
 MPU9150Wrapper::MPU9150Wrapper(int bus, char add) {
@@ -41,7 +42,7 @@ int MPU9150Wrapper::init() {
 	return 0;
 }
 
-int MPU9150Wrapper::getEuler(float * vector) {    
+int MPU9150Wrapper::getEuler(vector3d_t * vector) {
     // Get Euler angles
     //  In: pointer to float[3] vector
     //  Return: 0 on succes, 1 on data not ready, -1 on read error

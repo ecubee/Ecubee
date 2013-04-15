@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include "i2c/MPU9150Wrapper.h"
+#include "i2c/vector3d.h"
 
 #ifdef RASPBERRY_PI
 #define I2C_BUS 1
@@ -20,13 +21,13 @@
 int done;
 
 // forward declarations
-void print_angles(float * angles);
+void print_angles(vector3d_t * angles);
 void register_sig_handler();
 
 
 int main(int argc, char **argv)
 {
-    float angles[3];
+    vector3d_t angles;
     int result;
     MPU9150Wrapper * sensor;
     
@@ -50,12 +51,12 @@ int main(int argc, char **argv)
     sensor->stop();
 }
 
-void print_angles(float * angles)
+void print_angles(vector3d_t* angles)
 {
     printf("\rX: %0.0f Y: %0.0f Z: %0.0f        ",
-           angles[0] * RAD_TO_DEGREE,
-           angles[1] * RAD_TO_DEGREE,
-           angles[2] * RAD_TO_DEGREE);
+           angles[VEC3_X] * RAD_TO_DEGREE,
+           angles[VEC3_Y] * RAD_TO_DEGREE,
+           angles[VEC3_Z] * RAD_TO_DEGREE);
     
     fflush(stdout);
 }
