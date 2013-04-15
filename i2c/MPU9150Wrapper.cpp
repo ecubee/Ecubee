@@ -66,7 +66,7 @@ int MPU9150Wrapper::read() {
     return mpu9150_read(&mpu);
 }
 
-void MPU9150Wrapper::debug(int dbg = 1) {
+void MPU9150Wrapper::debug(int dbg) {
     mpu9150_set_debug(dbg)
 }
 
