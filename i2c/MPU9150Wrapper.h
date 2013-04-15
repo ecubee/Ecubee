@@ -10,6 +10,7 @@
 #define __Ecubee__MPU9150Wrapper__
 
 #include "mpu9150.h"
+#include "vector3d.h"
 
 #define MPU9150_BUS 3           // 1 for raspberry, 3 for beagleboard
 #define MPU9150_ADDRESS 0x68
@@ -25,7 +26,7 @@ public:
     int init();
     int reset();
     int stop();
-	int getEuler(float* vector);
+	int getEuler(vector3d_t vector);
     void debug(int dbg = 1);
 
 private:

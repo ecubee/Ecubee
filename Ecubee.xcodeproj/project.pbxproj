@@ -28,6 +28,7 @@
 		1F5B4BA21716FFBA00E93904 /* i2cManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = i2cManager.cpp; sourceTree = "<group>"; };
 		1F5B4BA31716FFBA00E93904 /* i2cManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = i2cManager.h; sourceTree = "<group>"; };
 		1F609E3E171C129C00726D7E /* fusion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fusion.cpp; sourceTree = "<group>"; };
+		1FBD1191171C26BC00533562 /* local_defaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = local_defaults.h; sourceTree = "<group>"; };
 		1FD272EB1716F8C10015453D /* dmpKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dmpKey.h; sourceTree = "<group>"; };
 		1FD272EC1716F8C10015453D /* dmpmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dmpmap.h; sourceTree = "<group>"; };
 		1FD272ED1716F8C10015453D /* inv_mpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = inv_mpu.c; sourceTree = "<group>"; };
@@ -134,6 +135,7 @@
 		1FF8B895170D8757001F6E0C = {
 			isa = PBXGroup;
 			children = (
+				1FBD1191171C26BC00533562 /* local_defaults.h */,
 				1F609E3E171C129C00726D7E /* fusion.cpp */,
 				1F3F489A171821AC00C90016 /* calibration */,
 				1F3F4885171816E200C90016 /* i2c */,
