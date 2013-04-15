@@ -61,7 +61,7 @@ martijn/%.o: %.cpp
 martijn/%.o: %.c
 	$(CC) $(MARTIJN_CFLAGS) $(CFLAGS) $(PATHS) $< -o $@
     
-cal: caldir $(CAL_OBJS)
+$(CAL_APP): caldir $(CAL_OBJS)
 	$(CXX) $(CAL_OBJS) -o $(CAL_APP)
 
 cal/%.o: %.cpp
