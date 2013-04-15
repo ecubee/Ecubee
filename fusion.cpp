@@ -13,7 +13,7 @@
 #include <float.h>
 #include "i2c/MPU9150Wrapper.h"
 #include "i2c/vector3d.h"
-#include "i2c/linux_glue.c"
+#include "i2c/linux_glue.h"
 
 #ifdef RASPBERRYPI
 #define I2C_BUS 1
