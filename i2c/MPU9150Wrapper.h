@@ -26,7 +26,7 @@ public:
     int reset();
     int stop();
 	int getEuler(float* vector);
-    void debug(int dbg);
+    void debug(int dbg = 1);
 
 private:
     int i2c_bus;
