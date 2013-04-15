@@ -56,8 +56,8 @@ int main(int argc, char **argv)
 
 void print_angles(vector3d_t* angles)
 {
-    printf("\rX: %0.0f Y: %0.0f Z: %0.0f   ", angles[VEC3_X] * RAD_TO_DEGREE, angles[VEC3_Y] * RAD_TO_DEGREE, angles[VEC3_Z] * RAD_TO_DEGREE);
-    
+   // printf("\rX: %0.0f Y: %0.0f Z: %0.0f   ", angles[VEC3_X] * RAD_TO_DEGREE, angles[VEC3_Y] * RAD_TO_DEGREE, angles[VEC3_Z] * RAD_TO_DEGREE);
+    printf("\rX: %0.0f Y: %0.0f Z: %0.0f   ", angles[VEC3_X], angles[VEC3_Y], angles[VEC3_Z]);
     fflush(stdout);
 }
 
