@@ -25,8 +25,8 @@
 #include <string.h>
 
 #include "linux_glue.h"
-#include "../eMPL/inv_mpu.h"
-#include "../eMPL/inv_mpu_dmp_motion_driver.h"
+#include "inv_mpu.h"
+#include "inv_mpu_dmp_motion_driver.h"
 #include "mpu9150.h"
 
 static int data_ready();
@@ -36,6 +36,7 @@ static int data_fusion(mpudata_t *mpu);
 static unsigned short inv_row_2_scale(const signed char *row);
 static unsigned short inv_orientation_matrix_to_scalar(const signed char *mtx);
 
+int debug_on;
 int yaw_mixing_factor;
 
 int use_accel_cal;
@@ -44,7 +45,10 @@ caldata_t accel_cal_data;
 int use_mag_cal;
 caldata_t mag_cal_data;
 
-
+void mpu9150_set_debug(int on)
+{
+	debug_on = on;
+}
 
 int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 {
@@ -69,7 +73,7 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	fflush(stdout);
 
 	if (mpu_init(NULL)) {
-		printf("\nmpu_init() failed\n");
+		fprintf(stderr, "\nmpu_init() failed\n");
 		return -1;
 	}
 
@@ -77,7 +81,7 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	fflush(stdout);
 
 	if (mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS)) {
-		printf("\nmpu_set_sensors() failed\n");
+		fprintf(stderr, "\nmpu_set_sensors() failed\n");
 		return -1;
 	}
 
@@ -85,7 +89,7 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	fflush(stdout);
 
 	if (mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL)) {
-		printf("\nmpu_configure_fifo() failed\n");
+		fprintf(stderr, "\nmpu_configure_fifo() failed\n");
 		return -1;
 	}
 
@@ -93,7 +97,7 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	fflush(stdout);
 	
 	if (mpu_set_sample_rate(sample_rate)) {
-		printf("\nmpu_set_sample_rate() failed\n");
+		fprintf(stderr, "\nmpu_set_sample_rate() failed\n");
 		return -1;
 	}
 
@@ -101,7 +105,7 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	fflush(stdout);
 
 	if (mpu_set_compass_sample_rate(sample_rate)) {
-		printf("\nmpu_set_compass_sample_rate() failed\n");
+		fprintf(stderr, "\nmpu_set_compass_sample_rate() failed\n");
 		return -1;
 	}
 
@@ -109,7 +113,7 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	fflush(stdout);
 
 	if (dmp_load_motion_driver_firmware()) {
-		printf("\ndmp_load_motion_driver_firmware() failed\n");
+		fprintf(stderr, "\ndmp_load_motion_driver_firmware() failed\n");
 		return -1;
 	}
 
@@ -117,7 +121,7 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	fflush(stdout);
 
 	if (dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_orientation))) {
-		printf("\ndmp_set_orientation() failed\n");
+		fprintf(stderr, "\ndmp_set_orientation() failed\n");
 		return -1;
 	}
 
@@ -126,7 +130,7 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 
   	if (dmp_enable_feature(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_RAW_ACCEL 
 						| DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_GYRO_CAL)) {
-		printf("\ndmp_enable_feature() failed\n");
+		pfrintf(stderr, "\ndmp_enable_feature() failed\n");
 		return -1;
 	}
 
@@ -134,7 +138,7 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	fflush(stdout);
  
 	if (dmp_set_fifo_rate(sample_rate)) {
-		printf("\ndmp_set_fifo_rate() failed\n");
+		fprintf(stderr, "\ndmp_set_fifo_rate() failed\n");
 		return -1;
 	}
 
@@ -142,7 +146,7 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	fflush(stdout);
 
 	if (mpu_set_dmp_state(1)) {
-		printf("\nmpu_set_dmp_state(1) failed\n");
+		fprintf(stderr, "\nmpu_set_dmp_state(1) failed\n");
 		return -1;
 	}
 
@@ -151,13 +155,12 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	return 0;
 }
 
-int mpu9150_exit()
+void mpu9150_exit()
 {
-    int result;
 	// turn off the DMP on exit 
-	if (result = mpu_set_dmp_state(0))
-		printf("mpu_set_dmp_state(0) failed\n");
-    return result;
+	if (mpu_set_dmp_state(0))
+		fprintf(stderr, "mpu_set_dmp_state(0) failed\n");
+
 	// TODO: Should turn off the sensors too
 }
 
@@ -182,13 +185,12 @@ void mpu9150_set_accel_cal(caldata_t *cal)
 		bias[i] = -accel_cal_data.offset[i];
 	}
 
-#ifdef I2C_DEBUG
-    fprintf(stderr, "\naccel cal (range : offset)\n");
+	if (debug_on) {
+		fprintf(stderr, "\naccel cal (range : offset)\n");
 
-	for (i = 0; i < 3; i++)
+		for (i = 0; i < 3; i++)
 			fprintf(stderr, "%d : %d\n", accel_cal_data.range[i], accel_cal_data.offset[i]);
 	}
-#endif
 
 	mpu_set_accel_bias(bias);
 
@@ -218,13 +220,13 @@ void mpu9150_set_mag_cal(caldata_t *cal)
 			mag_cal_data.offset[i] = MAG_SENSOR_RANGE;
 	}
 
-#ifdef I2C_DEBUG
-    fprintf(stderr, "\nmag cal (range : offset)\n");
+	if (debug_on) {
+		fprintf(stderr, "\nmag cal (range : offset)\n");
 
 		for (i = 0; i < 3; i++)
 			fprintf(stderr, "%d : %d\n", mag_cal_data.range[i], mag_cal_data.offset[i]);
 	}
-#endif
+
 	use_mag_cal = 1;
 }
 
@@ -238,29 +240,31 @@ int mpu9150_read_dmp(mpudata_t *mpu)
 		return -1;
 
 	if (dmp_read_fifo(mpu->rawGyro, mpu->rawAccel, mpu->rawQuat, &mpu->dmpTimestamp, &sensors, &more) < 0) {
-		printf("dmp_read_fifo() failed\n");
+		fprintf(stderr, "dmp_read_fifo() failed\n");
 		return -1;
 	}
-    
+
 	while (more) {
 		// Fell behind, reading again
 		if (dmp_read_fifo(mpu->rawGyro, mpu->rawAccel, mpu->rawQuat, &mpu->dmpTimestamp, &sensors, &more) < 0) {
-			printf("dmp_read_fifo() failed\n");
+			fprintf(stderr, "dmp_read_fifo() failed\n");
 			return -1;
 		}
         i++;
 	}
-#ifdef I2C_DEBUG
-    if i
-        fprintf(stderr, "DBG: skipped %d samples\n", i);
-#endif
+    
+    if (debug_on) {
+        if (i) {
+            fprintf(stderr, "Skipped %d reads from fifo", i);
+        }
+    }
 	return 0;
 }
 
 int mpu9150_read_mag(mpudata_t *mpu)
 {
 	if (mpu_get_compass_reg(mpu->rawMag, &mpu->magTimestamp) < 0) {
-		printf("mpu_get_compass_reg() failed\n");
+		fprintf(stderr, "mpu_get_compass_reg() failed\n");
 		return -1;
 	}
 
@@ -285,7 +289,7 @@ int data_ready()
 	short status;
 
 	if (mpu_get_int_status(&status) < 0) {
-		printf("mpu_get_int_status() failed\n");
+		fprintf(stderr, "mpu_get_int_status() failed\n");
 		return 0;
 	}
 
@@ -379,7 +383,7 @@ int data_fusion(mpudata_t *mpu)
 	newMagYaw = -atan2f(magQuat[QUAT_Y], magQuat[QUAT_X]);
 
 	if (newMagYaw != newMagYaw) {
-		printf("newMagYaw NAN\n");
+		fprintf(stderr, "newMagYaw NAN\n");
 		return -1;
 	}
 

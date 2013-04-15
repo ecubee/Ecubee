@@ -34,7 +34,7 @@
 		1FD272EF1716F8C10015453D /* inv_mpu_dmp_motion_driver.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = inv_mpu_dmp_motion_driver.c; sourceTree = "<group>"; };
 		1FD272F01716F8C10015453D /* inv_mpu_dmp_motion_driver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inv_mpu_dmp_motion_driver.h; sourceTree = "<group>"; };
 		1FD272F11716F8C10015453D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		1FD273091716FBE70015453D /* fusion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fusion.cpp; sourceTree = "<group>"; };
+		1FD273091716FBE70015453D /* imu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imu.cpp; sourceTree = "<group>"; };
 		1FD2730B1716FC7C0015453D /* acos.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = acos.cpp; sourceTree = "<group>"; };
 		1FD2730C1716FC7C0015453D /* acos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acos.h; sourceTree = "<group>"; };
 		1FD2730E1716FC950015453D /* communicator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = communicator.cpp; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 				1F3F489A171821AC00C90016 /* calibration */,
 				1F3F4885171816E200C90016 /* i2c */,
 				1FD273121716FCAE0015453D /* osg */,
-				1FD273091716FBE70015453D /* fusion.cpp */,
+				1FD273091716FBE70015453D /* imu.cpp */,
 				1FF8B89F170D881F001F6E0C /* CMakeLists.txt */,
 				1FF8B8B7170E3040001F6E0C /* i2c obsolete */,
 				1FF8B8AD170D881F001F6E0C /* main.cpp */,

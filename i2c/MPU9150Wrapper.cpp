@@ -61,6 +61,10 @@ int MPU9150Wrapper::read() {
     return mpu9150_read(&mpu);
 }
 
+void MPU9150Wrapper::debug(int dbg = 1) {
+    mpu9150_set_debug(dbg)
+}
+
 int MPU9150Wrapper::setCalibration(bool mag) {
     int i;
 	FILE *f;
