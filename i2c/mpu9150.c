@@ -303,7 +303,7 @@ int data_ready()
 	// debug
 	if(debug_on) {
        // if (status != 0x0103)
-            fprintf(stderr, "Status: %04X  ", status);
+            fprintf(stderr, "Status: %04X  \n", status);
     }
 	return (status == 0x0103);
 }

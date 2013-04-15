@@ -34,6 +34,7 @@ int main(int argc, char **argv)
     vector3d_t angles;
     int result;
     MPU9150Wrapper * sensor;
+    int i = 0;
     
     sensor = new MPU9150Wrapper(I2C_BUS);
     
@@ -48,8 +49,10 @@ int main(int argc, char **argv)
     
     while (!done) {
         if ((result = sensor->getEuler(angles)) < 0) {
-            fprintf(stderr, "Sensor read error");
-            break;
+            fprintf(stderr, "Sensor read error\n");
+            i++;
+            if (i>10)
+                break;
         }
         if (!result)
             print_angles(angles);
@@ -63,7 +66,7 @@ int main(int argc, char **argv)
 
 void print_angles(vector3d_t angles)
 {
-    printf("\rX: %0.0f Y: %0.0f Z: %0.0f   ", angles[VEC3_X] * RAD_TO_DEGREE, angles[VEC3_Y] * RAD_TO_DEGREE, angles[VEC3_Z] * RAD_TO_DEGREE);
+    printf("\rX: %0.0f Y: %0.0f Z: %0.0f   \n", angles[VEC3_X] * RAD_TO_DEGREE, angles[VEC3_Y] * RAD_TO_DEGREE, angles[VEC3_Z] * RAD_TO_DEGREE);
        fflush(stdout);
 }
 
