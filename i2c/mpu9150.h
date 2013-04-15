@@ -28,7 +28,10 @@
 
 #define MAG_SENSOR_RANGE 	4096
 #define ACCEL_SENSOR_RANGE 	32000
-
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 typedef struct {
 	short offset[3];
 	short range[3];
@@ -63,5 +66,9 @@ int mpu9150_read_mag(mpudata_t *mpu);
 void mpu9150_set_accel_cal(caldata_t *cal);
 void mpu9150_set_mag_cal(caldata_t *cal);
 
+#ifdef __cplusplus
+}
+#endif
+    
 #endif /* MPU9150_H */
 

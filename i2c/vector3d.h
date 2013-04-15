@@ -35,10 +35,17 @@
 #define VEC3_Y		1
 #define VEC3_Z		2
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 typedef float vector3d_t[3];
 
 void vector3DotProduct(vector3d_t a, vector3d_t b, float *d);
 void vector3CrossProduct(vector3d_t a, vector3d_t b, vector3d_t d);
-
+#ifdef __cplusplus
+}
+#endif
 #endif /* VECTOR3D_H */
 
