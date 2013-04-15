@@ -68,7 +68,7 @@ int MPU9150Wrapper::read() {
 }
 
 void MPU9150Wrapper::debug(int dbg) {
-    mpu9150_set_debug(dbg)
+    mpu9150_set_debug(dbg);
 }
 
 int MPU9150Wrapper::setCalibration(bool mag) {
@@ -115,7 +115,7 @@ int MPU9150Wrapper::setCalibration(bool mag) {
         fclose(f);
 
     } else {
-        fprintf(stderr, "Warning: %s not found, switching to hardcoded values\n");
+        fprintf(stderr, "Warning: %s not found, switching to hardcoded values\n", filename);
         error = true;
     }
     
