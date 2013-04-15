@@ -13,7 +13,7 @@
 #include "MPU9150Wrapper.h"
 #include "mpu9150.h"
 #include "vector3d.h"
-#include "inv_mpu.h"
+#include "linux_glue.h"
 
 
 MPU9150Wrapper::MPU9150Wrapper(int bus, char add) {
