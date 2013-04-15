@@ -1,5 +1,6 @@
 #CXX = g++
-CFLAGS = -c -Wall -O3 
+CFLAGS = -c -Wall -O3 -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
+#Optional flags: -DI2C_DEBUG
 BBFLAGS = -march=armv7-a -mtune=cortex-a8 -mfpu=vfp -mfloat-abi=softfp
 LDFLAGS = -losg -lOpenThreads -losgGA -losgDB -losgUtil -losgViewer
 
@@ -27,7 +28,7 @@ FUSION_OBJDIR := fusionobj
 FUSION_OBJS := $(notdir $(FUSION_SRCS))
 FUSION_OBJS := $(FUSION_OBJS:%.c=$(FUSION_OBJDIR)/%.o)
 FUSION_OBJS := $(FUSION_OBJS:%.cpp=$(FUSION_OBJDIR)/%.o)
-FUSION_CFLAGS = -DRASPBERRYPI -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
+FUSION_CFLAGS = $(CFLAGS) -DRASPBERRYPI
 FUSION_PATHS = $(addprefix -I$(CURDIR)/, $(FUSION_INC))
 
 VPATH := $(INC) 
