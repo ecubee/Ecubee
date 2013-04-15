@@ -11,9 +11,9 @@
 #include "i2c/MPU9150Wrapper.h"
 
 #ifdef RASPBERRY_PI
-#define I2C_BUS 1;
+#define I2C_BUS 1
 #else
-#define I2C_BUS 3;
+#define I2C_BUS 3
 #endif
 
 // globals
