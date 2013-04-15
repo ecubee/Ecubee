@@ -294,7 +294,7 @@ int mpu9150_read(mpudata_t *mpu)
 int data_ready()
 {
 	short status;
-    unsigned char data;
+    unsigned char data[2];
     
 	if (mpu_get_int_status(&status) < 0) {
 		fprintf(stderr, "mpu_get_int_status() failed\n");
@@ -311,8 +311,8 @@ int data_ready()
 
 	// debug
 	if(debug_on) {
-        mpu_read_reg(0x73, &data);
-            fprintf(stderr, "Data:   %04X  \n", data);
+        linux_i2c_read(0x68, 0x72, 2, data)
+            fprintf(stderr, "Data:   %02X%02X  \n", data[0], data[1]);
             fprintf(stderr, "Status: %04X  \n", status);
     }
 	return (status == 0x0103);
