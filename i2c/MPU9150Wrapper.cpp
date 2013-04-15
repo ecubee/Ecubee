@@ -13,6 +13,7 @@
 #include "MPU9150Wrapper.h"
 #include "mpu9150.h"
 #include "vector3d.h"
+#include "inv_mpu.h"
 
 
 MPU9150Wrapper::MPU9150Wrapper(int bus, char add) {
@@ -37,6 +38,8 @@ int MPU9150Wrapper::init() {
     setCalibration(true);  // Magneto Calibration
     
     memset(&mpu, 0, sizeof(mpudata_t));
+    
+    set_int_enable(1);
     
     flush();
     

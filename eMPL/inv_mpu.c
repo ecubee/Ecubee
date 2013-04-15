@@ -1721,13 +1721,12 @@ int mpu_read_fifo_stream(unsigned short length, unsigned char *data,
         return -1;
     if (!st.chip_cfg.sensors)
         return -1;
-    fprintf(stderr, "Reading fifo stream\n");
+
     if (i2c_read(st.hw->addr, st.reg->fifo_count_h, 2, tmp))
         return -1;
     fifo_count = (tmp[0] << 8) | tmp[1];
     if (fifo_count < length) {
         more[0] = 0;
-        fprintf(stderr, "Stream empty\n");
         return -1;
     }
     if (fifo_count > (st.hw->max_fifo >> 1)) {
@@ -1739,7 +1738,7 @@ int mpu_read_fifo_stream(unsigned short length, unsigned char *data,
             return -2;
         }
     }
-    fprintf(stderr, "check actual data \n");
+
     if (i2c_read(st.hw->addr, st.reg->fifo_r_w, length, data))
         return -1;
     more[0] = fifo_count / length - 1;
