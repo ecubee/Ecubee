@@ -16,7 +16,7 @@
 #include "linux_glue.h"
 
 
-MPU9150Wrapper::MPU9150Wrapper(int bus, char add) {
+MPU9150Wrapper::MPU9150Wrapper(int bus, unsigned char add) {
     i2c_bus = bus;
     add = add;
 }
