@@ -311,7 +311,7 @@ int data_ready()
 
 	// debug
 	if(debug_on) {
-        mpu_read_reg(0x3A, &data);
+        mpu_read_reg(0x73, &data);
             fprintf(stderr, "Data:   %04X  \n", data);
             fprintf(stderr, "Status: %04X  \n", status);
     }
