@@ -53,8 +53,8 @@ int mag_mode;
 void usage(char *argv_0)
 {
     printf("\nCalibrate Ecubee Sensor Bias\n");
-    printf("To calibrate Ecubee, run program ans slowely(!) turn cube to all six orientations, i.e. lay flat on each side. ");
-    printf("Magnetometer and accelerometer need to be calibrated seperately");
+    printf("To calibrate Ecubee, run program and slowely(!) turn cube in all six orientations, i.e. lay flat on each side. ");
+    printf("Magnetometer and accelerometer need to be calibrated seperately\n");
 	printf("\nUsage: (sudo) %s <-a | -m> [options]\n", argv_0);
 	printf("  -b <i2c-bus>          The I2C bus number where the IMU is. The default is 1 for RPi, 3 otherwise.\n");
 	printf("  -s <sample-rate>      The IMU sample rate in Hz. Range 2-50, default 10.\n");
