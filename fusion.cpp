@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
+#include <float.h>
 #include "i2c/MPU9150Wrapper.h"
 #include "i2c/vector3d.h"
 
