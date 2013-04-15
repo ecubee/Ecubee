@@ -294,7 +294,7 @@ int mpu9150_read(mpudata_t *mpu)
 int data_ready()
 {
 	short status;
-    char data;
+    unsigned char data;
     
 	if (mpu_get_int_status(&status) < 0) {
 		fprintf(stderr, "mpu_get_int_status() failed\n");
