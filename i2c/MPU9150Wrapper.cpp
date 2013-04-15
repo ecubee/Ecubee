@@ -38,9 +38,7 @@ int MPU9150Wrapper::init() {
     setCalibration(true);  // Magneto Calibration
     
     memset(&mpu, 0, sizeof(mpudata_t));
-        
-    flush();
-    
+            
 	return 0;
 }
 
