@@ -86,8 +86,10 @@ fusiondir:
 	mkdir -p $(FUSION_OBJDIR)
 
 clean:
-	rm -rf $(APP) \
-		  bart \
+	rm -rf  bart \
 		  gertjan \
 		  martijn \
 		  $(FUSION_OBJDIR)
+
+veryclean: clean
+	rm -f $(APP) $(FUSION_APP)
