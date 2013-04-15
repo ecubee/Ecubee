@@ -27,9 +27,11 @@
 // To avoid having to pass the same command line switches when running
 // the test apps, you can specify the defaults for your platform here.
 
-// RPi I2C bus 
+#ifdef RASPBERRYPI
 #define DEFAULT_I2C_BUS 1
-
+#else
+#define DEFAULT_I2C_BUS 3
+#endif
 // Gumstix Overo
 // #define DEFAULT_I2C_BUS 3
 
@@ -41,7 +43,7 @@
 
 #define DEFAULT_SAMPLE_RATE_HZ	10
 
-#define DEFAULT_YAW_MIX_FACTOR 4
+#define DEFAULT_YAW_MIX_FACTOR 10
 
 #endif /* LOCAL_DEFAULTS_H */
 

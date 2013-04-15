@@ -52,13 +52,16 @@ int mag_mode;
 
 void usage(char *argv_0)
 {
-	printf("\nUsage: %s <-a | -m> [options]\n", argv_0);
-	printf("  -b <i2c-bus>          The I2C bus number where the IMU is. The default is 1 for /dev/i2c-1.\n");
+    printf("\nCalibrate Ecubee Sensor Bias\n");
+    printf("To calibrate Ecubee, run program ans slowely(!) turn cube to all six orientations, i.e. lay flat on each side. ");
+    printf("Magnetometer and accelerometer need to be calibrated seperately");
+	printf("\nUsage: (sudo) %s <-a | -m> [options]\n", argv_0);
+	printf("  -b <i2c-bus>          The I2C bus number where the IMU is. The default is 1 for RPi, 3 otherwise.\n");
 	printf("  -s <sample-rate>      The IMU sample rate in Hz. Range 2-50, default 10.\n");
 	printf("  -a                    Accelerometer calibration\n");
     printf("  -m                    Magnetometer calibration\n");
     printf("                        Accel and mag modes are mutually exclusive, but one must be chosen.\n");
-	printf("  -f <cal-file>         Where to save the calibration file. Default ./<mode>cal.txt\n");
+	printf("  -f <cal-file>         Where to save the calibration file. Default /etc/ecubee/<mode>cal.txt\n");
 	printf("  -h                    Show this help\n");
 
 	printf("\nExample: %s -b3 -s20 -a\n\n", argv_0);
@@ -142,9 +145,9 @@ int main(int argc, char **argv)
 
 	if (strlen(calFile) == 0) {
 		if (mag_mode)
-			strcpy(calFile, "magcal.txt");
+			strcpy(calFile, "/etc/ecubee/magcal.txt");
 		else
-			strcpy(calFile, "accelcal.txt");
+			strcpy(calFile, "/etc/ecubee/accelcal.txt");
 	}
 
 	write_cal();
