@@ -14,7 +14,7 @@
 #include "i2c/MPU9150Wrapper.h"
 #include "i2c/vector3d.h"
 
-#ifdef RASPBERRY_PI
+#ifdef RASPBERRYPI
 #define I2C_BUS 1
 #else
 #define I2C_BUS 3
