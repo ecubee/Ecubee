@@ -51,6 +51,8 @@ int main(int argc, char **argv)
         if (!result)
             print_angles(angles);
         
+        linux_delay_ms(10);
+
     }
     
     sensor->stop();
