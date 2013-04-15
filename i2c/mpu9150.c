@@ -252,7 +252,7 @@ int mpu9150_read_dmp(mpudata_t *mpu)
 	while (more) {
 		// Fell behind, reading again
 		if (dmp_read_fifo(mpu->rawGyro, mpu->rawAccel, mpu->rawQuat, &mpu->dmpTimestamp, &sensors, &more) < 0) {
-			fprintf(stderr, "dmp_read_fifo() failed\n");
+			fprintf(stderr, "dmp_read_fifo():more failed\n");
 			return -1;
 		}
         i++;

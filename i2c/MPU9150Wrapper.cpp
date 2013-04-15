@@ -38,6 +38,7 @@ int MPU9150Wrapper::init() {
     
     memset(&mpu, 0, sizeof(mpudata_t));
     
+    flush();
     
 	return 0;
 }
@@ -56,6 +57,10 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
     for (int i=0; i < 3; i++) {
         vector[i] = mpu.fusedEuler[i];
     }
+    return 0;
+}
+int MPU9150Wrapper::flush() {
+    //TODO
     return 0;
 }
 
