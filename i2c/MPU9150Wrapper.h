@@ -15,8 +15,8 @@
 #define MPU9150_ADDRESS 0x68
 #define MPU9150_SAMPLE_RATE 50   // Output rate of DMP
 #define MPU9150_YAW_MIX_FACTOR 10    // The bigger, the less dominant magnetometer
-
-
+#define MPU9150_MAGNETO_DEFAULT_CALIBRATION -163,77,-100,153,-231,34
+#define MPU9150_ACCEL_DEFAULT_CALIBRATION -16566,16888,-16968,16996,-18186,16164 
 
 class MPU9150Wrapper {
 public:

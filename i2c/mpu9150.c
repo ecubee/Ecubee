@@ -237,7 +237,7 @@ int mpu9150_read_dmp(mpudata_t *mpu)
     int i = 0;
 
 	if (!data_ready())
-		return -1;
+		return 1;
 
 	if (dmp_read_fifo(mpu->rawGyro, mpu->rawAccel, mpu->rawQuat, &mpu->dmpTimestamp, &sensors, &more) < 0) {
 		fprintf(stderr, "dmp_read_fifo() failed\n");
@@ -273,8 +273,10 @@ int mpu9150_read_mag(mpudata_t *mpu)
 
 int mpu9150_read(mpudata_t *mpu)
 {
-	if (mpu9150_read_dmp(mpu) != 0)
-		return -1;
+    int result;
+    
+	if ((result = mpu9150_read_dmp(mpu)) != 0)
+		return result;
 
 	if (mpu9150_read_mag(mpu) != 0)
 		return -1;
