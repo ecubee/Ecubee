@@ -29,7 +29,12 @@
 #include <math.h>
 #include "inv_mpu.h"
 
-static inline int reg_int_cb(struct int_param_s *int_param)
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+    static inline int reg_int_cb(struct int_param_s *int_param)
 {
 	return 0;
 }
@@ -55,5 +60,9 @@ int linux_i2c_read(unsigned char slave_addr, unsigned char reg_addr,
 int linux_delay_ms(unsigned long num_ms);
 int linux_get_ms(unsigned long *count);
 
+#ifdef __cplusplus
+}
+#endif
+    
 #endif /* ifndef LINUX_GLUE_H */
 
