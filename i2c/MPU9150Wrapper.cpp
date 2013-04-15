@@ -14,7 +14,6 @@
 #include "mpu9150.h"
 
 
-
 MPU9150Wrapper::MPU9150Wrapper(int bus = MPU9150_BUS, char add = MPU9150_ADDRESS) {
     i2c_bus = bus;
     add = add;
@@ -43,8 +42,14 @@ int MPU9150Wrapper::init() {
 }
 
 int MPU9150Wrapper::getEuler(float * vector) {    
-    if (read()) {
-        return -1;
+    // Get Euler angles
+    //  In: pointer to float[3] vector
+    //  Return: 0 on succes, 1 on data not ready, -1 on read error
+    
+    int result;
+    
+    if ((result = read()) != 0) {
+        return result;
     }
     
     for (int i=0; i < 3; i++) {
@@ -71,8 +76,8 @@ int MPU9150Wrapper::setCalibration(bool mag) {
     char filename[32];
 	char buff[32];
 	long readout[6];
-    long magdefaults[6] = {-163, 77, -100, 153, -231, 34};
-    long acceldefaults[6] = {-16566, 16888, -16968, 16996, -18186, 16164 };
+    long magdefaults[6] = {MPU9150_MAGNETO_DEFAULT_CALIBRATION};
+    long acceldefaults[6] = {MPU9150_ACCEL_DEFAULT_CALIBRATION};
     long * val;
     bool error = false;
 	caldata_t cal;
