@@ -14,7 +14,7 @@
 #include "mpu9150.h"
 
 
-MPU9150Wrapper::MPU9150Wrapper(int bus = MPU9150_BUS, char add = MPU9150_ADDRESS) {
+MPU9150Wrapper::MPU9150Wrapper(int bus, char add) {
     i2c_bus = bus;
     add = add;
 }
