@@ -7,6 +7,8 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <signal.h>
 #include "i2c/MPU9150Wrapper.h"
 #include "i2c/vector3d.h"
@@ -70,7 +72,7 @@ void register_sig_handler()
 {
 	struct sigaction sia;
     
-	bzero(&sia, sizeof sia);
+	memset(&sia, 0, sizeof sia);
 	sia.sa_handler = sigint_handler;
     
 	if (sigaction(SIGINT, &sia, NULL) < 0) {
