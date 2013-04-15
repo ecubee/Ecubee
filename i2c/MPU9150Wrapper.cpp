@@ -61,8 +61,7 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
     return 0;
 }
 int MPU9150Wrapper::flush() {
-    //TODO
-    return 0;
+    return mpu_reset_fifo();
 }
 
 int MPU9150Wrapper::stop() {
@@ -70,6 +69,16 @@ int MPU9150Wrapper::stop() {
 }
 
 int MPU9150Wrapper::read() {
+    unsigned char data[2];
+    unsigned short count;
+    
+    // data_ready() in mpu9150.c if flawed, instead check if there is something in fifo first
+    linux_i2c_read(address, MPU9150_REG_FIFO_COUNT, 2, data);
+    count = (data[0] << 8) | data[1];
+
+    if (count == 0)
+        return 1;
+    
     return mpu9150_read(&mpu);
 }
 
