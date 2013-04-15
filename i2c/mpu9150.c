@@ -130,7 +130,7 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 
   	if (dmp_enable_feature(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_RAW_ACCEL 
 						| DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_GYRO_CAL)) {
-		pfrintf(stderr, "\ndmp_enable_feature() failed\n");
+		fprintf(stderr, "\ndmp_enable_feature() failed\n");
 		return -1;
 	}
 
@@ -155,13 +155,18 @@ int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 	return 0;
 }
 
-void mpu9150_exit()
+int mpu9150_exit()
 {
+    int result;
+    
 	// turn off the DMP on exit 
-	if (mpu_set_dmp_state(0))
+	if ((result = mpu_set_dmp_state(0)) != 0) {
 		fprintf(stderr, "mpu_set_dmp_state(0) failed\n");
-
+        return result;
+    }
 	// TODO: Should turn off the sensors too
+    
+    return 0;
 }
 
 void mpu9150_set_accel_cal(caldata_t *cal)
