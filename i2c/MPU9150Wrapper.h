@@ -26,7 +26,7 @@ public:
     int init();
     int reset();
     int stop();
-	int getEuler(vector3d_t* vector);
+	int getEuler(vector3d_t vector);
     void debug(int dbg = 1);
 
 private:
