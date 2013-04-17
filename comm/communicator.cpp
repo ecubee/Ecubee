@@ -15,6 +15,8 @@ void CommunicatorThread::run(void)
 	serialPort->init();
   #ifdef BART
 	sensor = new MPU9150Wrapper();
+    sensor->init();
+    sensor->debug();
   #endif
 #endif
 
