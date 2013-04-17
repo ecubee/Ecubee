@@ -35,7 +35,7 @@ all: bart
 install: install-bart
 
 bart: bartdir $(BART_OBJS)
-	$(CXX) $(LDFLAGS) $^ -o $(APP)
+	$(CXX) $(LDFLAGS) $(BART_OBJS) -o $(APP)
 	
 bart/%.o: %.cpp
 	$(CXX) $(BART_CFLAGS) $(CFLAGS) $(PATHS) $< -o $@
@@ -44,7 +44,7 @@ bart/%.o: %.c
 	$(CC) $(BART_CFLAGS) $(CFLAGS) $(PATHS) $< -o $@
 
 gertjan: gertjandir $(GERTJAN_OBJS)
-	$(CXX) $(LDFLAGS) $^ -o $(APP)
+	$(CXX) $(LDFLAGS) $(GERTJAN_OBJS) -o $(APP)
 
 gertjan/%.o: %.cpp
 	$(CXX) $(GERTJAN_CFLAGS) $(CFLAGS) $(PATHS) $< -o $@
@@ -53,7 +53,7 @@ gertjan/%.o: %.c
 	$(CC) $(GERTJAN_CFLAGS) $(CFLAGS) $(PATHS) $< -o $@
 
 martijn: martijndir $(MARTIJN_OBJS)
-	$(CXX) $(LDFLAGS) $^ -o $(APP)
+	$(CXX) $(LDFLAGS) $(MARTIJN_OBJS) -o $(APP)
 	
 martijn/%.o: %.cpp
 	$(CXX) $(MARTIJN_CFLAGS) $(CFLAGS) $(PATHS) $< -o $@
