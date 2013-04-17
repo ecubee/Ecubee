@@ -1,6 +1,6 @@
 BBFLAGS = -march=armv7-a -mtune=cortex-a8 -mfpu=vfp -mfloat-abi=softfp
-CFLAGS = -c -Wall -O3 $(BBFLAGS) -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
-#Optional flags: -DI2C_DEBUG -DRASPBERRYPI $(BBFLAGS)
+CFLAGS = -c -Wall -O3 $(BBFLAGS) -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY -DMPU9150_DEBUG
+#Optional flags: -DI2C_DEBUG -DMPU9150_DEBUG -DRASPBERRYPI $(BBFLAGS)
 LDFLAGS = -losg -lOpenThreads -losgGA -losgDB -losgUtil -losgViewer
 
 BART_CFLAGS = -DBART

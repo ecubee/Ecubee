@@ -38,7 +38,10 @@ int MPU9150Wrapper::init() {
     setCalibration(true);  // Magneto Calibration
     
     memset(&mpu, 0, sizeof(mpudata_t));
-            
+#ifdef MPU9150_DEBUG
+    debug();
+#endif
+    
 	return 0;
 }
 
@@ -56,6 +59,12 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
     for (int i=0; i < 3; i++) {
         vector[i] = mpu.fusedEuler[i];
     }
+    
+#ifdef MPU9150_DEBUG
+    printf("\rX: %0.0f Y: %0.0f Z: %0.0f    ", mpu.fusedEuler[VEC3_X] * RAD_TO_DEGREE, mpu.fusedEuler[VEC3_Y] * RAD_TO_DEGREE, mpu.fusedEuler[VEC3_Z] * RAD_TO_DEGREE);
+    fflush(stdout);
+#endif
+    
     return 0;
 }
 int MPU9150Wrapper::flush() {
@@ -151,4 +160,3 @@ int MPU9150Wrapper::setCalibration(bool mag) {
     
 	return 0;
 }
-

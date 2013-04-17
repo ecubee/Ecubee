@@ -16,7 +16,6 @@ void CommunicatorThread::run(void)
   #ifdef BART
 	sensor = new MPU9150Wrapper();
     sensor->init();
-    sensor->debug();
   #endif
 #endif
 
@@ -76,7 +75,7 @@ void CommunicatorThread::run(void)
 #ifdef SIMULATION
 		OpenThreads::Thread::microSleep(16000);
 #else
-		OpenThreads::Thread::microSleep(10000);
+		OpenThreads::Thread::microSleep(5000);
 #endif
 	}
 
