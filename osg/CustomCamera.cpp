@@ -13,7 +13,7 @@ bool CustomCamera::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAda
 			double left, right, bottom, top, near, far;
 			osg::Matrix rotateMat;
 
-			rotateMat = osg::Matrix::rotate(_xAngle, osg::X_AXIS) * osg::Matrix::rotate(_yAngle, osg::Y_AXIS);
+			rotateMat = osg::Matrix::rotate(_xAngle, osg::X_AXIS) * osg::Matrix::rotate(_yAngle, osg::Y_AXIS) * osg::Matrix::rotate(_zAngle, osg::Z_AXIS);
 			eye = rotateMat * CAMERA_BEGIN_POS;
 			
 			#ifdef BART
@@ -77,6 +77,10 @@ void CustomCamera::setXAngle(const float ang) {
 
 void CustomCamera::setYAngle(const float ang) {
 	_yAngle = ang;
+}
+
+void CustomCamera::setZAngle(const float ang) {
+	_zAngle = ang;
 }
 
 osg::Matrixd CustomCamera::getMatrix()	const {

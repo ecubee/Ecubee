@@ -14,9 +14,11 @@ class CustomCamera : public osgGA::CameraManipulator	{
 		virtual osg::Matrixd getMatrix() const;
 		void setXAngle(const float ang);
 		void setYAngle(const float ang);
+        void setZAngle(const float ang);
 		virtual ~CustomCamera() {};
 	protected:
 		osg::ref_ptr<osg::Camera> _cam;
 		float _xAngle;
 		float _yAngle;
+        float _zAngle;
 };
