@@ -9,15 +9,18 @@ set (ecubee_VERSION_MAJOR 0)
 set (ecubee_VERSION_MINOR 1)
 
 SET (SRC main.cpp
-	acos.cpp
-	Box.cpp
-	communicator.cpp
-	CreateWindows.cpp
-	CustomCamera.cpp
-	HMC5843.cpp
-	i2cManager.cpp
-	LIS3LV02DL.cpp
-	rs232.cpp)
+	math/acos.cpp
+	math/quaternion.c
+	math/vector3d.c
+	comm/communicator.cpp
+	comm/rs232.cpp
+	osg/Box.cpp
+	osg/CreateWindows.cpp
+	osg/CustomCamera.cpp
+	i2c/MPU9150Wrapper.cpp
+	i2c/mpu9150.cpp
+	i2c/linux_glue.cpp
+	i2c/MPU9150Wrapper.cpp)
 
 # Compile for Bart
 set(CMAKE_CXX_FLAGS "-D BART")

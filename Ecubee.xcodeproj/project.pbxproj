@@ -46,7 +46,7 @@
 		1FD273151716FCAE0015453D /* CustomCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CustomCamera.cpp; sourceTree = "<group>"; };
 		1FD273161716FCAE0015453D /* CustomCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCamera.h; sourceTree = "<group>"; };
 		1FD273171716FCAE0015453D /* dimensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dimensions.h; sourceTree = "<group>"; };
-		1FF8B89F170D881F001F6E0C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		1FF8B89F170D881F001F6E0C /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; usesTabs = 1; };
 		1FF8B8A6170D881F001F6E0C /* HMC5843.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HMC5843.cpp; sourceTree = "<group>"; };
 		1FF8B8A7170D881F001F6E0C /* HMC5843.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HMC5843.h; sourceTree = "<group>"; };
 		1FF8B8A8170D881F001F6E0C /* i2c-dev.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "i2c-dev.h"; sourceTree = "<group>"; };
