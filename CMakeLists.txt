@@ -19,11 +19,13 @@ SET (SRC main.cpp
 	osg/CustomCamera.cpp
 	i2c/MPU9150Wrapper.cpp
 	i2c/mpu9150.c
-	i2c/linux_glue.c)
+	i2c/linux_glue.c
+	eMPL/inv_mpu.c
+	eMPL/inv_mpu_dmp_motion_driver.c)
 
 # Compile for Bart and MPU9150
 set(CMAKE_CXX_FLAGS "-DBART -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY -DMPU9150_DEBUG")
-include_directories(math comm osg i2c)
+include_directories(math comm osg i2c eMPL)
 
 add_executable(ecubee ${SRC})
 
