@@ -18,12 +18,11 @@ SET (SRC main.cpp
 	osg/CreateWindows.cpp
 	osg/CustomCamera.cpp
 	i2c/MPU9150Wrapper.cpp
-	i2c/mpu9150.cpp
-	i2c/linux_glue.cpp
-	i2c/MPU9150Wrapper.cpp)
+	i2c/mpu9150.c
+	i2c/linux_glue.c)
 
-# Compile for Bart
-set(CMAKE_CXX_FLAGS "-D BART")
+# Compile for Bart and MPU9150
+set(CMAKE_CXX_FLAGS "-DBART -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY -DMPU9150_DEBUG")
 
 
 add_executable(ecubee ${SRC})
