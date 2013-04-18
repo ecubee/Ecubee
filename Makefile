@@ -11,7 +11,7 @@ MARTIJN_CFLAGS = -DMARTIJN
 
 APP := ecubee
 INC := osg comm math i2c eMPL
-PATHS = $(addprefix -I$(srcdir)/, $(INC))
+PATHS = $(addprefix -I$(CURDIR)/, $(INC))
 SRCS := main.cpp $(foreach dir,$(INC),$(wildcard $(dir)/*.c*)) 
 OBJS := $(notdir $(SRCS))
 OBJS := $(OBJS:%.c=%.o)
