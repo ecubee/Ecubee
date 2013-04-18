@@ -5,7 +5,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(ecubee)
 
-set (ecubee_VERSION_MAJOR 0)
+set (ecubee_VERSION_MAJOR 1)
 set (ecubee_VERSION_MINOR 1)
 
 SET (SRC main.cpp
@@ -22,6 +22,14 @@ SET (SRC main.cpp
 	i2c/linux_glue.c
 	eMPL/inv_mpu.c
 	eMPL/inv_mpu_dmp_motion_driver.c)
+	
+SET (SRC imucal.c
+	math/quaternion.c
+	math/vector3d.c
+	i2c/mpu9150.c
+	i2c/linux_glue.c
+	eMPL/inv_mpu.c
+	eMPL/inv_mpu_dmp_motion_driver.c)
 
 # Compile for Bart and MPU9150
 set(CMAKE_CXX_FLAGS "-DBART")
@@ -29,6 +37,7 @@ set(CMAKE_C_FLAGS "-DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY -DMPU9150_DE
 include_directories(math comm osg i2c eMPL)
 
 add_executable(ecubee ${SRC})
+add_executable(ecubeecal ${CALSRC})
 
 # OSG libs
 target_link_libraries(ecubee osg)
@@ -48,6 +57,7 @@ target_link_libraries(ecubee X11)
 
 # Put Ecubee in bin dir
 install(TARGETS ecubee DESTINATION bin)
+install(TARGETS ecubeecal DESTINATION bin)
 
 # build a CPack driven installer package
 include (InstallRequiredSystemLibraries)
