@@ -248,7 +248,7 @@ void print_mag(mpudata_t *mpu)
 
 void write_cal()
 {
-	int i, fd, ff;
+	int i, fd;
 	char buff[32];
     
     mkdir("/etc/ecubee"); // should simply return EEXISTS if dir exists
