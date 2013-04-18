@@ -23,7 +23,7 @@ SET (SRC main.cpp
 	eMPL/inv_mpu.c
 	eMPL/inv_mpu_dmp_motion_driver.c)
 	
-SET (SRC imucal.c
+SET (CALSRC imucal.c
 	math/quaternion.c
 	math/vector3d.c
 	i2c/mpu9150.c
@@ -54,6 +54,7 @@ target_link_libraries(ecubee GLU)
 target_link_libraries(ecubee OpenThreads)
 target_link_libraries(ecubee Xext)
 target_link_libraries(ecubee X11)
+target_link_libraries(ecubeecal m)
 
 # Put Ecubee in bin dir
 install(TARGETS ecubee DESTINATION bin)
