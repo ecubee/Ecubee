@@ -47,7 +47,7 @@ target_link_libraries(ecubee Xext)
 target_link_libraries(ecubee X11)
 
 # Put Ecubee in bin dir
-install(TARGETS ecubee DESTINATION usr/bin)
+install(TARGETS ecubee DESTINATION bin)
 
 # build a CPack driven installer package
 include (InstallRequiredSystemLibraries)
