@@ -23,7 +23,7 @@ SET (SRC main.cpp
 
 # Compile for Bart and MPU9150
 set(CMAKE_CXX_FLAGS "-DBART -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY -DMPU9150_DEBUG")
-
+include_directories(math comm osg i2c)
 
 add_executable(ecubee ${SRC})
 
@@ -44,7 +44,7 @@ target_link_libraries(ecubee Xext)
 target_link_libraries(ecubee X11)
 
 # Put Ecubee in bin dir
-install(TARGETS ecubee DESTINATION bin)
+install(TARGETS ecubee DESTINATION usr/bin)
 
 # build a CPack driven installer package
 include (InstallRequiredSystemLibraries)
