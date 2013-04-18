@@ -248,8 +248,10 @@ void print_mag(mpudata_t *mpu)
 
 void write_cal()
 {
-	int i, fd;
+	int i, fd, ff;
 	char buff[32];
+    
+    mkdir("/etc/ecubee"); // should simply return EEXISTS if dir exists
 
 	fd = open(calFile, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
