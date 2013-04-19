@@ -251,7 +251,7 @@ void write_cal()
 	int i, fd;
 	char buff[32];
     
-    mkdir("/etc/ecubee"); // should simply return EEXISTS if dir exists
+    mkdir("/etc/ecubee", (S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH)); // should simply return EEXISTS if dir exists
 
 	fd = open(calFile, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
