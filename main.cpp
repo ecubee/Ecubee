@@ -65,7 +65,7 @@ int main(int argc, char * argv[])	{
 			OpenThreads::Thread::microSleep(1000000.0 * (minFrameTime - frameTime));
 	}
 	
-	commThread->stop();
+	//commThread->stop();
 	
 	return 0;
 }
