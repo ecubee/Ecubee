@@ -47,8 +47,8 @@ int main(int argc, char * argv[])	{
 	viewer->realize();
 	
 	// start communicator thread
-	CommunicatorThread *commThread = new CommunicatorThread((CustomCamera *) viewer->getCameraManipulator());
-	commThread->start();
+	//CommunicatorThread *commThread = new CommunicatorThread((CustomCamera *) viewer->getCameraManipulator());
+	//commThread->start();
 	
 	// calculate frametime
 	double minFrameTime = 1.0 / FRAMERATE;
