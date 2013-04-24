@@ -32,7 +32,7 @@ SET (CALSRC imucal.c
 	eMPL/inv_mpu_dmp_motion_driver.c)
 
 # Compile for Bart and MPU9150
-set(CMAKE_CXX_FLAGS "-DBART")
+set(CMAKE_CXX_FLAGS "-DBART -DMPU9150_DEBUG")
 set(CMAKE_C_FLAGS "-DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY -DMPU9150_DEBUG")
 include_directories(math comm osg i2c eMPL)
 
