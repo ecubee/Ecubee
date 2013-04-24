@@ -264,7 +264,7 @@ void write_cal()
 			sprintf(buff, "%d\n%d\n", minVal[i], maxVal[i]);
 			write(fd, buff, strlen(buff));
 	}
-
+    printf("\nWrote to %s \n",calFile);
 	close(fd);
 }
 
