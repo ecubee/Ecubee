@@ -201,7 +201,7 @@ void read_loop(unsigned int sample_rate)
 			}
 		}
 		else {
-			if (mpu9150_read_dmp(&mpu) == 0) {
+			if (mpu9150_read(&mpu) == 0) {
 				for (i = 0; i < 3; i++) {
 					if (mpu.rawAccel[i] < minVal[i]) {
 						minVal[i] = mpu.rawAccel[i];
