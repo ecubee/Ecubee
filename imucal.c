@@ -140,6 +140,9 @@ int main(int argc, char **argv)
 
 	if (mpu9150_init(i2c_bus, sample_rate, 0))
 		exit(1);
+#ifdef I2C_DEBUG
+    debug_on();
+#endif
 
 	read_loop(sample_rate);
 
