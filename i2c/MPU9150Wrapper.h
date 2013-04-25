@@ -30,11 +30,11 @@ public:
     int flush();
 	int getEuler(vector3d_t vector);
     void debug(int dbg = 1);
+    mpudata_t mpu;
 
 private:
     int i2c_bus;
     unsigned char address;
-    mpudata_t mpu;
     
     int setCalibration(bool mag);
     int read();

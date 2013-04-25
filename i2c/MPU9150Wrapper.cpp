@@ -37,8 +37,8 @@ int MPU9150Wrapper::init() {
         return -1;
     }
     
-	setCalibration(false); // Accel Calibration;
-    setCalibration(true);  // Magneto Calibration
+//	setCalibration(false); // Accel Calibration;
+//  setCalibration(true);  // Magneto Calibration
     
     memset(&mpu, 0, sizeof(mpudata_t));
 #ifdef MPU9150_DEBUG
@@ -79,7 +79,7 @@ int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
     int i;
     
     for (i=0; i < 3; i++) {
-        normalized[i] = (float) mpu.rawAccel[i];
+        normalized[i] = (float) (mpu.rawAccel[i]);
         scale += normalized[i] * normalized[i];
     }
     
