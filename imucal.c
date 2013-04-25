@@ -223,7 +223,7 @@ void read_loop(unsigned int sample_rate)
 				print_accel(&mpu);
 		}
 
-		linux_delay_ms(loop_delay);
+		linux_delay_ms(loop_delay/10);
 	}
 
 	printf("\n\n");
