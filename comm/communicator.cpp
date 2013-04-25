@@ -75,7 +75,7 @@ void CommunicatorThread::run(void)
 #ifdef SIMULATION
 		OpenThreads::Thread::microSleep(16000);
 #else
-		OpenThreads::Thread::microSleep(5000);
+		OpenThreads::Thread::microSleep(50000);
 #endif
 	}
 

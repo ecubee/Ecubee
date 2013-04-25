@@ -49,7 +49,7 @@ int MPU9150Wrapper::init() {
 }
 
 int MPU9150Wrapper::getEuler(vector3d_t vector) {
-    // Get Euler angles
+    //  Get Euler angles
     //  In: pointer to float[3] vector
     //  Return: 0 on succes, 1 on data not ready, -1 on read error
     
