@@ -60,6 +60,9 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
         vector[i] = mpu.fusedEuler[i];
     }
     
+    //test without z
+    vector[2] = 0;
+    
 #ifdef MPU9150_DEBUG
     printf("\rX: %0.0f Y: %0.0f Z: %0.0f    ", mpu.fusedEuler[VEC3_X] * RAD_TO_DEGREE, mpu.fusedEuler[VEC3_Y] * RAD_TO_DEGREE, mpu.fusedEuler[VEC3_Z] * RAD_TO_DEGREE);
     fflush(stdout);
