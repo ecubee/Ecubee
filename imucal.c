@@ -37,6 +37,10 @@
 #include "linux_glue.h"
 #include "local_defaults.h"
 
+
+#define MPU9150_REG_FIFO_COUNT 0x72
+
+
 void read_loop(unsigned int sample_rate);
 void print_accel(mpudata_t *mpu);
 void print_mag(mpudata_t *mpu);
@@ -165,6 +169,7 @@ void read_loop(unsigned int sample_rate)
 	int i, change;
 	unsigned long loop_delay;
 	mpudata_t mpu;
+    unsigned short count;
 
 	if (sample_rate == 0)
 		return;
@@ -184,6 +189,12 @@ void read_loop(unsigned int sample_rate)
 
 	while (!done) {
 		change = 0;
+        linux_i2c_read(address, MPU9150_REG_FIFO_COUNT, 2, data);
+        count = (data[0] << 8) | data[1];
+        
+        if (count == 0)
+            continue;
+
 
 		if (mag_mode) {
 			if (mpu9150_read_mag(&mpu) == 0) {
