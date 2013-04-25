@@ -170,6 +170,8 @@ void read_loop(unsigned int sample_rate)
 	unsigned long loop_delay;
 	mpudata_t mpu;
     unsigned short count;
+    unsigned char data[2];
+    
 
 	if (sample_rate == 0)
 		return;
@@ -189,7 +191,7 @@ void read_loop(unsigned int sample_rate)
 
 	while (!done) {
 		change = 0;
-        linux_i2c_read(address, MPU9150_REG_FIFO_COUNT, 2, data);
+        linux_i2c_read(0x68, MPU9150_REG_FIFO_COUNT, 2, data);
         count = (data[0] << 8) | data[1];
         
         if (count == 0)
