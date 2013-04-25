@@ -4,21 +4,21 @@
 //
 //  Copyright (c) 2013 Pansenti, LLC
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy of 
-//  this software and associated documentation files (the "Software"), to deal in 
-//  the Software without restriction, including without limitation the rights to use, 
-//  copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-//  Software, and to permit persons to whom the Software is furnished to do so, 
+//  Permission is hereby granted, free of charge, to any person obtaining a copy of
+//  this software and associated documentation files (the "Software"), to deal in
+//  the Software without restriction, including without limitation the rights to use,
+//  copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+//  Software, and to permit persons to whom the Software is furnished to do so,
 //  subject to the following conditions:
 //
-//  The above copyright notice and this permission notice shall be included in all 
+//  The above copyright notice and this permission notice shall be included in all
 //  copies or substantial portions of the Software.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-//  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-//  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-//  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
-//  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+//  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+//  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+//  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+//  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 //  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <stdio.h>
@@ -36,10 +36,6 @@
 #include "mpu9150.h"
 #include "linux_glue.h"
 #include "local_defaults.h"
-
-
-#define MPU9150_REG_FIFO_COUNT 0x72
-
 
 void read_loop(unsigned int sample_rate);
 void print_accel(mpudata_t *mpu);
@@ -67,7 +63,7 @@ void usage(char *argv_0)
     printf("                        Accel and mag modes are mutually exclusive, but one must be chosen.\n");
 	printf("  -f <cal-file>         Where to save the calibration file. Default /etc/ecubee/<mode>cal.txt\n");
 	printf("  -h                    Show this help\n");
-
+    
 	printf("\nExample: %s -b3 -s20 -a\n\n", argv_0);
 	
 	exit(1);
@@ -80,87 +76,84 @@ int main(int argc, char **argv)
 	int sample_rate = DEFAULT_SAMPLE_RATE_HZ;
 	
 	mag_mode = -1;
-
+    
 	memset(calFile, 0, sizeof(calFile));
-
+    
 	while ((opt = getopt(argc, argv, "b:s:y:amh")) != -1) {
 		switch (opt) {
-		case 'b':
-			i2c_bus = strtoul(optarg, NULL, 0);
-			
-			if (errno == EINVAL)
-				usage(argv[0]);
-			
-			if (i2c_bus < 0 || i2c_bus > 5)
-				usage(argv[0]);
-
-			break;
-		
-		case 's':
-			sample_rate = strtoul(optarg, NULL, 0);
-			
-			if (errno == EINVAL)
-				usage(argv[0]);
-			
-			if (sample_rate < 2 || sample_rate > 50)
-				usage(argv[0]);
-
-			break;
-
-		case 'y':
-			if (strlen(optarg) >= sizeof(calFile)) {
-				printf("Choose a shorter path for the cal file\n");
-				usage(argv[0]);
-			}
-
-			strcpy(calFile, optarg);
-			break;
-
-		case 'a':
-			if (mag_mode != -1)
-				usage(argv[0]);
-
-			mag_mode = 0;
-			break;
-
-		case 'm':
-			if (mag_mode != -1)
-				usage(argv[0]);
-
-			mag_mode = 1;
-			break;
-		
-		case 'h':
-		default:
-			usage(argv[0]);
-			break;
+            case 'b':
+                i2c_bus = strtoul(optarg, NULL, 0);
+                
+                if (errno == EINVAL)
+                    usage(argv[0]);
+                
+                if (i2c_bus < 0 || i2c_bus > 5)
+                    usage(argv[0]);
+                
+                break;
+                
+            case 's':
+                sample_rate = strtoul(optarg, NULL, 0);
+                
+                if (errno == EINVAL)
+                    usage(argv[0]);
+                
+                if (sample_rate < 2 || sample_rate > 50)
+                    usage(argv[0]);
+                
+                break;
+                
+            case 'y':
+                if (strlen(optarg) >= sizeof(calFile)) {
+                    printf("Choose a shorter path for the cal file\n");
+                    usage(argv[0]);
+                }
+                
+                strcpy(calFile, optarg);
+                break;
+                
+            case 'a':
+                if (mag_mode != -1)
+                    usage(argv[0]);
+                
+                mag_mode = 0;
+                break;
+                
+            case 'm':
+                if (mag_mode != -1)
+                    usage(argv[0]);
+                
+                mag_mode = 1;
+                break;
+                
+            case 'h':
+            default:
+                usage(argv[0]);
+                break;
 		}
 	}
-
+    
 	if (mag_mode == -1)
 		usage(argv[0]);
-
+    
 	register_sig_handler();
-
+    
 	if (mpu9150_init(i2c_bus, sample_rate, 0))
 		exit(1);
-#ifdef I2C_DEBUG
-    mpu9150_set_debug(1);
-#endif
-
+    
 	read_loop(sample_rate);
-
+    
 	if (strlen(calFile) == 0) {
 		if (mag_mode)
 			strcpy(calFile, "/etc/ecubee/magcal.txt");
 		else
 			strcpy(calFile, "/etc/ecubee/accelcal.txt");
 	}
-
+    
 	write_cal();
-
+    
 	mpu9150_exit();
-
+    
 	return 0;
 }
 
@@ -169,35 +162,26 @@ void read_loop(unsigned int sample_rate)
 	int i, change;
 	unsigned long loop_delay;
 	mpudata_t mpu;
-    unsigned short count;
-    unsigned char data[2];
     
-
 	if (sample_rate == 0)
 		return;
-
+    
 	memset(&mpu, 0, sizeof(mpudata_t));
-
+    
 	for (i = 0; i < 3; i++) {
 		minVal[i] = 0x7fff;
 		maxVal[i] = 0x8000;
 	}
-
+    
 	loop_delay = (1000 / sample_rate) - 2;
-
+    
 	printf("\nEntering read loop (ctrl-c to exit)\n\n");
-
+    
 	linux_delay_ms(loop_delay);
-
+    
 	while (!done) {
 		change = 0;
-        linux_i2c_read(0x68, MPU9150_REG_FIFO_COUNT, 2, data);
-        count = (data[0] << 8) | data[1];
         
-        if (count == 0)
-            continue;
-
-
 		if (mag_mode) {
 			if (mpu9150_read_mag(&mpu) == 0) {
 				for (i = 0; i < 3; i++) {
@@ -205,7 +189,7 @@ void read_loop(unsigned int sample_rate)
 						minVal[i] = mpu.rawMag[i];
 						change = 1;
 					}
-				
+                    
 					if (mpu.rawMag[i] > maxVal[i]) {
 						maxVal[i] = mpu.rawMag[i];
 						change = 1;
@@ -214,13 +198,13 @@ void read_loop(unsigned int sample_rate)
 			}
 		}
 		else {
-			if (mpu9150_read(&mpu) == 0) {
+			if (mpu9150_read_dmp(&mpu) == 0) {
 				for (i = 0; i < 3; i++) {
 					if (mpu.rawAccel[i] < minVal[i]) {
 						minVal[i] = mpu.rawAccel[i];
 						change = 1;
 					}
-				
+                    
 					if (mpu.rawAccel[i] > maxVal[i]) {
 						maxVal[i] = mpu.rawAccel[i];
 						change = 1;
@@ -235,30 +219,30 @@ void read_loop(unsigned int sample_rate)
 			else
 				print_accel(&mpu);
 		}
-
-		linux_delay_ms(loop_delay/10);
+        
+		linux_delay_ms(loop_delay);
 	}
-
+    
 	printf("\n\n");
 }
 
 void print_accel(mpudata_t *mpu)
 {
 	printf("\rX %d|%d|%d    Y %d|%d|%d    Z %d|%d|%d             ",
-			minVal[0], mpu->rawAccel[0], maxVal[0], 
-			minVal[1], mpu->rawAccel[1], maxVal[1],
-			minVal[2], mpu->rawAccel[2], maxVal[2]);
-
+           minVal[0], mpu->rawAccel[0], maxVal[0],
+           minVal[1], mpu->rawAccel[1], maxVal[1],
+           minVal[2], mpu->rawAccel[2], maxVal[2]);
+    
 	fflush(stdout);
 }
 
 void print_mag(mpudata_t *mpu)
 {
 	printf("\rX %d|%d|%d    Y %d|%d|%d    Z %d|%d|%d             ",
-			minVal[0], mpu->rawMag[0], maxVal[0], 
-			minVal[1], mpu->rawMag[1], maxVal[1],
-			minVal[2], mpu->rawMag[2], maxVal[2]);
-
+           minVal[0], mpu->rawMag[0], maxVal[0],
+           minVal[1], mpu->rawMag[1], maxVal[1],
+           minVal[2], mpu->rawMag[2], maxVal[2]);
+    
 	fflush(stdout);
 }
 
@@ -268,17 +252,17 @@ void write_cal()
 	char buff[32];
     
     mkdir("/etc/ecubee", (S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH)); // should simply return EEXISTS if dir exists
-
+    
 	fd = open(calFile, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-
+    
 	if (fd < 0) {
 		perror("open(calFile)");
 		return;
 	}
-
+    
 	for (i = 0; i < 3; i++) {
-			sprintf(buff, "%d\n%d\n", minVal[i], maxVal[i]);
-			write(fd, buff, strlen(buff));
+        sprintf(buff, "%d\n%d\n", minVal[i], maxVal[i]);
+        write(fd, buff, strlen(buff));
 	}
     printf("\nWrote to %s \n",calFile);
 	close(fd);
@@ -287,10 +271,10 @@ void write_cal()
 void register_sig_handler()
 {
 	struct sigaction sia;
-
+    
 	bzero(&sia, sizeof sia);
 	sia.sa_handler = sigint_handler;
-
+    
 	if (sigaction(SIGINT, &sia, NULL) < 0) {
 		perror("sigaction(SIGINT)");
 		exit(1);

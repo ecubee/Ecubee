@@ -59,22 +59,22 @@ $(CAL_APP): $(CAL_OBJS)
 
 
 bartobj/%.o: %.cpp
-	$(CXX) $(BART_CFLAGS) $(CFLAGS) $(PATHS) $< -o $@
+	$(CXX) $(CFLAGS) $(BART_CFLAGS) $(PATHS) $< -o $@
 
 bartobj/%.o: %.c
-	$(CC) $(BART_CFLAGS) $(CFLAGS) $(PATHS) $< -o $@
+	$(CC) $(CFLAGS) $(BART_CFLAGS) $(PATHS) $< -o $@
 
 gertjanobj/%.o: %.cpp
-	$(CXX) $(GERTJAN_CFLAGS) $(CFLAGS) $(PATHS) $< -o $@
+	$(CXX) $(CFLAGS) $(GERTJAN_CFLAGS) $(PATHS) $< -o $@
 
 gertjanobj/%.o: %.c
-	$(CC) $(GERTJAN_CFLAGS) $(CFLAGS) $(PATHS) $< -o $@
+	$(CC) $(CFLAGS) $(GERTJAN_CFLAGS) $(PATHS) $< -o $@
 
 martijnobj/%.o: %.cpp
-	$(CXX) $(MARTIJN_CFLAGS) $(CFLAGS) $(PATHS) $< -o $@
+	$(CXX) $(CFLAGS) $(MARTIJN_CFLAGS) $(PATHS) $< -o $@
 
 martijnobj/%.o: %.c
-	$(CC) $(MARTIJN_CFLAGS) $(CFLAGS) $(PATHS) $< -o $@
+	$(CC) $(CFLAGS) $(MARTIJN_CFLAGS) $(PATHS) $< -o $@
 
 calobj/%.o: %.cpp
 	$(CXX) $(CFLAGS) $(CAL_CFLAGS) $(PATHS) $< -o $@

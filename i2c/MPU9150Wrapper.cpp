@@ -85,9 +85,6 @@ int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
     
 #ifdef MPU9150_DEBUG
     printf("\rrawAccel:   X: %d Y: %d Z: %d   \n", mpu.rawAccel[VEC3_X], mpu.rawAccel[VEC3_Y], mpu.rawAccel[VEC3_Z]);
-    printf("\rnormalized: X: %0.2f Y: %0.2f Z: %0.2f   \n", normalized[VEC3_X], normalized[VEC3_Y], normalized[VEC3_Z]);
-    
-   // fflush(stdout);
 #endif
     
     scale = sqrt(scale);
@@ -95,8 +92,10 @@ int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
     for (i=0; i < 3; i++) {
         normalized[i] = normalized [i]/scale;
     }
+#ifdef MPU9150_DEBUG
+    printf("\rnormalized: X: %0.2f Y: %0.2f Z: %0.2f   \n", normalized[VEC3_X], normalized[VEC3_Y], normalized[VEC3_Z]);
+#endif
     
-
     vector[0] = fastAcos(normalized[0]) - (0.5 * osg::PI);
     vector[1] = fastAcos(normalized[1]) - (0.5 * osg::PI);
     vector[2] = 0;
