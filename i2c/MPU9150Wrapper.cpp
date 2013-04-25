@@ -79,13 +79,13 @@ int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
     
     for (int i=0; i < 3; i++) {
         normalized[i] = (float) mpu.rawAccel[i];
-        scale += normalized[i] * normalized[i]
+        scale += normalized[i] * normalized[i];
     }
     
-    scale = sqrt(scale)
+    scale = sqrt(scale);
     
     for (i=0; i < 3; i++) {
-        normalized[i] = normalized [i]/scale
+        normalized[i] = normalized [i]/scale;
     }
     
     vector[0] = fastAcos(normalized[0]) - (0.5 * PI);
