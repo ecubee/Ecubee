@@ -76,8 +76,9 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
 int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
     float normalized [3];
     float scale = 0;
+    int i;
     
-    for (int i=0; i < 3; i++) {
+    for (i=0; i < 3; i++) {
         normalized[i] = (float) mpu.rawAccel[i];
         scale += normalized[i] * normalized[i];
     }
@@ -88,8 +89,8 @@ int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
         normalized[i] = normalized [i]/scale;
     }
     
-    vector[0] = fastAcos(normalized[0]) - (0.5 * PI);
-    vector[1] = fastAcos(normalized[1]) - (0.5 * PI);
+    vector[0] = fastAcos(normalized[0]) - (0.5 * osg::PI);
+    vector[1] = fastAcos(normalized[1]) - (0.5 * osg::PI);
     vector[2] = 0;
     return 0;
 }
