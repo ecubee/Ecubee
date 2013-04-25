@@ -10,10 +10,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
+#include <osg/Math>
 #include "MPU9150Wrapper.h"
 #include "mpu9150.h"
 #include "vector3d.h"
 #include "linux_glue.h"
+#include "acos.h"
 
 
 MPU9150Wrapper::MPU9150Wrapper(int bus, unsigned char add) {
@@ -56,12 +59,11 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
         return result;
     }
     
-    for (int i=0; i < 3; i++) {
-        vector[i] = mpu.fusedEuler[i];
-    }
+//    for (int i=0; i < 3; i++) {
+//        vector[i] = mpu.fusedEuler[i];
+//    }
     
-    //test without z
-    vector[2] = 0;
+    getEulerFromAccel(vector);
     
 #ifdef MPU9150_DEBUG
     printf("\rX: %0.0f Y: %0.0f Z: %0.0f    ", vector[VEC3_X] * RAD_TO_DEGREE, vector[VEC3_Y] * RAD_TO_DEGREE, vector[VEC3_Z] * RAD_TO_DEGREE);
@@ -70,6 +72,28 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
     
     return 0;
 }
+
+int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
+    float normalized [3];
+    float scale = 0;
+    
+    for (int i=0; i < 3; i++) {
+        normalized[i] = (float) mpu.rawAccel[i];
+        scale += normalized[i] * normalized[i]
+    }
+    
+    scale = sqrt(scale)
+    
+    for (i=0; i < 3; i++) {
+        normalized[i] = normalized [i]/scale
+    }
+    
+    vector[0] = fastAcos(normalized[0]) - (0.5 * PI);
+    vector[1] = fastAcos(normalized[1]) - (0.5 * PI);
+    vector[2] = 0;
+    return 0;
+}
+
 int MPU9150Wrapper::flush() {
     return mpu_reset_fifo();
 }
