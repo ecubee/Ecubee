@@ -90,7 +90,7 @@ int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
     }
     
 #ifdef MPU9150_DEBUG
-        printf("\rX: %0.0f Y: %0.0f Z: %0.0f    ", normalized[VEC3_X], normalized[VEC3_Y], normalized[VEC3_Z]);
+        printf("\rX: %0.2f Y: %0.2f Z: %0.2f    ", normalized[VEC3_X], normalized[VEC3_Y], normalized[VEC3_Z]);
         fflush(stdout);
 #endif
     vector[0] = fastAcos(normalized[0]) - (0.5 * osg::PI);
