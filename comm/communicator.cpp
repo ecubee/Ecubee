@@ -12,8 +12,8 @@ void CommunicatorThread::run(void)
 {
 #ifndef SIMULATION
 	// initialize serial port
-	serialPort = new SerialPort();
-	serialPort->init();
+//	serialPort = new SerialPort();
+//	serialPort->init();
   #ifdef BART
     int j = 0;
     vector3d_t sensorVal;
@@ -31,7 +31,7 @@ void CommunicatorThread::run(void)
 #endif
 
 	while (!_done) {
-		struct sMessage msg;
+//		struct sMessage msg;
 #ifdef SIMULATION
 		msg.header = FusedValues & 0xff;
 		msg.size = 3 * sizeof(float);
@@ -51,17 +51,17 @@ void CommunicatorThread::run(void)
   #ifdef BART
 		if (!sensor->getEuler(sensorVal)) {
 			// construct message
-			msg.header = AcceleroValues & 0xff;
-			msg.size = sizeof(vector3d_t);
-			float *ptr = (float *) msg.data;
-			for (int i = 0; i < 3; ++i, ++ptr) {
-				*ptr = sensorVal[i];
-			}
-			// send message via serial port
-			serialPort->send((char *) &msg, msg.size + 2);
-            _cameraManip->setXAngle(sensorVal[0]);
-			_cameraManip->setYAngle(sensorVal[1]);
-            _cameraManip->setZAngle(sensorVal[2]);
+//			msg.header = AcceleroValues & 0xff;
+//			msg.size = sizeof(vector3d_t);
+//			float *ptr = (float *) msg.data;
+//			for (int i = 0; i < 3; ++i, ++ptr) {
+//				*ptr = sensorVal[i];
+//			}
+//			// send message via serial port
+//			serialPort->send((char *) &msg, msg.size + 2);
+//            _cameraManip->setXAngle(sensorVal[0]);
+//			_cameraManip->setYAngle(sensorVal[1]);
+//            _cameraManip->setZAngle(sensorVal[2]);
             j++;
 		}
         if (j==5) {
@@ -90,8 +90,8 @@ void CommunicatorThread::run(void)
 
 #ifndef SIMULATION
 	// close port
-	serialPort->deinit();
-    delete serialPort;
+//	serialPort->deinit();
+//    delete serialPort;
  #ifdef BART
     delete sensor;
     exit(0);
