@@ -12,8 +12,8 @@ void CommunicatorThread::run(void)
 {
 #ifndef SIMULATION
 	// initialize serial port
-//	serialPort = new SerialPort();
-//	serialPort->init();
+	serialPort = new SerialPort();
+	serialPort->init();
   #ifdef BART
     int j = 0;
     vector3d_t sensorVal;
