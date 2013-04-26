@@ -56,7 +56,7 @@ int main(int argc, char **argv)
         linux_delay_ms(5);
     
     }
-    
+    sensor->runSelfTest();
     sensor->stop();
 }
 

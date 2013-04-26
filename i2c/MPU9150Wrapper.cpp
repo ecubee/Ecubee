@@ -128,6 +128,16 @@ void MPU9150Wrapper::debug(int dbg) {
     mpu9150_set_debug(dbg);
 }
 
+int MPU9150Wrapper::runSelfTest() {
+    int result;
+    long gyro, accel;
+    
+    result = mpu_run_self_test(&gyro, &accel);
+    
+    printf("\n Self-test result: %x, Gyrobias: %d, Accelbias: %d", result, gyro, accel);
+    return 0;
+}
+
 int MPU9150Wrapper::setCalibration(bool mag) {
     int i;
 	FILE *f;

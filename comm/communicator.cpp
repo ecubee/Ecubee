@@ -19,6 +19,7 @@ void CommunicatorThread::run(void)
     vector3d_t sensorVal;
 	sensor = new MPU9150Wrapper();
     sensor->init();
+    sensor->debug();
   #endif
 #endif
 
@@ -65,6 +66,7 @@ void CommunicatorThread::run(void)
 		}
         if (j ==5) {
             _done = 1;
+            sensor->runSelfTest();
             exit(0);
         }
   #else
