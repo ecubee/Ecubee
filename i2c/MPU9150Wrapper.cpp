@@ -100,7 +100,7 @@ int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
 #endif
     
     vector[0] = fastAcos(normalized[1]) - (0.5 * osg::PI);
-    vector[1] = -fastAcos(normalized[0]) - (0.5 * osg::PI);
+    vector[1] = -fastAcos(normalized[0]) + (0.5 * osg::PI);
     vector[2] = 0;
     return 0;
 }
