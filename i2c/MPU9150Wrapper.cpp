@@ -17,6 +17,7 @@
 #include "vector3d.h"
 #include "linux_glue.h"
 #include "acos.h"
+#include "quaternion.h"
 
 
 MPU9150Wrapper::MPU9150Wrapper(int bus, unsigned char add) {
@@ -60,11 +61,9 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
         return result;
     }
     
-//    for (int i=0; i < 3; i++) {
-//        vector[i] = mpu.fusedEuler[i];
-//    }
-    
-    getEulerFromAccel(vector);
+    // Choose source
+    //getEulerFromAccel(vector);
+    getEulerFromRawQuat;
     
 #ifdef MPU9150_DEBUG
     printf("\rAngles:     X: %0.0f Y: %0.0f Z: %0.0f    \n", vector[VEC3_X] * RAD_TO_DEGREE, vector[VEC3_Y] * RAD_TO_DEGREE, vector[VEC3_Z] * RAD_TO_DEGREE);
@@ -90,7 +89,7 @@ int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
     printf("\rrawAccel:   X: %d Y: %d Z: %d   \n", mpu.rawAccel[VEC3_X], mpu.rawAccel[VEC3_Y], mpu.rawAccel[VEC3_Z]);
 #endif
     
-    scale = sqrt(scale);
+    scale = sqrtf(scale);
     
     for (i=0; i < 3; i++) {
         normalized[i] = normalized [i]/scale;
@@ -102,6 +101,19 @@ int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
     vector[0] = fastAcos(normalized[1]) - (0.5 * osg::PI);
     vector[1] = -fastAcos(normalized[0]) + (0.5 * osg::PI);
     vector[2] = 0;
+    return 0;
+}
+
+int getEulerFromRawQuat(vector3d_t vector) {
+    quaternion_t q;
+    
+    q[QUAT_W] = (float)mpu.rawQuat[QUAT_W];
+	q[QUAT_X] = (float)mpu.rawQuat[QUAT_X];
+	q[QUAT_Y] = (float)mpu.rawQuat[QUAT_Y];
+	q[QUAT_Z] = (float)mpu.rawQuat[QUAT_Z];
+    
+	quaternionNormalize(q);
+    quaternionToEuler(q, vector);
     return 0;
 }
 

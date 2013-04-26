@@ -41,6 +41,7 @@ private:
     int setCalibration(bool mag);
     int read();
     int getEulerFromAccel(vector3d_t vector);
+    int getEulerFromRawQuat(vector3d_t vector);
 };
 
 #endif /* defined(__Ecubee__MPU9150Wrapper__) */
