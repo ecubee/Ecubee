@@ -10,7 +10,6 @@
 
 void CommunicatorThread::run(void)
 {
-#ifndef SIMULATION
 	// initialize serial port
 	serialPort = new SerialPort();
 	serialPort->init();
@@ -21,33 +20,9 @@ void CommunicatorThread::run(void)
     sensor->init();
     sensor->debug();
   #endif
-#endif
-
-#ifdef SIMULATION
-	float dir = 0.001;
-	float sensorVal[3];
-	for (int i = 0; i < 3; ++i)
-		sensorVal[i] = 0.0;
-#endif
 
 	while (!_done) {
-//		struct sMessage msg;
-#ifdef SIMULATION
-		msg.header = FusedValues & 0xff;
-		msg.size = 3 * sizeof(float);
-		float *ptr = (float *) msg.data;
-		for (int i = 0; i < 3; ++i, ++ptr) {
-			// turn random side
-			unsigned int randVal = rand() & 1;
-			sensorVal[i] = (randVal > 0) ? sensorVal[i] + dir : sensorVal[i];
-
-			// clip sensor val to -0.5 < x < 0.5
-			dir = (sensorVal[i] < -0.5) ? 0.001 : dir;
-			dir = (sensorVal[i] > 0.5) ? -0.001 : dir;
-			
-			*ptr = sensorVal[i];
-		}
-#else
+		struct sMessage msg;
   #ifdef BART
 		if (!sensor->getEuler(sensorVal)) {
 			// construct message
@@ -78,25 +53,19 @@ void CommunicatorThread::run(void)
 		handle(&msg);
 
   #endif
-#endif	
 		
 		// sleep for a while
-#ifdef SIMULATION
-		OpenThreads::Thread::microSleep(16000);
-#else
+
 		OpenThreads::Thread::microSleep(50000);
-#endif
 	}
 
-#ifndef SIMULATION
 	// close port
-//	serialPort->deinit();
-//    delete serialPort;
+	serialPort->deinit();
+    delete serialPort;
  #ifdef BART
     delete sensor;
     exit(0);
  #endif
-#endif
 }
 
 void CommunicatorThread::stop(void)
