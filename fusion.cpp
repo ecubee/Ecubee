@@ -56,7 +56,7 @@ int main(int argc, char **argv)
         linux_delay_ms(50);
     
     }
-    sensor->runSelfTest();
+  //  sensor->runSelfTest();
     sensor->printRegDump();
     delete sensor;
 }
@@ -64,7 +64,7 @@ int main(int argc, char **argv)
 void print_angles(vector3d_t angles)
 {
     static int i = 0;
-    printf("\rX: %0.0f Y: %0.0f Z: %0.0f    ", angles[VEC3_X] * RAD_TO_DEGREE, angles[VEC3_Y] * RAD_TO_DEGREE, angles[VEC3_Z] * RAD_TO_DEGREE);
+    printf("\rX: %0.0f Y: %0.0f Z: %0.0f   \n ", angles[VEC3_X] * RAD_TO_DEGREE, angles[VEC3_Y] * RAD_TO_DEGREE, angles[VEC3_Z] * RAD_TO_DEGREE);
        fflush(stdout);
     i++;
     if (i==5) {
