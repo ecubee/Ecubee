@@ -27,6 +27,7 @@ MPU9150Wrapper::MPU9150Wrapper(int bus, unsigned char add) {
 MPU9150Wrapper::~MPU9150Wrapper() {
 	// Stop the DMP
     stop();
+
 }
 
 int MPU9150Wrapper::init() {
@@ -42,7 +43,7 @@ int MPU9150Wrapper::init() {
     memset(&mpu, 0, sizeof(mpudata_t));
 #ifdef MPU9150_DEBUG
     debug();
-    printf("MPU9150Wrapper instance initiated, bus: %d, address %x", i2c_bus, address & 0xff);
+    printf("MPU9150Wrapper instance initiated, bus: %d, address %x \n", i2c_bus, address & 0xff);
 #endif
     
 	return 0;
@@ -107,7 +108,19 @@ int MPU9150Wrapper::flush() {
 }
 
 int MPU9150Wrapper::stop() {
-    return mpu9150_exit();
+    int result;
+    
+#ifdef MPU9150_DEBUG
+    printf("Stopping MPU9150\n");
+#endif
+    
+    result = mpu9150_exit();
+    
+#ifdef MPU9150_DEBUG
+    printf("MPU9150 Stopped with code: %d\n", result);
+#endif
+    
+    return result;
 }
 
 int MPU9150Wrapper::read() {
