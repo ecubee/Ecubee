@@ -53,7 +53,7 @@ int main(int argc, char **argv)
         if (!result)
             print_angles(angles);
         
-        linux_delay_ms(5);
+        linux_delay_ms(50);
     
     }
     sensor->runSelfTest();
