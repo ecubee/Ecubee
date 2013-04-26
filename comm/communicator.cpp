@@ -94,6 +94,7 @@ void CommunicatorThread::run(void)
     delete serialPort;
  #ifdef BART
     delete sensor;
+    exit(0);
  #endif
 #endif
 }
