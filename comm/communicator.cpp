@@ -66,7 +66,7 @@ void CommunicatorThread::run(void)
 		}
         if (j==5) {
             _done = 1;
-            sensor->runSelfTest();
+            //sensor->runSelfTest();
             sensor->printRegDump();
         }
   #else

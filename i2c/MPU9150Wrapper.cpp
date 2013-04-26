@@ -142,10 +142,9 @@ void MPU9150Wrapper::debug(int dbg) {
 }
 
 int MPU9150Wrapper::runSelfTest() {
+    // Prints but causes segmentation fault??
     int result;
     long gyro, accel;
-    
-    
     
     result = mpu_run_self_test(&gyro, &accel);
     
