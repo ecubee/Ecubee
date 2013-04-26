@@ -63,7 +63,7 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
     
     // Choose source
     //getEulerFromAccel(vector);
-    getEulerFromRawQuat;
+    getEulerFromRawQuat(vector);
     
 #ifdef MPU9150_DEBUG
     printf("\rAngles:     X: %0.0f Y: %0.0f Z: %0.0f    \n", vector[VEC3_X] * RAD_TO_DEGREE, vector[VEC3_Y] * RAD_TO_DEGREE, vector[VEC3_Z] * RAD_TO_DEGREE);
@@ -104,7 +104,7 @@ int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
     return 0;
 }
 
-int getEulerFromRawQuat(vector3d_t vector) {
+int MPU9150Wrapper::getEulerFromRawQuat(vector3d_t vector) {
     quaternion_t q;
     
     q[QUAT_W] = (float)mpu.rawQuat[QUAT_W];

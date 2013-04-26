@@ -25,19 +25,17 @@ public:
     MPU9150Wrapper(int bus = MPU9150_BUS, unsigned char add = MPU9150_ADDRESS);
     ~MPU9150Wrapper();
     int init();
-    int reset();
+    void debug(int dbg = 1);
     int stop();
     int flush();
 	int getEuler(vector3d_t vector);
     int runSelfTest();
     int printRegDump();
-    void debug(int dbg = 1);
-    mpudata_t mpu;
 
 private:
     int i2c_bus;
     unsigned char address;
-    
+    mpudata_t mpu;
     int setCalibration(bool mag);
     int read();
     int getEulerFromAccel(vector3d_t vector);
