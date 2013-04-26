@@ -132,9 +132,11 @@ int MPU9150Wrapper::runSelfTest() {
     int result;
     long gyro, accel;
     
+    
+    
     result = mpu_run_self_test(&gyro, &accel);
     
-    printf("\n Self-test result: %d, Gyrobias: %ld, Accelbias: %ld", result, gyro, accel);
+    printf("\n Self-test result: %d, Gyrobias: %ld, Accelbias: %ld \n", result, gyro, accel);
     return 0;
 }
 

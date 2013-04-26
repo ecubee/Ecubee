@@ -64,10 +64,9 @@ void CommunicatorThread::run(void)
             _cameraManip->setZAngle(sensorVal[2]);
             j++;
 		}
-        if (j ==5) {
+        if (j==5) {
             _done = 1;
             sensor->runSelfTest();
-            exit(0);
         }
   #else
 		// read message from serial port
@@ -91,7 +90,10 @@ void CommunicatorThread::run(void)
 #ifndef SIMULATION
 	// close port
 	serialPort->deinit();
-    sensor->stop();
+    delete serialPort;
+ #ifdef BART
+    delete sensor;
+ #endif
 #endif
 }
 
