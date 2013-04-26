@@ -52,8 +52,8 @@ void mpu9150_set_debug(int on)
 
 int mpu9150_init(int i2c_bus, int sample_rate, int mix_factor)
 {
-	signed char gyro_orientation[9] = { 1, 0, 0,
-                                        0, 1, 0,
+	signed char gyro_orientation[9] = { -1, 0, 0,
+                                        0, -1, 0,
                                         0, 0, 1 };
 
 	if (i2c_bus < 0 || i2c_bus > 3)

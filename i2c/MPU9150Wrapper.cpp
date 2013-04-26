@@ -65,11 +65,13 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
     //getEulerFromAccel(vector);
     getEulerFromRawQuat(vector);
     
+    
+    
 #ifdef MPU9150_DEBUG
-    printf("\rAngles:     X: %0.0f Y: %0.0f Z: %0.0f    \n", vector[VEC3_X] * RAD_TO_DEGREE, vector[VEC3_Y] * RAD_TO_DEGREE, vector[VEC3_Z] * RAD_TO_DEGREE);
+    printf("\rAngles:     X: %0.1f Y: %0.1f Z: %0.1f    \n", vector[VEC3_X] * RAD_TO_DEGREE, vector[VEC3_Y] * RAD_TO_DEGREE, vector[VEC3_Z] * RAD_TO_DEGREE);
 #endif
 #ifdef MPU9150_TRACK
-    printf("\rAngles:     X: %0.0f Y: %0.0f Z: %0.0f      ", vector[VEC3_X] * RAD_TO_DEGREE, vector[VEC3_Y] * RAD_TO_DEGREE, vector[VEC3_Z] * RAD_TO_DEGREE);
+    printf("\rAngles:     X: %0.1f Y: %0.1f Z: %0.1f      ", vector[VEC3_X] * RAD_TO_DEGREE, vector[VEC3_Y] * RAD_TO_DEGREE, vector[VEC3_Z] * RAD_TO_DEGREE);
     fflush(stdout);
 #endif
     return 0;
@@ -98,8 +100,8 @@ int MPU9150Wrapper::getEulerFromAccel(vector3d_t vector) {
     printf("\rnormalized: X: %0.2f Y: %0.2f Z: %0.2f   \n", normalized[VEC3_X], normalized[VEC3_Y], normalized[VEC3_Z]);
 #endif
     
-    vector[0] = fastAcos(normalized[1]) - (0.5 * osg::PI);
-    vector[1] = -fastAcos(normalized[0]) + (0.5 * osg::PI);
+    vector[0] = -fastAcos(normalized[1]) + (0.5 * osg::PI);
+    vector[1] = fastAcos(normalized[0]) - (0.5 * osg::PI);
     vector[2] = 0;
     return 0;
 }

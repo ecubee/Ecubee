@@ -77,14 +77,6 @@ void CommunicatorThread::handle(struct sMessage *msg)
 			for (int i = 0; i < 3; ++i, ++ptr) {
 				sensorVal[i] = *ptr;
 			}
-			// OSG_NOTICE << std::fixed << std::setprecision(3);
-			// OSG_NOTICE <<"Accelerometer x: " << sensorVal[0] << ", ";
-			// OSG_NOTICE <<"Accelerometer y: " << sensorVal[1] << ", ";
-			// OSG_NOTICE <<"Accelerometer z: " << sensorVal[2] << std::endl;
-			
-			// calculate angles
-			//xAngle = fastAcos(sensorVal[0]) - (0.5 * osg::PI);
-			//yAngle = fastAcos(sensorVal[1]) - (0.5 * osg::PI);
 			
 			// update camera manipulator angles
 			_cameraManip->setXAngle(sensorVal[0]);
