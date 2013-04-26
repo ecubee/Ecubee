@@ -30,6 +30,7 @@ public:
     int flush();
 	int getEuler(vector3d_t vector);
     int runSelfTest();
+    int printRegDump();
     void debug(int dbg = 1);
     mpudata_t mpu;
 

@@ -57,6 +57,7 @@ int main(int argc, char **argv)
     
     }
     sensor->runSelfTest();
+    sensor->printRegDump();
     delete sensor;
 }
 

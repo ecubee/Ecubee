@@ -152,6 +152,10 @@ int MPU9150Wrapper::runSelfTest() {
     printf("\n Self-test result: %d, Gyrobias: %ld, Accelbias: %ld \n", result, gyro, accel);
     return 0;
 }
+int MPU9150Wrapper::printRegDump() {
+    printf("Starting REG Dump: \n\n");
+    return mpu_reg_dump();
+}
 
 int MPU9150Wrapper::setCalibration(bool mag) {
     int i;
