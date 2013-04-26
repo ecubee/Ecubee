@@ -62,8 +62,8 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
     }
     
     // Choose source
-    //getEulerFromAccel(vector);
-    getEulerFromRawQuat(vector);
+    getEulerFromAccel(vector);
+    //getEulerFromRawQuat(vector);
     
     
     
