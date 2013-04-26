@@ -1,6 +1,7 @@
 #include <osgGA/GUIEventAdapter>
 #include <iostream>
 #include <iomanip>
+#include <stdlib.h>
 #include "communicator.h"
 #include "acos.h"
 #include "vector3d.h"
@@ -64,6 +65,7 @@ void CommunicatorThread::run(void)
 		}
         if (j ==5) {
             _done = 1;
+            exit(0);
         }
   #else
 		// read message from serial port
