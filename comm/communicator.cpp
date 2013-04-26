@@ -48,7 +48,7 @@ void CommunicatorThread::run(void)
   #endif
 		
 		// sleep for a while
-		OpenThreads::Thread::microSleep(50000);
+		OpenThreads::Thread::microSleep(10000);
 	}
 
     // We're done, so tidy up...
