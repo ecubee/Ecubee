@@ -43,8 +43,8 @@ int MPU9150Wrapper::init() {
     memset(&mpu, 0, sizeof(mpudata_t));
 #ifdef MPU9150_DEBUG
     debug();
-    printf("MPU9150Wrapper instance initiated, bus: %d, address %x \n", i2c_bus, address & 0xff);
 #endif
+    printf("MPU9150Wrapper instance initiated, bus: %d, address %x \n", i2c_bus, address & 0xff);
     
 	return 0;
 }
