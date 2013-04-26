@@ -12,9 +12,8 @@ void CommunicatorThread::run(void)
 {
 	// initialize serial port
 	serialPort = new SerialPort();
-	serialPort->init();
+	//serialPort->init();
   #ifdef BART
-    int j = 0;
     vector3d_t sensorVal;
 	sensor = new MPU9150Wrapper();
     sensor->init();
@@ -26,24 +25,18 @@ void CommunicatorThread::run(void)
   #ifdef BART
 		if (!sensor->getEuler(sensorVal)) {
 			// construct message
-//			msg.header = AcceleroValues & 0xff;
-//			msg.size = sizeof(vector3d_t);
-//			float *ptr = (float *) msg.data;
-//			for (int i = 0; i < 3; ++i, ++ptr) {
-//				*ptr = sensorVal[i];
-//			}
-//			// send message via serial port
-//			serialPort->send((char *) &msg, msg.size + 2);
-//            _cameraManip->setXAngle(sensorVal[0]);
-//			_cameraManip->setYAngle(sensorVal[1]);
-//            _cameraManip->setZAngle(sensorVal[2]);
-            j++;
+			msg.header = AcceleroValues & 0xff;
+			msg.size = sizeof(vector3d_t);
+			float *ptr = (float *) msg.data;
+			for (int i = 0; i < 3; ++i, ++ptr) {
+				*ptr = sensorVal[i];
+			}
+			// send message via serial port
+			//serialPort->send((char *) &msg, msg.size + 2);
+            _cameraManip->setXAngle(sensorVal[0]);
+			_cameraManip->setYAngle(sensorVal[1]);
+            _cameraManip->setZAngle(sensorVal[2]);
 		}
-        if (j==5) {
-            _done = 1;
-            //sensor->runSelfTest();
-            sensor->printRegDump();
-        }
   #else
 		// read message from serial port
 		serialPort->receive((char *) &msg.header, 1);
@@ -55,10 +48,11 @@ void CommunicatorThread::run(void)
   #endif
 		
 		// sleep for a while
-
 		OpenThreads::Thread::microSleep(50000);
 	}
 
+    // We're done, so tidy up...
+    
 	// close port
 	serialPort->deinit();
     delete serialPort;

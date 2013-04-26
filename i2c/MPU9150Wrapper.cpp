@@ -67,10 +67,12 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
     getEulerFromAccel(vector);
     
 #ifdef MPU9150_DEBUG
-//    printf("\rX: %0.0f Y: %0.0f Z: %0.0f    ", vector[VEC3_X] * RAD_TO_DEGREE, vector[VEC3_Y] * RAD_TO_DEGREE, vector[VEC3_Z] * RAD_TO_DEGREE);
-//    fflush(stdout);
+    printf("\rAngles:     X: %0.0f Y: %0.0f Z: %0.0f    \n", vector[VEC3_X] * RAD_TO_DEGREE, vector[VEC3_Y] * RAD_TO_DEGREE, vector[VEC3_Z] * RAD_TO_DEGREE);
 #endif
-    
+#ifdef MPU9150_TRACK
+    printf("\rAngles:     X: %0.0f Y: %0.0f Z: %0.0f      ", vector[VEC3_X] * RAD_TO_DEGREE, vector[VEC3_Y] * RAD_TO_DEGREE, vector[VEC3_Z] * RAD_TO_DEGREE);
+    fflush(stdout);
+#endif
     return 0;
 }
 

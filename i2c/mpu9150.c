@@ -260,7 +260,7 @@ int mpu9150_read_dmp(mpudata_t *mpu)
     
     if (debug_on) {
         if (i) {
-            fprintf(stderr, "Skipped reads from fifo:  %d", i);
+            fprintf(stderr, "Skipped reads from fifo:  %d \n", i);
         }
     }
 	return 0;
