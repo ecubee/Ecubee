@@ -57,7 +57,7 @@ int main(int argc, char **argv)
     
     }
     sensor->runSelfTest();
-    delete sensor;
+    delete *sensor;
 }
 
 void print_angles(vector3d_t angles)
