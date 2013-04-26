@@ -14,6 +14,7 @@ void CommunicatorThread::run(void)
 	serialPort = new SerialPort();
 	serialPort->init();
   #ifdef BART
+    int j = 0;
     vector3d_t sensorVal;
 	sensor = new MPU9150Wrapper();
     sensor->init();
@@ -59,7 +60,11 @@ void CommunicatorThread::run(void)
             _cameraManip->setXAngle(sensorVal[0]);
 			_cameraManip->setYAngle(sensorVal[1]);
             _cameraManip->setZAngle(sensorVal[2]);
+            j++;
 		}
+        if (j ==5) {
+            _done = 1;
+        }
   #else
 		// read message from serial port
 		serialPort->receive((char *) &msg.header, 1);
