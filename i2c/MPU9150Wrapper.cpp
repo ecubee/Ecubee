@@ -62,9 +62,9 @@ int MPU9150Wrapper::getEuler(vector3d_t vector) {
     }
     
     // Choose source
-    getEulerFromAccel(vector);
+    //getEulerFromAccel(vector);
     //getEulerFromRawQuat(vector);
-    
+    getEulerFromNineAxisFusion(vector);
     
     
 #ifdef MPU9150_DEBUG
@@ -116,6 +116,13 @@ int MPU9150Wrapper::getEulerFromRawQuat(vector3d_t vector) {
     
 	quaternionNormalize(q);
     quaternionToEuler(q, vector);
+    return 0;
+}
+int MPU9150Wrapper::getEulerFromNineAxisFusion(vector3d_t vector) {
+    vector[VEC3_X] = mpu.fusedEuler[VEC3_X];
+    vector[VEC3_Y] = mpu.fusedEuler[VEC3_Y];
+    vector[VEC3_Z] = mpu.fusedEuler[VEC3_Z];
+
     return 0;
 }
 

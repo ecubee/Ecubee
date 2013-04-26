@@ -40,6 +40,7 @@ private:
     int read();
     int getEulerFromAccel(vector3d_t vector);
     int getEulerFromRawQuat(vector3d_t vector);
+    int getEulerFromNineAxisFusion(vector3d_t vector);
 };
 
 #endif /* defined(__Ecubee__MPU9150Wrapper__) */
