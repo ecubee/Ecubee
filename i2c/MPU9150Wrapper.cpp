@@ -31,7 +31,6 @@ MPU9150Wrapper::~MPU9150Wrapper() {
 
 int MPU9150Wrapper::init() {
     
-    
 	if (mpu9150_init(i2c_bus, MPU9150_SAMPLE_RATE, MPU9150_YAW_MIX_FACTOR)) {
         fprintf( stderr, "Failed set up MPU9150\n" );
         return -1;
@@ -43,6 +42,7 @@ int MPU9150Wrapper::init() {
     memset(&mpu, 0, sizeof(mpudata_t));
 #ifdef MPU9150_DEBUG
     debug();
+    printf("MPU9150Wrapper instance initiated, bus: %d, address %x", i2c_bus, address & 0xff);
 #endif
     
 	return 0;
