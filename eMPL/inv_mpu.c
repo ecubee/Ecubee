@@ -2114,8 +2114,8 @@ int mpu_run_self_test(long *gyro, long *accel)
     int ii;
 #endif
     int result;
-    unsigned char accel_fsr, fifo_sensors, sensors_on;
-    unsigned short gyro_fsr, sample_rate, lpf;
+    unsigned char accel_fsr = 0, fifo_sensors, sensors_on;
+    unsigned short gyro_fsr, sample_rate = 0, lpf;
     unsigned char dmp_was_on;
 
     if (st.chip_cfg.dmp_on) {
@@ -2132,6 +2132,11 @@ int mpu_run_self_test(long *gyro, long *accel)
     sensors_on = st.chip_cfg.sensors;
     mpu_get_fifo_config(&fifo_sensors);
 
+#ifdef I2C_DEBUG
+    printf("Accel_fsr: %x \n", accel_fsr);
+    printf("sample_rate: %d \n", sample_rate);
+#endif
+    
     /* For older chips, the self-test will be different. */
 #if defined MPU6050
     for (ii = 0; ii < tries; ii++)
