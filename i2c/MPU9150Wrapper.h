@@ -23,7 +23,7 @@
 class MPU9150Wrapper {
 public:
     MPU9150Wrapper(int bus = MPU9150_BUS, unsigned char add = MPU9150_ADDRESS);
-	virtual ~MPU9150Wrapper();
+    ~MPU9150Wrapper();
     int init();
     int reset();
     int stop();
