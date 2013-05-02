@@ -12,7 +12,7 @@ bool SerialPort::init(void)
 	int error;
 
 	/* Open UART port */
-	port = open("/dev/ttyS1", O_RDWR | O_NOCTTY);
+	port = open("/dev/ttyO1", O_RDWR | O_NOCTTY);
 	if (port < 0) {
 		perror("unable to open serial port ");
 		return false;

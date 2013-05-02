@@ -12,7 +12,7 @@ void CommunicatorThread::run(void)
 {
 	// initialize serial port
 	serialPort = new SerialPort();
-	//serialPort->init();
+	serialPort->init();
   #ifdef BART
     vector3d_t sensorVal;
 	sensor = new MPU9150Wrapper();
