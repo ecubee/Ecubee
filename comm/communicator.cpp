@@ -33,7 +33,7 @@ void CommunicatorThread::run(void)
 				*ptr = sensorVal[i];
 			}
 			// send message via serial port
-			//serialPort->send((char *) &msg, msg.size + 2);
+			serialPort->send((char *) &msg, msg.size + 2);
             _cameraManip->setXAngle(sensorVal[0]);
 			_cameraManip->setYAngle(sensorVal[1]);
             _cameraManip->setZAngle(sensorVal[2]);
