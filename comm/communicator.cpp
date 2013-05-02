@@ -47,9 +47,11 @@ void CommunicatorThread::run(void)
 		handle(&msg);
 
   #endif
-		
+
+#ifdef BART
 		// sleep for a while
 		OpenThreads::Thread::microSleep(10000);
+#endif
 	}
 
     // We're done, so tidy up...
@@ -90,6 +92,10 @@ void CommunicatorThread::handle(struct sMessage *msg)
 		}
 		break;
 	default:
+#ifdef SERIAL_TRACK
+            printf("\rNo handler for type %x        ", msg->header);
+            fflush(stdout);
+#endif
 		break;
 	}
 }
