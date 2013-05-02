@@ -38,8 +38,8 @@ int MPU9150Wrapper::init() {
         return -1;
     }
     
-//	setCalibration(false); // Accel Calibration;
-//  setCalibration(true);  // Magneto Calibration
+	setCalibration(false); // Accel Calibration;
+    setCalibration(true);  // Magneto Calibration
     
     memset(&mpu, 0, sizeof(mpudata_t));
 #ifdef MPU9150_DEBUG
