@@ -80,7 +80,7 @@ void CommunicatorThread::handle(struct sMessage *msg)
 			}
             
 #ifdef SERIAL_TRACK
-            printf("\rFused Angles: X: %0.1f Y: %0.1f Z: %0.1f      ", sensorVal[0] * RAD_TO_DEGREE, sensorVal[1]] * RAD_TO_DEGREE, sensorVal[2] * RAD_TO_DEGREE);
+            printf("\rFused Angles: X: %0.1f Y: %0.1f Z: %0.1f      ", sensorVal[0] * RAD_TO_DEGREE, sensorVal[1] * RAD_TO_DEGREE, sensorVal[2] * RAD_TO_DEGREE);
             fflush(stdout);
 #endif
 			// update camera manipulator angles
