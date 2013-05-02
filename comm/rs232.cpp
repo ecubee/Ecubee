@@ -41,6 +41,9 @@ bool SerialPort::init(void)
 		perror("unable to adjust portsettings ");
 		return false;
 	}
+#ifdef SERIAL_DEBUG
+    printf("Serialport initialized \n");
+#endif
 
 	return true;
 }
@@ -52,17 +55,25 @@ bool SerialPort::deinit(void)
 	
 	/* Restore old settings */
 	tcsetattr(port, TCSANOW, &old_port_settings);
+
+#ifdef SERIAL_DEBUG
+    printf("Serialport de-initialized \n");
+#endif
 	
-	return true;
+    return true;
 }
 
 int SerialPort::send(char *buf, int len)
 {
+#ifdef SERIAL_DEBUG
+    printf("Write started, port: %#x, length: %d, first char: %#x \n", port, len, buf[0]);
+#endif
 	return write(port, buf, len);
 }
 
 int SerialPort::receive(char *buf, int len)
 {
+    int result;
 #ifndef __STRICT_ANSI__ 	// __STRICT_ANSI__ is defined when the -ansi option is used for gcc
 	if(len > SSIZE_MAX)
 		len = (int) SSIZE_MAX;  // SSIZE_MAX is defined in limits.h
@@ -71,5 +82,16 @@ int SerialPort::receive(char *buf, int len)
 		len = 4096;
 #endif
 
-	return read(port, buf, len);
+#ifdef SERIAL_DEBUG
+    printf("Read started, port: %#x, length: %d \n", port, len);
+#endif
+    
+	result = read(port, buf, len);
+    
+#ifdef SERIAL_DEBUG
+    printf("Read finished, port: %#x, length: %d, first char: %#x, result: %d \n", port, len, buf[0], result);
+#endif
+    
+    return result;
+
 }

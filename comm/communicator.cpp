@@ -92,9 +92,8 @@ void CommunicatorThread::handle(struct sMessage *msg)
 		}
 		break;
 	default:
-#ifdef SERIAL_TRACK
-            printf("\rNo handler for type %x        ", msg->header);
-            fflush(stdout);
+#ifdef SERIAL_DEBUG
+            printf("\rNo handler for type %#x \n", msg->header);
 #endif
 		break;
 	}
