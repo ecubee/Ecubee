@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <stdlib.h>
+#include <stdio.h>
 #include "communicator.h"
 #include "acos.h"
 #include "vector3d.h"
@@ -77,7 +78,11 @@ void CommunicatorThread::handle(struct sMessage *msg)
 			for (int i = 0; i < 3; ++i, ++ptr) {
 				sensorVal[i] = *ptr;
 			}
-			
+            
+#ifdef SERIAL_TRACK
+            printf("\rFused Angles: X: %0.1f Y: %0.1f Z: %0.1f      ", sensorVal[0] * RAD_TO_DEGREE, sensorVal[1]] * RAD_TO_DEGREE, sensorVal[2] * RAD_TO_DEGREE);
+            fflush(stdout);
+#endif
 			// update camera manipulator angles
 			_cameraManip->setXAngle(sensorVal[0]);
 			_cameraManip->setYAngle(sensorVal[1]);
