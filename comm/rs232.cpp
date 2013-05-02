@@ -66,7 +66,11 @@ bool SerialPort::deinit(void)
 int SerialPort::send(char *buf, int len)
 {
 #ifdef SERIAL_DEBUG
-    printf("Write started, port: %#x, length: %d, first char: %#x \n", port, len, buf[0]);
+    printf("Write started, port: %#x, length: %d, msg: 0x", port, len);
+    for(int 1 = 0, i < len, i++) {
+        printf("%x ", buf[i]);
+    }
+    printf("\n");
 #endif
 	return write(port, buf, len);
 }
