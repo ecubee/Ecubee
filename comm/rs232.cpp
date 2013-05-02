@@ -67,7 +67,7 @@ int SerialPort::send(char *buf, int len)
 {
 #ifdef SERIAL_DEBUG
     printf("Write started, port: %#x, length: %d, msg: 0x", port, len);
-    for(int 1 = 0; i < len; i++) { 
+    for(int i = 0; i < len; i++) {
         printf("%x ", buf[i]);
     }
     printf("\n");
