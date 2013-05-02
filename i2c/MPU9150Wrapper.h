@@ -14,11 +14,16 @@
 
 #define MPU9150_BUS 3           // 1 for raspberry, 3 for beagleboard
 #define MPU9150_ADDRESS 0x68
-#define MPU9150_SAMPLE_RATE 50   // Output rate of DMP
 #define MPU9150_YAW_MIX_FACTOR 10    // The bigger, the less dominant magnetometer
 #define MPU9150_MAGNETO_DEFAULT_CALIBRATION -146,234,-101,241,-296,232
 #define MPU9150_ACCEL_DEFAULT_CALIBRATION -16946,16572,-18726,16748,-17946,16724
 #define MPU9150_REG_FIFO_COUNT 0x72
+
+#if (defined I2C_DEBUG || defined SERIAL_DEBUG)
+#define MPU9150_SAMPLE_RATE 1   // Output rate of DMP
+#else
+#define MPU9150_SAMPLE_RATE 50   // Output rate of DMP
+#endif
 
 class MPU9150Wrapper {
 public:

@@ -26,7 +26,7 @@ MPU9150Wrapper::MPU9150Wrapper(int bus, unsigned char add) {
 }
 
 MPU9150Wrapper::~MPU9150Wrapper() {
-	// Stop the DMP
+	// Stop the DMP 
     stop();
 
 }

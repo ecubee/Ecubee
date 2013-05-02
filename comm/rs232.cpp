@@ -93,7 +93,12 @@ int SerialPort::receive(char *buf, int len)
 	result = read(port, buf, len);
     
 #ifdef SERIAL_DEBUG
-    printf("Read finished, port: %#x, length: %d, first char: %#x, result: %d \n", port, len, buf[0], result);
+    printf("Read finished, port: %#x, length: %d, msg: 0x", port, len);
+    for(int i = 0; i < len; i++) {
+        printf("%x ", buf[i]);
+    }
+    printf(", result: %d \n", result);
+    
 #endif
     
     return result;

@@ -11,8 +11,8 @@
 		1F3F488B171816E200C90016 /* linux_glue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = linux_glue.h; sourceTree = "<group>"; };
 		1F3F488C171816E200C90016 /* mpu9150.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mpu9150.c; sourceTree = "<group>"; };
 		1F3F488D171816E200C90016 /* mpu9150.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mpu9150.h; sourceTree = "<group>"; };
-		1F3F488E171816E200C90016 /* MPU9150Wrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MPU9150Wrapper.cpp; sourceTree = "<group>"; };
-		1F3F488F171816E200C90016 /* MPU9150Wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPU9150Wrapper.h; sourceTree = "<group>"; };
+		1F3F488E171816E200C90016 /* MPU9150Wrapper.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MPU9150Wrapper.cpp; sourceTree = "<group>"; };
+		1F3F488F171816E200C90016 /* MPU9150Wrapper.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = MPU9150Wrapper.h; sourceTree = "<group>"; };
 		1F3F489417181A3800C90016 /* MPU9150Wrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MPU9150Wrapper.cpp; sourceTree = "<group>"; };
 		1F3F489517181A3800C90016 /* MPU9150Wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPU9150Wrapper.h; sourceTree = "<group>"; };
 		1F3F489617181C1A00C90016 /* i2cBus.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = i2cBus.cpp; sourceTree = "<group>"; };
@@ -21,9 +21,9 @@
 		1F3F489917181C1A00C90016 /* i2cSlave.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = i2cSlave.h; sourceTree = "<group>"; };
 		1F5B4BA21716FFBA00E93904 /* i2cManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = i2cManager.cpp; sourceTree = "<group>"; };
 		1F5B4BA31716FFBA00E93904 /* i2cManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = i2cManager.h; sourceTree = "<group>"; };
-		1F609E3E171C129C00726D7E /* fusion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fusion.cpp; sourceTree = "<group>"; };
+		1F96CF0B1732E45A00F7BF77 /* fusion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fusion.cpp; sourceTree = "<group>"; };
+		1F96CF0C1732E45A00F7BF77 /* imucal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = imucal.c; sourceTree = "<group>"; };
 		1FBD1191171C26BC00533562 /* local_defaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = local_defaults.h; sourceTree = "<group>"; };
-		1FBD1192171C95F100533562 /* imucal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = imucal.c; sourceTree = "<group>"; };
 		1FBD1193171C9DF200533562 /* quaternion.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = quaternion.c; sourceTree = "<group>"; };
 		1FBD1194171C9DF200533562 /* quaternion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = quaternion.h; sourceTree = "<group>"; };
 		1FBD1195171C9DF200533562 /* vector3d.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vector3d.c; sourceTree = "<group>"; };
@@ -42,7 +42,7 @@
 		1FD273101716FC950015453D /* rs232.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rs232.cpp; sourceTree = "<group>"; };
 		1FD273111716FC950015453D /* rs232.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rs232.h; sourceTree = "<group>"; };
 		1FD273131716FCAE0015453D /* Box.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
-		1FD273141716FCAE0015453D /* CreateWindows.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CreateWindows.cpp; sourceTree = "<group>"; };
+		1FD273141716FCAE0015453D /* CreateWindows.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; path = CreateWindows.cpp; sourceTree = "<group>"; };
 		1FD273151716FCAE0015453D /* CustomCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CustomCamera.cpp; sourceTree = "<group>"; };
 		1FD273161716FCAE0015453D /* CustomCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCamera.h; sourceTree = "<group>"; };
 		1FD273171716FCAE0015453D /* dimensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dimensions.h; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 		1FF8B8AC170D881F001F6E0C /* LIS3LV02DL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LIS3LV02DL.h; sourceTree = "<group>"; };
 		1FF8B8AD170D881F001F6E0C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1FF8B8AF170D881F001F6E0C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		1FF8B8B4170DA27E001F6E0C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; usesTabs = 1; };
+		1FF8B8B4170DA27E001F6E0C /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; usesTabs = 1; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -124,9 +124,9 @@
 		1FF8B895170D8757001F6E0C = {
 			isa = PBXGroup;
 			children = (
-				1FBD1192171C95F100533562 /* imucal.c */,
 				1FBD1191171C26BC00533562 /* local_defaults.h */,
-				1F609E3E171C129C00726D7E /* fusion.cpp */,
+				1F96CF0B1732E45A00F7BF77 /* fusion.cpp */,
+				1F96CF0C1732E45A00F7BF77 /* imucal.c */,
 				1F3F4885171816E200C90016 /* i2c */,
 				1FD273121716FCAE0015453D /* osg */,
 				1FF8B89F170D881F001F6E0C /* CMakeLists.txt */,
@@ -162,6 +162,22 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXLegacyTarget section */
+		1F96CF071732E29500F7BF77 /* Ecubee */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 1F96CF081732E29500F7BF77 /* Build configuration list for PBXLegacyTarget "Ecubee" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			dependencies = (
+			);
+			name = Ecubee;
+			passBuildSettingsInEnvironment = 1;
+			productName = Ecubee;
+		};
+/* End PBXLegacyTarget section */
+
 /* Begin PBXProject section */
 		1FF8B896170D8757001F6E0C /* Project object */ = {
 			isa = PBXProject;
@@ -176,29 +192,110 @@
 				en,
 			);
 			mainGroup = 1FF8B895170D8757001F6E0C;
+			productRefGroup = 1FF8B895170D8757001F6E0C;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				1F96CF071732E29500F7BF77 /* Ecubee */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin XCBuildConfiguration section */
+		1F96CF091732E29500F7BF77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "armv7-a";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1F96CF0A1732E29500F7BF77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "armv7-a";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		1FF8B89A170D8757001F6E0C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				New_Setting = "";
+				"New_Setting[sdk=*]" = "";
 			};
 			name = Debug;
 		};
 		1FF8B89B170D8757001F6E0C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				New_Setting = "";
+				"New_Setting[arch=*]" = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1F96CF081732E29500F7BF77 /* Build configuration list for PBXLegacyTarget "Ecubee" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F96CF091732E29500F7BF77 /* Debug */,
+				1F96CF0A1732E29500F7BF77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		1FF8B899170D8757001F6E0C /* Build configuration list for PBXProject "Ecubee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
