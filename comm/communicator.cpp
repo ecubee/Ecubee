@@ -25,7 +25,7 @@ void CommunicatorThread::run(void)
   #ifdef BART
 		if (!sensor->getEuler(sensorVal)) {
 			// construct message
-			msg.header = AcceleroValues & 0xff;
+			msg.header = FusedValues & 0xff;
 			msg.size = sizeof(vector3d_t);
 			float *ptr = (float *) msg.data;
 			for (int i = 0; i < 3; ++i, ++ptr) {
