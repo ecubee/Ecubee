@@ -11,7 +11,7 @@
 		1F3F488B171816E200C90016 /* linux_glue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = linux_glue.h; sourceTree = "<group>"; };
 		1F3F488C171816E200C90016 /* mpu9150.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mpu9150.c; sourceTree = "<group>"; };
 		1F3F488D171816E200C90016 /* mpu9150.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mpu9150.h; sourceTree = "<group>"; };
-		1F3F488E171816E200C90016 /* MPU9150Wrapper.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MPU9150Wrapper.cpp; sourceTree = "<group>"; };
+		1F3F488E171816E200C90016 /* MPU9150Wrapper.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; path = MPU9150Wrapper.cpp; sourceTree = "<group>"; };
 		1F3F488F171816E200C90016 /* MPU9150Wrapper.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = MPU9150Wrapper.h; sourceTree = "<group>"; };
 		1F3F489417181A3800C90016 /* MPU9150Wrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MPU9150Wrapper.cpp; sourceTree = "<group>"; };
 		1F3F489517181A3800C90016 /* MPU9150Wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPU9150Wrapper.h; sourceTree = "<group>"; };
