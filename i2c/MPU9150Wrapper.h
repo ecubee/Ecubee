@@ -20,7 +20,7 @@
 #define MPU9150_REG_FIFO_COUNT 0x72
 
 #if (defined I2C_DEBUG || defined SERIAL_DEBUG)
-#define MPU9150_SAMPLE_RATE 1   // Output rate of DMP
+#define MPU9150_SAMPLE_RATE 2   // Output rate of DMP
 #else
 #define MPU9150_SAMPLE_RATE 50   // Output rate of DMP
 #endif

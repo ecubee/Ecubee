@@ -51,7 +51,7 @@ void CommunicatorThread::run(void)
 #ifdef BART
 		// sleep for a while
 #if (defined I2C_DEBUG || defined SERIAL_DEBUG)
-		OpenThreads::Thread::microSleep(500000);
+		OpenThreads::Thread::microSleep(300000);
 #else
         OpenThreads::Thread::microSleep(10000);
 #endif
