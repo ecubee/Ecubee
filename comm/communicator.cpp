@@ -44,6 +44,7 @@ void CommunicatorThread::run(void)
 		// read message from serial port
 		serialPort->receive((char *) &msg.header, 1);
 		serialPort->receive((char *) &msg.size, 1);
+        serialPort->receive((char *) msg.dummy, 2);
 		serialPort->receive((char *) msg.data, msg.size);
  #ifdef SERIAL_DEBUG
         printf("Received message, now processing\n");
