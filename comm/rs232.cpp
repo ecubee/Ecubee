@@ -12,7 +12,7 @@ bool SerialPort::init(void)
 	int error;
 
 	/* Open UART port */
-	port = open("/dev/ttyO1", O_RDWR | O_NOCTTY);
+	port = open("/dev/ttyO1", O_RDWR | O_NOCTTY); // add O_NDELAY flag?
 	if (port < 0) {
 		perror("unable to open serial port ");
 		return false;
@@ -90,7 +90,9 @@ int SerialPort::receive(char *buf, int len)
     printf("Read started, port: %#x, length: %d \n", port, len);
 #endif
     
-	result = read(port, buf, len);
+	while(!(result = read(port, buf, len)) {
+        OpenThreads::Thread::microSleep(1000);
+    }
     
 #ifdef SERIAL_DEBUG
     printf("Read finished, port: %#x, length: %d, msg: 0x", port, len);
