@@ -26,6 +26,7 @@ enum eHeader {
 struct sMessage {
 	unsigned char header;
 	unsigned char size;
+    unsigned char dummy[2];
 	unsigned char data[MAX_DATA_SIZE];
 };
 
