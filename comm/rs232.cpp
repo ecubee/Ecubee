@@ -91,7 +91,7 @@ int SerialPort::receive(char *buf, int len)
     printf("Read started, port: %#x, length: %d \n", port, len);
 #endif
     
-	while(!(result = read(port, buf, len)) {
+	while(!(result = read(port, buf, len))) {
         OpenThreads::Thread::microSleep(1000);
     }
     
