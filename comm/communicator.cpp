@@ -35,7 +35,7 @@ void CommunicatorThread::run(void)
 				*ptr = sensorVal[i];
 			}
 			// send message via serial port
-			serialPort->send((char *) &msg, msg.size + 2);
+			serialPort->send((char *) &msg, msg.size + 4);
             _cameraManip->setXAngle(sensorVal[0]);
 			_cameraManip->setYAngle(sensorVal[1]);
             _cameraManip->setZAngle(sensorVal[2]);
@@ -91,9 +91,8 @@ void CommunicatorThread::handle(struct sMessage *msg)
 			}
             
 #ifdef SERIAL_TRACK
-            printf("Test %f \n", sensorVal);
-            //printf("Fused Angles: X: %0.1f Y: %0.1f Z: %0.1f      \n", sensorVal[VEC3_X] * RAD_TO_DEGREE, sensorVal[VEC3_Y] * RAD_TO_DEGREE, sensorVal[VEC3_Z] * RAD_TO_DEGREE);
-  //          fflush(stdout);
+            printf("Fused Angles: X: %0.1f Y: %0.1f Z: %0.1f      ", sensorVal[VEC3_X] * RAD_TO_DEGREE, sensorVal[VEC3_Y] * RAD_TO_DEGREE, sensorVal[VEC3_Z] * RAD_TO_DEGREE);
+            fflush(stdout);
 #endif
 			// update camera manipulator angles
 			_cameraManip->setXAngle(sensorVal[0]);
