@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "rs232.h"
+#include <OpenThreads/Thread>
 
 bool SerialPort::init(void)
 {
