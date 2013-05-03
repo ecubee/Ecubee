@@ -84,15 +84,15 @@ void CommunicatorThread::handle(struct sMessage *msg)
 	switch (msg->header) {
 	case FusedValues:
 		{
-			float sensorVal[3];
-			float *ptr = (float *) msg->data;
+			vector3d_t sensorVal;
+			float * ptr = (float *) msg->data;
 			for (int i = 0; i < 3; ++i, ++ptr) {
 				sensorVal[i] = *ptr;
 			}
             
 #ifdef SERIAL_TRACK
-            printf("\rFused Angles: X: %0.1f Y: %0.1f Z: %0.1f      ", sensorVal[0] * RAD_TO_DEGREE, sensorVal[1] * RAD_TO_DEGREE, sensorVal[2] * RAD_TO_DEGREE);
-            fflush(stdout);
+            printf("\rFused Angles: X: %0.1f Y: %0.1f Z: %0.1f      \n", sensorVal[0] * RAD_TO_DEGREE, sensorVal[1] * RAD_TO_DEGREE, sensorVal[2] * RAD_TO_DEGREE);
+  //          fflush(stdout);
 #endif
 			// update camera manipulator angles
 			_cameraManip->setXAngle(sensorVal[0]);
