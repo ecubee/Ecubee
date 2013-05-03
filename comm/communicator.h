@@ -16,6 +16,7 @@
 #define MAX_DATA_SIZE	255
 
 enum eHeader {
+    Dummy,
     FusedValues,
     GyroValues,
 	MagnetoValues,

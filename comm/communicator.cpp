@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "communicator.h"
 #include "acos.h"
 #include "vector3d.h"
@@ -11,19 +12,20 @@
 
 void CommunicatorThread::run(void)
 {
+    struct sMessage msg;
 	// initialize serial port
 	serialPort = new SerialPort();
 	serialPort->init();
-  #ifdef BART
+#ifdef BART
     vector3d_t sensorVal;
 	sensor = new MPU9150Wrapper();
     sensor->init();
     sensor->debug();
-  #endif
+#endif
 
 	while (!_done) {
-		struct sMessage msg;
-  #ifdef BART
+        memset(&msg, 0, sizeof(msg));
+#ifdef BART
 		if (!sensor->getEuler(sensorVal)) {
 			// construct message
 			msg.header = FusedValues & 0xff;
@@ -38,23 +40,26 @@ void CommunicatorThread::run(void)
 			_cameraManip->setYAngle(sensorVal[1]);
             _cameraManip->setZAngle(sensorVal[2]);
 		}
-  #else
+#else
 		// read message from serial port
 		serialPort->receive((char *) &msg.header, 1);
 		serialPort->receive((char *) &msg.size, 1);
 		serialPort->receive((char *) msg.data, msg.size);
+ #ifdef SERIAL_DEBUG
+        printf("Received message, now processing\n");
+ #endif
         // handle message
 		handle(&msg);
 
-  #endif
+#endif
 
 #ifdef BART
 		// sleep for a while
-#if (defined I2C_DEBUG || defined SERIAL_DEBUG)
+ #if (defined I2C_DEBUG || defined SERIAL_DEBUG)
 		OpenThreads::Thread::microSleep(300000);
-#else
+ #else
         OpenThreads::Thread::microSleep(10000);
-#endif
+ #endif
 #endif
 	}
 
