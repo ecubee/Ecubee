@@ -28,7 +28,7 @@ bool CustomCamera::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAda
 			#endif
 			#ifdef GERTJAN
 				lookAt.set(eye.x(), 0.0, eye.z());
-				up.set(0.0, 0.0, -1.0);
+				up.set(0.0, 0.0, 1.0);
 				bottom = -H_SCREEN_HEIGHT - GERTJAN_OFFSET + eye.z();
 				top = H_SCREEN_HEIGHT - GERTJAN_OFFSET + eye.z();
 				if (eye.y() < 0) {
