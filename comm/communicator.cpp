@@ -24,10 +24,11 @@ void CommunicatorThread::run(void)
 #endif
 
 	while (!_done) {
-        memset(&msg, 0, sizeof(msg));
 #ifdef BART
 		if (!sensor->getEuler(sensorVal)) {
+            memset(&msg, 0, sizeof(msg));
 			// construct message
+            msg.sync[1] = 0xff; // sync[0] = 0x00 by memset
 			msg.header = FusedValues & 0xff;
 			msg.size = sizeof(vector3d_t);
 			float *ptr = (float *) msg.data;
@@ -41,10 +42,17 @@ void CommunicatorThread::run(void)
             _cameraManip->setZAngle(sensorVal[2]);
 		}
 #else
+        // clear message, just to be sure
+        memset(&msg, 0, sizeof(msg));
+
 		// read message from serial port
+        serialPort->receive((char *) msg.sync, 2);
+        if (msg.sync[0] != 0x00 or msg.sync[1] != 0xff) {
+            serialPort->flush();
+            continue;
+        }
 		serialPort->receive((char *) &msg.header, 1);
 		serialPort->receive((char *) &msg.size, 1);
-        serialPort->receive((char *) msg.dummy, 2);
 		serialPort->receive((char *) msg.data, msg.size);
  #ifdef SERIAL_DEBUG
         printf("Received message, now processing\n");

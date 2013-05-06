@@ -107,3 +107,20 @@ int SerialPort::receive(char *buf, int len)
     return result;
 
 }
+int SerialPort::flush()
+{
+    int i=0;
+    char dummy;
+    
+#ifdef SERIAL_DEBUG
+    printf("Wrong sync header, flushing serial port\n");
+#endif
+    
+    while(read(port,&dummy,1)){
+        i++;
+    }
+#ifdef SERIAL_DEBUG
+    print("Flushed %d bytes from buffer\n", i);
+    
+    return i;
+}

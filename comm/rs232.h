@@ -40,6 +40,7 @@ public:
 	bool deinit(void);
 	int send(char *buf, int len);
 	int receive(char *buf, int len);
+    int flush(void);
 private:
 	int port;
 	struct termios old_port_settings;

@@ -24,9 +24,9 @@ enum eHeader {
 };
 
 struct sMessage {
+    unsigned char sync[2]; // We want a 4 byte header for our floats to be aligned in memory. Use 2 bytes to check for synced read-out
 	unsigned char header;
 	unsigned char size;
-    unsigned char dummy[2]; // We want our floats to be aligned
 	unsigned char data[MAX_DATA_SIZE];
 };
 
