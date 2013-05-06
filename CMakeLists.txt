@@ -30,6 +30,11 @@ SET (CALSRC imucal.c
 	i2c/linux_glue.c
 	eMPL/inv_mpu.c
 	eMPL/inv_mpu_dmp_motion_driver.c)
+	
+add_executable(ecubee-bart ${SRC})
+add_executable(ecubee-gertjan ${SRC})
+add_executable(ecubee-martijn ${SRC})
+add_executable(ecubeecal ${CALSRC})
 
 # Compile for Bart and MPU9150
 #set(CMAKE_CXX_FLAGS "-DBART")
@@ -40,10 +45,6 @@ set_target_properties(ecubee-martijn PROPERTIES COMPILE_FLAGS "-DMARTIJN")
 set(CMAKE_C_FLAGS "-DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY")
 include_directories(math comm osg i2c eMPL)
 
-add_executable(ecubee-bart ${SRC})
-add_executable(ecubee-gertjan ${SRC})
-add_executable(ecubee-martijn ${SRC})
-add_executable(ecubeecal ${CALSRC})
 
 # OSG libs
 target_link_libraries(ecubee-bart osg)
