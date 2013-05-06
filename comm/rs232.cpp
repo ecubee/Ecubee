@@ -42,9 +42,7 @@ bool SerialPort::init(void)
 		perror("unable to adjust portsettings ");
 		return false;
 	}
-#ifdef SERIAL_DEBUG
-    printf("Serialport initialized \n");
-#endif
+    printf("\nSerialport initialized \n\n");
 
 	return true;
 }
