@@ -16,7 +16,7 @@ SRCS := main.cpp $(foreach dir,$(INC),$(wildcard $(dir)/*.c*))
 OBJS := $(notdir $(SRCS))
 OBJS := $(OBJS:%.c=%.o)
 OBJS := $(OBJS:%.cpp=%.o)
-OBJS = $(addprefix $(HOST)obj/, $(OBJS))
+OBJS := $(addprefix $(HOST)obj/, $(OBJS))
 
 CAL_APP := ecubeecal
 CAL_INC := eMPL i2c math
