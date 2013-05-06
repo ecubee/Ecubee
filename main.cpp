@@ -46,7 +46,7 @@ int main(int argc, char * argv[])	{
 	viewer = CreateWindows(viewer);
 	viewer->realize();
   
-    viewer->getCamera()->getView()->setLightingMode(osg::View::SKY_LIGHT); // Try different light source
+    viewer->getCamera()->getView()->setLightingMode(osg::View::HEADLIGHT); // Try different light source
 
 	
 	// start communicator thread
