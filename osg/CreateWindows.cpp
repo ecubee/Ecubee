@@ -65,7 +65,7 @@ osg::ref_ptr<osgViewer::Viewer> CreateWindows(osg::ref_ptr<osgViewer::Viewer> vi
 	#ifdef GERTJAN
 		eye.set(center.x(), center.y(), center.z() + r);
 		up.set(0.0,1.0,0.0);
-		osg::Matrixd DisplayCorrection = osg::Matrixd::rotate(osg::PI*(1), osg::Z_AXIS);
+		osg::Matrixd DisplayCorrection = osg::Matrixd::rotate(osg::PI*(0), osg::Z_AXIS);
 		double bottomtop = 4.0 - 0.5;
 		double leftright = 5.0 - 0.5;
 		double nearfar = 4.0;
