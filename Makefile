@@ -1,6 +1,6 @@
 SHELL = /bin/sh
 
-BBFLAGS = -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
+BBFLAGS = -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -ftree-vectorize
 CFLAGS = -c -Wall -O3 $(BBFLAGS) -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY -DMPU9150_TRACK -DSERIAL_TRACK
 #Optional flags: -DMPU9150_TRACK -DI2C_DEBUG -DSERIAL_TRACK -DSERIAL_DEBUG -DMPU9150_DEBUG -DRASPBERRYPI $(BBFLAGS)
 LDFLAGS = -losg -lOpenThreads -losgSim -losgGA -losgDB -losgUtil -losgViewer -lm -ldl -lGLESv2 -lXext -lX11
