@@ -20,7 +20,7 @@ OBJS := $(addprefix $(HOST)obj/, $(OBJS))
 
 CAL_APP := ecubeecal
 CAL_INC := eMPL i2c math
-CAL_SRCS := fusion.cpp $(foreach dir,$(CAL_INC),$(wildcard $(dir)/*.c*))
+CAL_SRCS := imucal.c $(foreach dir,$(CAL_INC),$(wildcard $(dir)/*.c*))
 CAL_OBJS := $(notdir $(CAL_SRCS))
 CAL_OBJS := $(CAL_OBJS:%.c=calobj/%.o)
 CAL_OBJS := $(CAL_OBJS:%.cpp=calobj/%.o)
@@ -51,10 +51,10 @@ $(CAL_APP): $(CAL_OBJS)
 	$(CXX) $^ -o $@
 
 $(HOST)obj/%.o: %.cpp
-	$(CXX) $(CFLAGS) $(BART_CFLAGS) $(PATHS) $< -o $@
+	$(CXX) $(CFLAGS) $(PATHS) $< -o $@
 
 $(HOST)obj/%.o: %.c
-	$(CC) $(CFLAGS) $(BART_CFLAGS) $(PATHS) $< -o $@
+	$(CC) $(CFLAGS) $(PATHS) $< -o $@
 
 calobj/%.o: %.cpp
 	$(CXX) $(CFLAGS) $(CAL_CFLAGS) $(PATHS) $< -o $@
