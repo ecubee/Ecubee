@@ -10,7 +10,7 @@
 osg::ref_ptr<osgViewer::Viewer> CreateWindows(osg::ref_ptr<osgViewer::Viewer> viewer);
 osg::ref_ptr<osg::Geode> createBox(const osg::Vec3& center,float width,float height,float depth);
 
-#define FRAMERATE	30
+#define FRAMERATE	50
 
 int main(int argc, char * argv[])	{
 	osg::ref_ptr<osg::ShapeDrawable> shape1 = new osg::ShapeDrawable;
@@ -45,6 +45,9 @@ int main(int argc, char * argv[])	{
 
 	viewer = CreateWindows(viewer);
 	viewer->realize();
+  
+    viewer->getCamera()->getView()->setLightingMode(osg::View::SKY_LIGHT); // Try different light source
+
 	
 	// start communicator thread
 	CommunicatorThread *commThread = new CommunicatorThread((CustomCamera *) viewer->getCameraManipulator());
