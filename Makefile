@@ -1,26 +1,22 @@
 SHELL = /bin/sh
 
+HOST = $(shell hostname)
 BBFLAGS = -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -ftree-vectorize
 CFLAGS = -c -Wall -O3 $(BBFLAGS) -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY -DMPU9150_TRACK -DSERIAL_TRACK
 #Optional flags: -DMPU9150_TRACK -DI2C_DEBUG -DSERIAL_TRACK -DSERIAL_DEBUG -DMPU9150_DEBUG -DRASPBERRYPI $(BBFLAGS)
 LDFLAGS = -losg -lOpenThreads -losgSim -losgGA -losgDB -losgUtil -losgViewer -lm -ldl -lGLESv2 -lXext -lX11
 # -lGL
 
-BART_CFLAGS = -DBART
-GERTJAN_CFLAGS = -DGERTJAN
-MARTIJN_CFLAGS = -DMARTIJN
+UPPER_HOST  = $(shell hostname | tr '[:lower:]' '[:upper:]')
+CFLAGS += -D$(UPPER_HOST)
 
-APP := ecubee
 INC := osg comm math i2c eMPL
 PATHS = $(addprefix -I$(CURDIR)/, $(INC))
 SRCS := main.cpp $(foreach dir,$(INC),$(wildcard $(dir)/*.c*)) 
 OBJS := $(notdir $(SRCS))
 OBJS := $(OBJS:%.c=%.o)
 OBJS := $(OBJS:%.cpp=%.o)
-
-BART_OBJS = $(addprefix bartobj/, $(OBJS))
-GERTJAN_OBJS = $(addprefix gertjanobj/, $(OBJS))
-MARTIJN_OBJS = $(addprefix martijnobj/, $(OBJS))
+OBJS = $(addprefix $(HOST)obj/, $(OBJS))
 
 CAL_APP := ecubeecal
 CAL_INC := eMPL i2c math
@@ -31,50 +27,33 @@ CAL_OBJS := $(CAL_OBJS:%.cpp=calobj/%.o)
 
 VPATH := $(INC) 
 
-INSTALL = cp
+INSTALL ?= cp
 INSTALL_PROGRAM = $(INSTALL)
 INSTALL_DATA = ${INSTALL} -m 644
 exec_prefix = /usr
 bindir = $(exec_prefix)/bin
 sysconfdir = $(prefix)/etc
 
-.PHONY: clean veryclean all bart gertjan martijn install install-ecubee install-bart install-martijn install-gertjan install-cal
+.PHONY: clean veryclean all install install-cal
 
 # Insert name target for which you want to compile
-all: bart
-install: install-bart
+all: ecubee-$(HOST)
 
+install: ecubee-$(HOST)
+	$(INSTALL_PROGRAM) ecubee-$(HOST) $(DESTDIR)$(bindir)
+	ln -s $(DESTDIR)$(bindir)/ecubee-$(HOST) $(DESTDIR)$(bindir)/ecubee
 
-bart: $(BART_OBJS)
-	$(CXX) $(LDFLAGS) $^ -o $(APP)
-
-gertjan: $(GERTJAN_OBJS)
-	$(CXX) $(LDFLAGS) $^ -o $(APP)
-
-martijn: $(MARTIJN_OBJS)
-	$(CXX) $(LDFLAGS) $^ -o $(APP)
+ecubee-$(HOST): $(OBJS)
+	$(CXX) $(LDFLAGS) $^ -o $@
 
 $(CAL_APP): $(CAL_OBJS)
-	$(CXX) $^ -o $(CAL_APP)
+	$(CXX) $^ -o $@
 
-
-bartobj/%.o: %.cpp
+$(HOST)obj/%.o: %.cpp
 	$(CXX) $(CFLAGS) $(BART_CFLAGS) $(PATHS) $< -o $@
 
-bartobj/%.o: %.c
+$(HOST)obj/%.o: %.c
 	$(CC) $(CFLAGS) $(BART_CFLAGS) $(PATHS) $< -o $@
-
-gertjanobj/%.o: %.cpp
-	$(CXX) $(CFLAGS) $(GERTJAN_CFLAGS) $(PATHS) $< -o $@
-
-gertjanobj/%.o: %.c
-	$(CC) $(CFLAGS) $(GERTJAN_CFLAGS) $(PATHS) $< -o $@
-
-martijnobj/%.o: %.cpp
-	$(CXX) $(CFLAGS) $(MARTIJN_CFLAGS) $(PATHS) $< -o $@
-
-martijnobj/%.o: %.c
-	$(CC) $(CFLAGS) $(MARTIJN_CFLAGS) $(PATHS) $< -o $@
 
 calobj/%.o: %.cpp
 	$(CXX) $(CFLAGS) $(CAL_CFLAGS) $(PATHS) $< -o $@
@@ -83,20 +62,11 @@ calobj/%.o: %.c
 	$(CC) $(CFLAGS) $(CAL_CFLAGS) $(PATHS) $< -o $@
 
 
-install-ecubee:
-	$(INSTALL_PROGRAM) $(APP) $(DESTDIR)$(bindir)
-
-install-bart: bart install-ecubee install-cal
-install-gertjan: gertjan install-ecubee
-install-martijn: martijn install-ecubee
-
 install-cal: $(CAL_APP)
 	-mkdir $(DESTDIR)$(sysconfdir)/ecubee
 	$(INSTALL_PROGRAM) $(CAL_APP) $(DESTDIR)$(bindir)
 
-$(BART_OBJS): | bartobj
-$(GERTJAN_OBJS): | gertjanobj
-$(MARTIJN_OBJS): | martijnobj
+$(OBJS): | $(HOST)obj
 $(CAL_OBJS): | calobj
 
 %obj:
@@ -109,5 +79,5 @@ clean:
 		  calobj
 
 veryclean: clean
-	-rm -f $(APP) $(CAL_APP) $(DESTDIR)$(bindir)/$(APP) $(DESTDIR)$(bindir)/$(CAL_APP)
-	-rm -rf $(DESTDIR)$(sysconfdir)/ecubee
+	-rm -f ecubee-* $(CAL_APP) $(DESTDIR)$(bindir)/ecubee-$(HOST) $(DESTDIR)$(bindir)/ecubee $(DESTDIR)$(bindir)/$(CAL_APP)
+	-rm -f $(DESTDIR)$(sysconfdir)/ecubee/*cal.txt
