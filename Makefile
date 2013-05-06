@@ -40,6 +40,7 @@ sysconfdir = $(prefix)/etc
 all: ecubee-$(HOST)
 
 install: ecubee-$(HOST)
+	-rm -f $(DESTDIR)$(bindir)/ecubee
 	$(INSTALL_PROGRAM) ecubee-$(HOST) $(DESTDIR)$(bindir)
 	ln -s $(DESTDIR)$(bindir)/ecubee-$(HOST) $(DESTDIR)$(bindir)/ecubee
 
