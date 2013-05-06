@@ -120,7 +120,7 @@ int SerialPort::flush()
         i++;
     }
 #ifdef SERIAL_DEBUG
-    print("Flushed %d bytes from buffer\n", i);
+    printf("Flushed %d bytes from buffer\n", i);
 #endif 
     return i;
 }
